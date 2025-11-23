@@ -621,6 +621,7 @@ const flightOptions = [
     carrier: 'Singapore Airlines SQ214',
     times: 'Dep 05:35 · Arr 10:45',
     duration: '5h 10m',
+    price: 'from ~AUD 820 (econ)',
     note: 'Morning arrival; buffer hotel check-in and pool time'
   },
   {
@@ -629,6 +630,7 @@ const flightOptions = [
     carrier: 'Singapore Airlines SQ638 (overnight)',
     times: 'Dep 00:30 · Arr 08:20',
     duration: '6h 50m',
+    price: 'from ~AUD 980 (econ)',
     note: 'Overnight to Tokyo; aligns with buffer day on arrival'
   },
   {
@@ -637,6 +639,7 @@ const flightOptions = [
     carrier: 'SQ633 (HND→SIN)',
     times: 'Dep 17:05 · Arr 23:45',
     duration: '7h 40m',
+    price: 'from ~AUD 930 (econ)',
     note: 'Evening flight after Tokyo wrap-up; lands same night'
   },
   {
@@ -645,6 +648,7 @@ const flightOptions = [
     carrier: 'SQ225',
     times: 'Dep 11:15 · Arr 16:30',
     duration: '5h 15m',
+    price: 'from ~AUD 820 (econ)',
     note: 'Daytime return; morning checkout is relaxed'
   }
 ];
