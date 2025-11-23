@@ -60,6 +60,28 @@ nav a:hover {
   background: rgba(255, 255, 255, 0.05);
 }
 
+.pill-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.pill-nav a {
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.pill-nav a:hover {
+  background: rgba(96, 165, 250, 0.18);
+  color: #e2e8f0;
+}
+
 .hero {
   text-align: left;
   margin-bottom: 1.25rem;
@@ -148,6 +170,10 @@ nav a:hover {
   font-size: 0.8rem;
   color: var(--accent-strong);
   margin-top: auto;
+}
+
+.section-anchor {
+  scroll-margin-top: 90px;
 }
 
 .summary-grid {

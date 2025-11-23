@@ -110,10 +110,16 @@
               Buffer days in Singapore, energy-aware ski legs in Hakuba, onsen and teamLab city wind-downs.
               This globe-first page keeps the action cards above the day cards so you can stay on top of every slot.
             </p>
+            <div class="pill-nav">
+              <a href="#resources">Booking links</a>
+              <a href="#actions">Action items</a>
+              <a href="#days">Day schedule</a>
+              <a href="#costs">Costs & food</a>
+            </div>
           <div class="summary-grid">
-            <div class="summary-chip">
-              <strong>Trip window</strong>
-              <p>30 Dec – 20 Jan</p>
+              <div class="summary-chip">
+                <strong>Trip window</strong>
+                <p>30 Dec – 20 Jan</p>
               </div>
               <div class="summary-chip">
                 <strong>Ski days</strong>
@@ -134,17 +140,18 @@
             </div>
           </div>
 
-          <section class="resource-panel">
+          <section id="resources" class="resource-panel section-anchor">
             <h2>Booking + reference links</h2>
+            <p class="chip">Flights • Lodging • Shuttles • Promotions</p>
             <div class="resource-grid" id="resource-grid"></div>
           </section>
 
           <div class="glance-row">
             <div class="glance-card">
               <small>Live location readout</small>
-            <p id="geo-status">Tap “Share location” to pin your timezone.</p>
-            <button id="geo-button" type="button">Share location</button>
-          </div>
+              <p id="geo-status">Tap “Share location” to pin your timezone.</p>
+              <button id="geo-button" type="button">Share location</button>
+            </div>
             <div class="glance-card">
               <small>Essential route order</small>
               <p id="route-summary">
@@ -157,14 +164,16 @@
             </div>
           </div>
 
-          <div class="actions-grid" id="actions-grid"></div>
+          <div id="actions" class="actions-grid section-anchor" >
+            <!-- actions inserted via script -->
+          </div>
 
-          <section class="cards-panel">
+          <section id="days" class="cards-panel section-anchor">
             <h2>Day-by-day schedule (wake-up → sleep)</h2>
             <div id="day-cards"></div>
           </section>
 
-          <section class="plan-comparison">
+          <section id="costs" class="plan-comparison section-anchor">
             <h2>Cost comparisons & food budgets</h2>
             <div class="card-grid" id="comparison-cards"></div>
             <table class="plan-table" id="food-table"></table>
