@@ -256,9 +256,9 @@
 
     <script src="data.js"></script>
     <script type="module">
-      import * as THREE from 'https://unpkg.com/three@0.163.0/build/three.module.js';
-      import { OrbitControls } from 'https://unpkg.com/three@0.163.0/examples/jsm/controls/OrbitControls.js';
-      import ThreeGlobe from 'https://unpkg.com/three-globe@2.27.12/dist/three-globe.module.js';
+      import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js';
+      import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/controls/OrbitControls.js';
+      import ThreeGlobe from 'https://cdn.jsdelivr.net/npm/three-globe@2.27.12/dist/three-globe.module.js';
 
       const data = window.TripData || {};
       const dayCards = document.getElementById('day-cards');
@@ -487,25 +487,18 @@
       renderEmergency();
 
       const journeyLegs = [
-        { label: 'PER → SIN', date: '30 Dec', time: '05:35' },
-        { label: 'SIN → TYO', date: '2 Jan', time: '05:25' },
-        { label: 'TYO → HAKUBA', date: '4 Jan', time: '10:00' },
-        { label: 'HAKUBA → TYO', date: '11 Jan', time: '08:00' },
-        { label: 'TYO → SIN', date: '16 Jan', time: '17:05' },
-        { label: 'SIN → PER', date: '20 Jan', time: '11:15' }
+        { label: 'PER → SIN', date: '2024-12-30', time: '05:35' },
+        { label: 'SIN → TYO', date: '2025-01-02', time: '05:25' },
+        { label: 'TYO → HAKUBA', date: '2025-01-04', time: '10:00' },
+        { label: 'HAKUBA → TYO', date: '2025-01-11', time: '08:00' },
+        { label: 'TYO → SIN', date: '2025-01-16', time: '17:05' },
+        { label: 'SIN → PER', date: '2025-01-20', time: '11:15' }
       ];
 
-      const parseLegDate = (d, t) => {
-        const now = new Date();
-        const [dayRaw, monRaw] = d.split(' ');
-        const day = parseInt(dayRaw, 10);
-        const monIdx = { dec: 11, jan: 0 }[monRaw.toLowerCase()] ?? now.getMonth();
+      const parseLegDate = (isoDate, t) => {
         const [h, m] = t.split(':').map((n) => parseInt(n, 10));
-        let dt = new Date(Date.UTC(now.getFullYear(), monIdx, day, h, m));
-        if (dt < now) {
-          dt = new Date(Date.UTC(now.getFullYear() + 1, monIdx, day, h, m));
-        }
-        return dt;
+        const base = new Date(`${isoDate}T${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:00Z`);
+        return base;
       };
 
       const updateCountdown = () => {
@@ -597,7 +590,10 @@
         }
       };
 
-      weatherCards.forEach(fetchWeather);
+      // Stagger weather fetches to avoid blocking on slow responses
+      weatherCards.forEach((loc, idx) => {
+        setTimeout(() => fetchWeather(loc), idx * 500);
+      });
 
       const renderComparison = () => {
         data.planCosts.forEach((option) => {
