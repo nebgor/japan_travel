@@ -103,81 +103,119 @@
             <a data-page="timeline.html" href="timeline.html">Timeline Review</a>
           </nav>
 
-          <div class="hero">
-            <p class="chip">27 Dec → 20 Jan • Perth → Singapore → Tokyo → Hakuba → Tokyo → Singapore → Perth</p>
-            <h1>Hakuba + Tokyo buffer-ready globe itinerary</h1>
-            <p>
-              Buffer days in Singapore, energy-aware ski legs in Hakuba, onsen and teamLab city wind-downs.
-              This globe-first page keeps the action cards above the day cards so you can stay on top of every slot.
-            </p>
-            <div class="pill-nav">
-              <a href="#resources">Booking links</a>
-              <a href="#actions">Action items</a>
-              <a href="#days">Day schedule</a>
-              <a href="#costs">Costs & food</a>
+          <div class="layout">
+            <div class="main-column">
+              <div class="hero">
+                <p class="chip">27 Dec → 20 Jan • Perth → Singapore → Tokyo → Hakuba → Tokyo → Singapore → Perth</p>
+                <h1>Hakuba + Tokyo buffer-ready globe itinerary</h1>
+                <p>
+                  Buffer days in Singapore, energy-aware ski legs in Hakuba, onsen and teamLab city wind-downs.
+                  This globe-first page keeps the action cards above the day cards so you can stay on top of every slot.
+                </p>
+                <div class="pill-nav">
+                  <a href="#resources">Booking links</a>
+                  <a href="#actions">Action items</a>
+                  <a href="#days">Day schedule</a>
+                  <a href="#costs">Costs & food</a>
+                </div>
+                <div class="summary-grid">
+                  <div class="summary-chip">
+                    <strong>Trip window</strong>
+                    <p>30 Dec – 20 Jan</p>
+                  </div>
+                  <div class="summary-chip">
+                    <strong>Ski days</strong>
+                    <p>5 focused powder days plus rest / recovery slots</p>
+                  </div>
+                  <div class="summary-chip">
+                    <strong>Singapore buffer</strong>
+                    <p>7 nights to reset body clocks and gear up for Japan</p>
+                  </div>
+                  <div class="summary-chip">
+                    <strong>Family</strong>
+                    <p>2 adults · 18yo · 14yo · 7yo</p>
+                  </div>
+                </div>
+                <div class="dataset-toggle" id="dataset-toggle">
+                  <button type="button" data-set="hakuba" class="active">Hakuba · Tokyo</button>
+                  <button type="button" data-set="furano">Furano · Sapporo</button>
+                </div>
+              </div>
+
+              <section id="resources" class="resource-panel section-anchor">
+                <h2>Booking + reference links</h2>
+                <p class="chip">Flights • Lodging • Shuttles • Promotions</p>
+                <div class="resource-grid" id="resource-grid"></div>
+              </section>
+
+              <div class="glance-row">
+                <div class="glance-card">
+                  <small>Live location readout</small>
+                  <p id="geo-status">Tap “Share location” to pin your timezone.</p>
+                  <button id="geo-button" type="button">Share location</button>
+                </div>
+                <div class="glance-card">
+                  <small>Essential route order</small>
+                  <p id="route-summary">
+                    Perth → Singapore (buffer) → Tokyo → Hakuba → Tokyo → Singapore → Perth
+                  </p>
+                </div>
+                <div class="glance-card">
+                  <small>Energy preview</small>
+                  <div id="energy-preview" class="energy-stack"></div>
+                </div>
+              </div>
+
+              <div id="actions" class="actions-grid section-anchor" >
+                <!-- actions inserted via script -->
+              </div>
+
+              <section id="days" class="cards-panel section-anchor">
+                <h2>Day-by-day schedule (wake-up → sleep)</h2>
+                <div id="day-cards"></div>
+              </section>
+
+              <section id="costs" class="plan-comparison section-anchor">
+                <h2>Cost comparisons & food budgets</h2>
+                <div class="card-grid" id="comparison-cards"></div>
+                <table class="plan-table" id="food-table"></table>
+              </section>
             </div>
-          <div class="summary-grid">
-              <div class="summary-chip">
-                <strong>Trip window</strong>
-                <p>30 Dec – 20 Jan</p>
+
+            <aside class="sidebar">
+              <div class="sidebar-card">
+                <h3>Japan travel pulse (X/Twitter)</h3>
+                <p class="chip">Open in new tab; curated searches for conditions and transit.</p>
+                <ul class="sidebar-links">
+                  <li><a target="_blank" rel="noreferrer noopener" href="https://twitter.com/search?q=Hakuba%20snow%20OR%20Happo%20weather&src=typed_query&f=live">Hakuba snow / Happo weather</a></li>
+                  <li><a target="_blank" rel="noreferrer noopener" href="https://twitter.com/search?q=Tokyo%20travel%20delay%20Haneda%20OR%20Narita%20rail&src=typed_query&f=live">Tokyo travel & rail status</a></li>
+                  <li><a target="_blank" rel="noreferrer noopener" href="https://twitter.com/search?q=Furano%20snow%20report%20OR%20Sapporo%20snow&src=typed_query&f=live">Furano/Sapporo snow updates</a></li>
+                  <li><a target="_blank" rel="noreferrer noopener" href="https://twitter.com/search?q=JR%20Nagano%20bus%20Hakuba&src=typed_query&f=live">JR Nagano → Hakuba buses</a></li>
+                </ul>
               </div>
-              <div class="summary-chip">
-                <strong>Ski days</strong>
-                <p>5 focused powder days plus rest / recovery slots</p>
+              <div class="sidebar-card">
+                <h3>Weather now</h3>
+                <p class="chip">Current temp + breeze (Open-Meteo)</p>
+                <div id="weather-grid">
+                  <div class="weather-card" data-loc="tokyo">
+                    <div class="title">Tokyo</div>
+                    <div class="temp" id="temp-tokyo">Loading…</div>
+                    <div class="desc" id="desc-tokyo"></div>
+                  </div>
+                  <div class="weather-card" data-loc="hakuba">
+                    <div class="title">Hakuba</div>
+                    <div class="temp" id="temp-hakuba">Loading…</div>
+                    <div class="desc" id="desc-hakuba"></div>
+                  </div>
+                  <div class="weather-card" data-loc="sapporo">
+                    <div class="title">Sapporo</div>
+                    <div class="temp" id="temp-sapporo">Loading…</div>
+                    <div class="desc" id="desc-sapporo"></div>
+                  </div>
+                </div>
               </div>
-              <div class="summary-chip">
-                <strong>Singapore buffer</strong>
-                <p>7 nights to reset body clocks and gear up for Japan</p>
-              </div>
-              <div class="summary-chip">
-                <strong>Family</strong>
-                <p>2 adults · 18yo · 14yo · 7yo</p>
-              </div>
-            </div>
-            <div class="dataset-toggle" id="dataset-toggle">
-              <button type="button" data-set="hakuba" class="active">Hakuba · Tokyo</button>
-              <button type="button" data-set="furano">Furano · Sapporo</button>
-            </div>
+            </aside>
           </div>
-
-          <section id="resources" class="resource-panel section-anchor">
-            <h2>Booking + reference links</h2>
-            <p class="chip">Flights • Lodging • Shuttles • Promotions</p>
-            <div class="resource-grid" id="resource-grid"></div>
-          </section>
-
-          <div class="glance-row">
-            <div class="glance-card">
-              <small>Live location readout</small>
-              <p id="geo-status">Tap “Share location” to pin your timezone.</p>
-              <button id="geo-button" type="button">Share location</button>
-            </div>
-            <div class="glance-card">
-              <small>Essential route order</small>
-              <p id="route-summary">
-                Perth → Singapore (buffer) → Tokyo → Hakuba → Tokyo → Singapore → Perth
-              </p>
-            </div>
-            <div class="glance-card">
-              <small>Energy preview</small>
-              <div id="energy-preview" class="energy-stack"></div>
-            </div>
-          </div>
-
-          <div id="actions" class="actions-grid section-anchor" >
-            <!-- actions inserted via script -->
-          </div>
-
-          <section id="days" class="cards-panel section-anchor">
-            <h2>Day-by-day schedule (wake-up → sleep)</h2>
-            <div id="day-cards"></div>
-          </section>
-
-          <section id="costs" class="plan-comparison section-anchor">
-            <h2>Cost comparisons & food budgets</h2>
-            <div class="card-grid" id="comparison-cards"></div>
-            <table class="plan-table" id="food-table"></table>
-          </section>
         </div>
       </div>
     </div>
@@ -321,6 +359,34 @@
       };
 
       renderTravelLinks();
+      // Weather pull (Open-Meteo)
+      const weatherCards = [
+        { id: 'tokyo', lat: 35.68, lon: 139.76, title: 'Tokyo' },
+        { id: 'hakuba', lat: 36.69, lon: 137.83, title: 'Hakuba' },
+        { id: 'sapporo', lat: 43.07, lon: 141.35, title: 'Sapporo' }
+      ];
+
+      const fetchWeather = async (loc) => {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}&current_weather=true&timezone=auto`;
+        const tempEl = document.getElementById(`temp-${loc.id}`);
+        const descEl = document.getElementById(`desc-${loc.id}`);
+        try {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error('Weather unavailable');
+          const json = await res.json();
+          const cw = json.current_weather || {};
+          const temp = cw.temperature != null ? `${cw.temperature}°C` : '—';
+          const wind = cw.windspeed != null ? `Wind ${cw.windspeed} km/h` : '';
+          const summary = cw.weathercode != null ? `Code ${cw.weathercode}` : 'Live data';
+          tempEl.textContent = temp;
+          descEl.textContent = `${summary}${wind ? ' · ' + wind : ''}`;
+        } catch (e) {
+          if (tempEl) tempEl.textContent = '—';
+          if (descEl) descEl.textContent = 'Weather unavailable';
+        }
+      };
+
+      weatherCards.forEach(fetchWeather);
 
       const renderComparison = () => {
         data.planCosts.forEach((option) => {
