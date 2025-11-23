@@ -125,6 +125,7 @@ nav a:hover {
 .sidebar-links a {
   color: var(--accent-strong);
   font-size: 0.9rem;
+  display: block;
 }
 
 .weather-card {
