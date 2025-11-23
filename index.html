@@ -98,9 +98,9 @@
       <div class="overlay">
         <div class="page-shell">
           <nav aria-label="Page versions">
-            <a class="active" href="index.html">Globe View</a>
-            <a href="cards.html">Card Summary</a>
-            <a href="timeline.html">Timeline Review</a>
+            <a class="active" href="./index.html">Globe View</a>
+            <a href="./cards.html">Card Summary</a>
+            <a href="./timeline.html">Timeline Review</a>
           </nav>
 
           <div class="hero">
@@ -137,9 +137,9 @@
           <div class="glance-row">
             <div class="glance-card">
               <small>Live location readout</small>
-              <p id="geo-status">Tap “Share location” to pin your timezone.</p>
-              <button id="geo-button" type="button">Share location</button>
-            </div>
+            <p id="geo-status">Tap “Share location” to pin your timezone.</p>
+            <button id="geo-button" type="button">Share location</button>
+          </div>
             <div class="glance-card">
               <small>Essential route order</small>
               <p id="route-summary">
@@ -362,12 +362,24 @@
           return;
         }
         updateGeoStatus('Requesting device location…');
+        geoButton?.setAttribute('disabled', 'true');
+        geoButton?.classList.add('busy');
+
         navigator.geolocation.getCurrentPosition(
-          handleLocationSuccess,
-          () => {
-            handleLocationError('Location blocked; using Perth anchor.');
+          (position) => {
+            geoButton?.removeAttribute('disabled');
+            geoButton?.classList.remove('busy');
+            handleLocationSuccess(position);
           },
-          { timeout: 20000 }
+          (error) => {
+            geoButton?.removeAttribute('disabled');
+            geoButton?.classList.remove('busy');
+            handleLocationError(`Location blocked (${error.code}): ${error.message}`);
+          },
+          {
+            timeout: 20000,
+            maximumAge: 60000
+          }
         );
       };
 
