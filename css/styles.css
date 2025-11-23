@@ -307,6 +307,40 @@ nav a:hover {
   font-size: 0.9rem;
 }
 
+.flight-panel {
+  margin-top: 1.5rem;
+}
+
+.flight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.85rem;
+}
+
+.flight-card {
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(3, 7, 24, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  gap: 0.3rem;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+}
+
+.flight-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.flight-card .meta {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.flight-card .chip {
+  font-size: 0.75rem;
+}
+
 .section-anchor {
   scroll-margin-top: 90px;
 }

@@ -148,6 +148,12 @@
                 <div class="resource-grid" id="resource-grid"></div>
               </section>
 
+              <section id="flights" class="flight-panel section-anchor">
+                <h2>Featured flights (locked to itinerary)</h2>
+                <p class="chip">Times align with buffers and wake-to-sleep schedule</p>
+                <div class="flight-grid" id="flight-grid"></div>
+              </section>
+
               <section id="maps" class="map-panel section-anchor">
                 <h2>Ski slope maps</h2>
                 <p class="chip">Trail maps from resort sites (opens in new tab)</p>
@@ -236,6 +242,7 @@
       const dayCards = document.getElementById('day-cards');
       const actionsGrid = document.getElementById('actions-grid');
       const resourceGrid = document.getElementById('resource-grid');
+      const flightGrid = document.getElementById('flight-grid');
       const mapGrid = document.getElementById('map-grid');
       const comparisonCards = document.getElementById('comparison-cards');
       const foodTable = document.getElementById('food-table');
@@ -706,3 +713,20 @@
 
   </body>
 </html>
+      const renderFlights = () => {
+        if (!flightGrid || !data.flightOptions) return;
+        flightGrid.innerHTML = '';
+        data.flightOptions.forEach((f) => {
+          const card = document.createElement('article');
+          card.className = 'flight-card';
+          card.innerHTML = `
+            <h3>${f.leg}</h3>
+            <div class="meta">${f.dates} · ${f.carrier}</div>
+            <div class="chip">${f.times} · ${f.duration}</div>
+            <p class="meta">${f.note}</p>
+          `;
+          flightGrid.appendChild(card);
+        });
+      };
+
+      renderFlights();

@@ -614,6 +614,41 @@ const slopeMaps = [
   }
 ];
 
+const flightOptions = [
+  {
+    leg: 'PER → SIN',
+    dates: '30 Dec',
+    carrier: 'Singapore Airlines SQ214',
+    times: 'Dep 05:35 · Arr 10:45',
+    duration: '5h 10m',
+    note: 'Morning arrival; buffer hotel check-in and pool time'
+  },
+  {
+    leg: 'SIN → TYO (NRT/HND)',
+    dates: '2 Jan',
+    carrier: 'Singapore Airlines SQ638 (overnight)',
+    times: 'Dep 00:30 · Arr 08:20',
+    duration: '6h 50m',
+    note: 'Overnight to Tokyo; aligns with buffer day on arrival'
+  },
+  {
+    leg: 'TYO → SIN',
+    dates: '16 Jan',
+    carrier: 'SQ633 (HND→SIN)',
+    times: 'Dep 17:05 · Arr 23:45',
+    duration: '7h 40m',
+    note: 'Evening flight after Tokyo wrap-up; lands same night'
+  },
+  {
+    leg: 'SIN → PER',
+    dates: '20 Jan',
+    carrier: 'SQ225',
+    times: 'Dep 11:15 · Arr 16:30',
+    duration: '5h 15m',
+    note: 'Daytime return; morning checkout is relaxed'
+  }
+];
+
 const travelLinks = [
   {
     title: 'Skyscanner multi-city search',
@@ -661,6 +696,7 @@ window.TripData = {
   routeArcs,
   actions,
   slopeMaps,
+  flightOptions,
   travelLinks,
   summary: tripSummary
 };
