@@ -581,6 +581,39 @@ const actions = [
   }
 ];
 
+const slopeMaps = [
+  {
+    title: 'Hakuba Happo-one trail map',
+    area: 'Hakuba',
+    link: 'https://www.happo-one.jp/wp/wp-content/uploads/2022/10/happo_trailmap_en.pdf',
+    image: 'hakuba.jpg'
+  },
+  {
+    title: 'Hakuba 47 / Goryu trail map',
+    area: 'Hakuba',
+    link: 'https://www.hakuba47.co.jp/wp/wp-content/themes/hakuba47/pdf/2024trailmap_en.pdf',
+    image: 'hakuba.jpg'
+  },
+  {
+    title: 'Tsugaike Kogen trail map',
+    area: 'Hakuba / Otari',
+    link: 'https://www.tsugaike.gr.jp/wp/wp-content/uploads/2023/12/map_en.pdf',
+    image: 'hakuba.jpg'
+  },
+  {
+    title: 'Iwatake trail map',
+    area: 'Hakuba',
+    link: 'https://www.nsd-hakuba.jp/iwatake/wp-content/uploads/sites/11/2022/12/iwatake_trailmap_en.pdf',
+    image: 'hakuba.jpg'
+  },
+  {
+    title: 'Furano resort trail map',
+    area: 'Furano',
+    link: 'https://www.princehotels.co.jp/furano/wp-content/uploads/sites/78/2023/11/furano_trailmap_en.pdf',
+    image: 'furano.jpg'
+  }
+];
+
 const travelLinks = [
   {
     title: 'Skyscanner multi-city search',
@@ -627,6 +660,7 @@ window.TripData = {
   routePoints,
   routeArcs,
   actions,
+  slopeMaps,
   travelLinks,
   summary: tripSummary
 };

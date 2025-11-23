@@ -148,6 +148,12 @@
                 <div class="resource-grid" id="resource-grid"></div>
               </section>
 
+              <section id="maps" class="map-panel section-anchor">
+                <h2>Ski slope maps</h2>
+                <p class="chip">Trail maps from resort sites (opens in new tab)</p>
+                <div class="map-grid" id="map-grid"></div>
+              </section>
+
               <div class="glance-row">
                 <div class="glance-card">
                   <small>Live location readout</small>
@@ -230,6 +236,7 @@
       const dayCards = document.getElementById('day-cards');
       const actionsGrid = document.getElementById('actions-grid');
       const resourceGrid = document.getElementById('resource-grid');
+      const mapGrid = document.getElementById('map-grid');
       const comparisonCards = document.getElementById('comparison-cards');
       const foodTable = document.getElementById('food-table');
       const energyPreview = document.getElementById('energy-preview');
@@ -359,6 +366,28 @@
       };
 
       renderTravelLinks();
+      const renderMapLinks = () => {
+        if (!mapGrid || !data.slopeMaps) return;
+        mapGrid.innerHTML = '';
+        data.slopeMaps.forEach((item) => {
+          const card = document.createElement('article');
+          card.className = 'map-card';
+          const imgSrc = item.image || 'hakuba.jpg';
+          card.innerHTML = `
+            <img src="${imgSrc}" alt="${item.title}" loading="lazy" decoding="async" />
+            <div class="body">
+              <h3>${item.title}</h3>
+              <p>${item.area}</p>
+            </div>
+            <div class="footer">
+              <a href="${item.link}" target="_blank" rel="noreferrer noopener">Open map →</a>
+            </div>
+          `;
+          mapGrid.appendChild(card);
+        });
+      };
+
+      renderMapLinks();
       // Weather pull (Open-Meteo)
       const weatherCards = [
         { id: 'tokyo', lat: 35.68, lon: 139.76, title: 'Tokyo' },
