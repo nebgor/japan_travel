@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Japan Travel Globe · Hakuba + Tokyo Buffer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      html,
+      body {
+        min-height: 100%;
+      }
+
+      body {
+        margin: 0;
+        overflow-x: hidden;
+      }
+
+      .globe-wrapper {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      #globe {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        filter: brightness(1.05);
+      }
+
+      .overlay {
+        position: relative;
+        z-index: 1;
+        pointer-events: auto;
+      }
+
+      .page-shell {
+        padding-bottom: 4rem;
+      }
+
+      #day-cards {
+        display: grid;
+        gap: 1.2rem;
+        scroll-snap-type: y mandatory;
+      }
+
+      .day-card {
+        scroll-snap-align: start;
+      }
+
+      .day-card .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 0.75rem;
+      }
+
+      .day-card .gallery img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .cards-panel h2,
+      .plan-comparison h2 {
+        margin: 2.5rem 0 0.8rem;
+      }
+
+      .plan-comparison {
+        max-width: 1200px;
+        margin: 0 auto 4rem;
+      }
+
+      .plan-table {
+        margin-top: 1rem;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 1rem;
+        overflow: hidden;
+      }
+
+      #route-summary {
+        font-weight: 600;
+        color: #e0f2fe;
+      }
+
+      #route-summary small {
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="globe-wrapper">
+      <canvas id="globe"></canvas>
+      <div class="overlay">
+        <div class="page-shell">
+          <nav aria-label="Page versions">
+            <a class="active" href="index.html">Globe View</a>
+            <a href="cards.html">Card Summary</a>
+            <a href="timeline.html">Timeline Review</a>
+          </nav>
+
+          <div class="hero">
+            <p class="chip">27 Dec → 20 Jan • Perth → Singapore → Tokyo → Hakuba → Tokyo → Singapore → Perth</p>
+            <h1>Hakuba + Tokyo buffer-ready globe itinerary</h1>
+            <p>
+              Buffer days in Singapore, energy-aware ski legs in Hakuba, onsen and teamLab city wind-downs.
+              This globe-first page keeps the action cards above the day cards so you can stay on top of every slot.
+            </p>
+          <div class="summary-grid">
+              <div class="summary-chip">
+                <strong>Trip window</strong>
+                <p>30 Dec – 20 Jan</p>
+              </div>
+              <div class="summary-chip">
+                <strong>Ski days</strong>
+                <p>5 focused powder days plus rest / recovery slots</p>
+              </div>
+              <div class="summary-chip">
+                <strong>Singapore buffer</strong>
+                <p>7 nights to reset body clocks and gear up for Japan</p>
+              </div>
+              <div class="summary-chip">
+                <strong>Family</strong>
+                <p>2 adults · 18yo · 14yo · 7yo</p>
+              </div>
+            </div>
+            <div class="dataset-toggle" id="dataset-toggle">
+              <button type="button" data-set="hakuba" class="active">Hakuba · Tokyo</button>
+              <button type="button" data-set="furano">Furano · Sapporo</button>
+            </div>
+          </div>
+
+          <div class="glance-row">
+            <div class="glance-card">
+              <small>Live location readout</small>
+              <p id="geo-status">Tap “Share location” to pin your timezone.</p>
+              <button id="geo-button" type="button">Share location</button>
+            </div>
+            <div class="glance-card">
+              <small>Essential route order</small>
+              <p id="route-summary">
+                Perth → Singapore (buffer) → Tokyo → Hakuba → Tokyo → Singapore → Perth
+              </p>
+            </div>
+            <div class="glance-card">
+              <small>Energy preview</small>
+              <div id="energy-preview" class="energy-stack"></div>
+            </div>
+          </div>
+
+          <div class="actions-grid" id="actions-grid"></div>
+
+          <section class="cards-panel">
+            <h2>Day-by-day schedule (wake-up → sleep)</h2>
+            <div id="day-cards"></div>
+          </section>
+
+          <section class="plan-comparison">
+            <h2>Cost comparisons & food budgets</h2>
+            <div class="card-grid" id="comparison-cards"></div>
+            <table class="plan-table" id="food-table"></table>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script type="module">
+      import * as THREE from 'https://unpkg.com/three@0.163.0/build/three.module.js';
+      import { OrbitControls } from 'https://unpkg.com/three@0.163.0/examples/jsm/controls/OrbitControls.js';
+      import ThreeGlobe from 'https://unpkg.com/three-globe@2.27.12/dist/three-globe.module.js';
+
+      const data = window.TripData;
+      const dayCards = document.getElementById('day-cards');
+      const actionsGrid = document.getElementById('actions-grid');
+      const comparisonCards = document.getElementById('comparison-cards');
+      const foodTable = document.getElementById('food-table');
+      const energyPreview = document.getElementById('energy-preview');
+      const geoStatus = document.getElementById('geo-status');
+      const geoButton = document.getElementById('geo-button');
+      const datasetToggle = document.getElementById('dataset-toggle');
+      const datasetButtons = datasetToggle ? datasetToggle.querySelectorAll('button') : [];
+
+      const buildCard = (entry) => {
+        const card = document.createElement('article');
+        card.className = 'day-card';
+        const planSteps = entry.plan.split(';').map((step) => step.trim()).filter(Boolean);
+        const gallery =
+          data.galleryMap[entry.location] || data.galleryMap[entry.location.split('→')[0]] || data.galleryMap.Tokyo;
+        const energy = data.energyMap[entry.date] || {
+          adults: 'Medium',
+          '18yo': 'Medium',
+          '14yo': 'Medium',
+          '7yo': 'Low'
+        };
+
+        const galleryMarkup = gallery
+          .map(
+            (src) =>
+              `<img src="${src}" alt="${entry.location} highlight" loading="lazy" decoding="async" />`
+          )
+          .join('');
+
+        const energyMarkup = Object.entries(energy)
+          .map(
+            ([person, level]) => `
+              <span class="energy-pill ${level.toLowerCase()}">${person}: <span>${level}</span></span>
+            `
+          )
+          .join('');
+
+        card.innerHTML = `
+          <h3>${entry.date} <span>${entry.location}</span></h3>
+          <div class="gallery">${galleryMarkup}</div>
+          <div class="chips">
+            <span class="chip">Food mid: $${entry.food}</span>
+            ${
+              entry.focus
+                ? `<span class="chip">Ski focus: ${entry.focus}</span>`
+                : '<span class="chip">Jet-lag smart pacing</span>'
+            }
+          </div>
+          <p>${planSteps.join(' · ')}</p>
+          <div class="chips energy-stack">${energyMarkup}</div>
+          <p><strong>Hint:</strong> ${entry.hint || 'Smooth transitions via reliable transfers.'}</p>
+        `;
+
+        return card;
+      };
+
+      const datasets = {
+        hakuba: data.hakuba,
+        furano: data.furano
+      };
+
+      let currentSet = 'hakuba';
+
+      const updateEnergyPreview = (entry) => {
+        const energy =
+          data.energyMap[entry?.date] || {
+            adults: 'Medium',
+            '18yo': 'Medium',
+            '14yo': 'Medium',
+            '7yo': 'Low'
+          };
+        energyPreview.innerHTML = Object.entries(energy)
+          .map(
+            ([person, level]) => `<span class="energy-pill ${level.toLowerCase()}">${person}: <span>${level}</span></span>`
+          )
+          .join('');
+      };
+
+      const renderDays = (setKey) => {
+        dayCards.innerHTML = '';
+        const selection = datasets[setKey] || [];
+        selection.forEach((day) => dayCards.appendChild(buildCard(day)));
+        updateEnergyPreview(selection[0]);
+      };
+
+      const setActiveDataset = (key) => {
+        currentSet = key;
+        datasetButtons.forEach((btn) => {
+          btn.classList.toggle('active', btn.dataset.set === key);
+        });
+        renderDays(key);
+      };
+
+      datasetButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          setActiveDataset(button.dataset.set);
+        });
+      });
+
+      setActiveDataset(currentSet);
+
+      data.actions.forEach((action) => {
+        const card = document.createElement('article');
+        card.className = 'action-card';
+        card.innerHTML = `
+          <h3>${action.title}</h3>
+          <p>${action.detail}</p>
+          <a href="${action.link}" target="_blank" rel="noreferrer noopener">Open resource →</a>
+        `;
+        actionsGrid.appendChild(card);
+      });
+
+      const renderComparison = () => {
+        data.planCosts.forEach((option) => {
+          const card = document.createElement('article');
+          card.className = 'day-card';
+          const chips = [
+            `Flights: ${option.flights}`,
+            `Lodging: ${option.lodging}`,
+            `Lifts: ${option.lifts}`,
+            `Rentals: ${option.rentals}`,
+            `Transport: ${option.transport}`,
+            `Food: ${option.food}`,
+            `Activities: ${option.activities}`
+          ]
+            .map((label) => `<span class="chip">${label}</span>`)
+            .join('');
+
+          card.innerHTML = `
+            <h3>${option.plan}</h3>
+            <div class="chips">${chips}</div>
+            <p>${option.notes}</p>
+          `;
+          comparisonCards.appendChild(card);
+        });
+
+        const headerRow = `
+          <tr>
+            <th>Location</th>
+            <th>Lean</th>
+            <th>Mid</th>
+            <th>Splurge</th>
+            <th>Notes</th>
+          </tr>
+        `;
+        const rows = data.foodBudget
+          .map(
+            (row) => `
+              <tr>
+                <td>${row.location}</td>
+                <td>${row.lean}</td>
+                <td>${row.mid}</td>
+                <td>${row.splurge}</td>
+                <td>${row.notes}</td>
+              </tr>
+            `
+          )
+          .join('');
+        foodTable.innerHTML = `<thead>${headerRow}</thead><tbody>${rows}</tbody>`;
+      };
+
+      renderComparison();
+
+      const updateGeoStatus = (text) => {
+        geoStatus.textContent = text;
+      };
+
+      const handleLocationSuccess = (pos) => {
+        updateGeoStatus(
+          `Device near ${pos.coords.latitude.toFixed(2)}, ${pos.coords.longitude.toFixed(2)}. Est. timezone offset ${(
+            new Date().getTimezoneOffset() / -60
+          ).toFixed(0)}h.`
+        );
+      };
+
+      const handleLocationError = (message) => {
+        updateGeoStatus(message);
+      };
+
+      const requestDeviceLocation = () => {
+        if (!('geolocation' in navigator)) {
+          handleLocationError('Geolocation unsupported; planning from Perth.');
+          geoButton?.setAttribute('disabled', 'true');
+          return;
+        }
+        updateGeoStatus('Requesting device location…');
+        navigator.geolocation.getCurrentPosition(
+          handleLocationSuccess,
+          () => {
+            handleLocationError('Location blocked; using Perth anchor.');
+          },
+          { timeout: 20000 }
+        );
+      };
+
+      geoButton?.addEventListener('click', requestDeviceLocation);
+
+      if ('geolocation' in navigator) {
+        if ('permissions' in navigator) {
+          navigator.permissions.query({ name: 'geolocation' }).then((status) => {
+            if (status.state === 'granted') {
+              requestDeviceLocation();
+            } else if (status.state === 'denied') {
+              handleLocationError('Location blocked; using Perth anchor.');
+            } else {
+              updateGeoStatus('Tap “Share location” to pin your timezone.');
+            }
+
+            status.onchange = () => {
+              if (status.state === 'granted') {
+                requestDeviceLocation();
+              } else if (status.state === 'denied') {
+                handleLocationError('Location blocked; using Perth anchor.');
+              }
+            };
+          });
+        } else {
+          updateGeoStatus('Tap “Share location” to pin your timezone.');
+        }
+      } else {
+        handleLocationError('Geolocation unsupported; planning from Perth.');
+        geoButton?.setAttribute('disabled', 'true');
+      }
+
+      const initGlobeScene = () => {
+        const canvas = document.getElementById('globe');
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x030711, 0);
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 200);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        directionalLight.position.set(100, 150, 100);
+        scene.add(directionalLight);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enablePan = false;
+        controls.minDistance = 130;
+        controls.maxDistance = 300;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.2;
+
+        const globe = new ThreeGlobe({ animateIn: true })
+          .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-night.jpg')
+          .bumpImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png')
+          .arcsData(data.routeArcs)
+          .arcColor(() => '#38bdf8')
+          .arcAltitudeAutoScale(true)
+          .arcDashLength(0.4)
+          .arcDashGap(0.7)
+          .arcDashAnimateTime(2000)
+          .pointsData(data.routePoints)
+          .pointLat('lat')
+          .pointLng('lng')
+          .pointColor(() => '#e0f2fe')
+          .pointRadius(0.6)
+          .labelsData(data.routePoints)
+          .labelLat('lat')
+          .labelLng('lng')
+          .labelText('label')
+          .labelAltitude(0.05)
+          .labelSize(0.8)
+          .labelColor(() => '#fff');
+
+        scene.add(globe);
+
+        const animate = () => {
+          controls.update();
+          renderer.render(scene, camera);
+          requestAnimationFrame(animate);
+        };
+
+        animate();
+
+        window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+      };
+
+      initGlobeScene();
+    </script>
+
+  </body>
+</html>

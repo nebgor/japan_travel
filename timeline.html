@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Timeline · Chrono Family Itinerary</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      .timeline-node {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+        border-radius: 1.25rem;
+        background: rgba(3, 7, 24, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .timeline-node .time {
+        font-weight: 600;
+        color: #22d3ee;
+      }
+
+      .timeline-node .location {
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      .timeline-label {
+        margin: 0.5rem 0 0.25rem;
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .timeline-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .timeline-section {
+        margin-bottom: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <nav aria-label="Page versions">
+        <a href="index.html">Globe View</a>
+        <a href="cards.html">Card Summary</a>
+        <a class="active" href="timeline.html">Timeline Review</a>
+      </nav>
+
+      <div class="hero">
+        <small>Chronological pacing + energy awareness</small>
+        <h1>We travel day-by-day, wake → sleep, with buffer highlights</h1>
+        <p>
+          The timeline below keeps every wake-up, train, and ski push in order. It pulls energy notes from
+          the globe page so you can match recovery days with activities, and always stay chronological.
+        </p>
+        <div class="dataset-toggle" id="timeline-toggle">
+          <button type="button" data-set="hakuba" class="active">Hakuba + Tokyo</button>
+          <button type="button" data-set="furano">Furano + Sapporo</button>
+        </div>
+      </div>
+
+      <section class="timeline-section">
+        <p class="section-caption" id="timeline-caption">Hakuba plan: sequential days, jet-lag buffer, ski focus, final Singapore buffer</p>
+        <div class="timeline-list" id="timeline-list"></div>
+      </section>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+      const data = window.TripData;
+      const timelineList = document.getElementById('timeline-list');
+      const timelineCaption = document.getElementById('timeline-caption');
+      const timelineToggle = document.getElementById('timeline-toggle');
+      const toggleButtons = timelineToggle ? timelineToggle.querySelectorAll('button') : [];
+
+      const datasetInfo = {
+        hakuba: 'Hakuba plan: sequential days, jet-lag buffer, ski focus, final Singapore buffer',
+        furano: 'Furano/Sapporo plan: CTS buffer, Hokkaido powder, Tokyo wind-down'
+      };
+
+      const datasets = {
+        hakuba: data.hakuba,
+        furano: data.furano
+      };
+
+      const buildTimeline = (entry) => {
+        const node = document.createElement('article');
+        node.className = 'timeline-node';
+        const energy = data.energyMap[entry.date] || {};
+        const energyText = Object.entries(energy)
+          .map(([person, level]) => `${person}: ${level}`)
+          .join(' · ');
+
+        node.innerHTML = `
+          <div>
+            <div class="time">${entry.date}</div>
+            <div class="location">${entry.location}</div>
+            <div class="chips">
+              <span class="chip">Food ${entry.food} AUD</span>
+              ${
+                entry.focus
+                  ? `<span class="chip">Ski focus: ${entry.focus}</span>`
+                  : '<span class="chip">Rest / buffer day</span>'
+              }
+            </div>
+          </div>
+          <div>
+            <p>${entry.plan}</p>
+            <p><strong>Energy:</strong> ${energyText || 'Balanced'}</p>
+          </div>
+        `;
+
+        return node;
+      };
+
+      const renderTimeline = (key) => {
+        const dataset = datasets[key] || [];
+        timelineList.innerHTML = '';
+        dataset.forEach((entry) => timelineList.appendChild(buildTimeline(entry)));
+        timelineCaption.textContent = datasetInfo[key] || '';
+      };
+
+      toggleButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          toggleButtons.forEach((btn) => btn.classList.remove('active'));
+          button.classList.add('active');
+          renderTimeline(button.dataset.set);
+        });
+      });
+
+      if (toggleButtons.length > 0) {
+        renderTimeline(toggleButtons[0].dataset.set);
+      }
+    </script>
+  </body>
+</html>

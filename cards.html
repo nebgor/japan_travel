@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Card Summary · Family Japan Options</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      .option-card .gallery {
+        display: flex;
+        gap: 0.5rem;
+        margin: 0.75rem 0;
+      }
+
+      .option-card img {
+        flex: 1;
+        border-radius: 1rem;
+        height: 140px;
+        object-fit: cover;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .hero small {
+        color: var(--muted);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .section-caption {
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <nav aria-label="Page versions">
+        <a href="index.html">Globe View</a>
+        <a class="active" href="cards.html">Card Summary</a>
+        <a href="timeline.html">Timeline Review</a>
+      </nav>
+
+      <div class="hero">
+        <small>Family options + inspiration</small>
+        <h1>Hakuba focus with a Furano/Sapporo alternative</h1>
+        <p>
+          A quick-reference layout that keeps your ski needs, energy levels, and essential next steps in one
+          scroll. Each option layer includes photos, buffer counts, and remaining to-dos.
+        </p>
+      </div>
+
+      <section>
+        <p class="section-caption">Hakuba + Tokyo plan · 5 ski days, rest days before skiing, buffer after Hakuba</p>
+        <div class="card-grid" id="option-cards"></div>
+      </section>
+
+      <section>
+        <p class="section-caption">Actions we will book next</p>
+        <div class="actions-grid" id="action-highlights"></div>
+      </section>
+
+      <section>
+        <p class="section-caption">Skill split plan for each level</p>
+        <div class="card-grid" id="skill-cards"></div>
+      </section>
+
+      <section>
+        <p class="section-caption">Daily pacing snapshots</p>
+        <div class="card-grid" id="daily-snapshots"></div>
+      </section>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+      const data = window.TripData;
+      const optionCards = document.getElementById('option-cards');
+      const actionHighlights = document.getElementById('action-highlights');
+      const skillCards = document.getElementById('skill-cards');
+      const snapshots = document.getElementById('daily-snapshots');
+
+      const optionSummary = [
+        {
+          label: 'Hakuba + Tokyo',
+          focus: 'Hakuba skiing + Tokyo restarts',
+          nights: 12,
+          buffer: '7 Singapore nights + Tokyo rest days',
+          highlights: [
+            'Jet-lag buffer straight after flights',
+            'Hakuba lessons for the two beginners',
+            'Snow Monkey day + restful Tokyo finale'
+          ],
+          gallery: ['hakuba.jpg', 'snowmonkey.jpg']
+        },
+        {
+          label: 'Furano/Sapporo + Tokyo',
+          focus: 'More northern powder, CTS buffer, Sapporo + Otaru day trips',
+          nights: 14,
+          buffer: 'longer Hokkaido stay to absorb snow, restful Tokyo evenings',
+          highlights: [
+            'Furano beginner greens + premium zone for intermediates',
+            'Sapporo/Otaru food tour en route to Tokyo',
+            'Travel windows kept from 27 Dec – 20 Jan'
+          ],
+          gallery: ['furano.jpg', 'sapporo.jpg']
+        }
+      ];
+
+      optionSummary.forEach((option) => {
+        const card = document.createElement('article');
+        card.className = 'day-card option-card';
+        card.innerHTML = `
+          <h3>${option.label}</h3>
+          <div class="gallery">
+            ${option.gallery.map((src) => `<img src="${src}" alt="${option.label}" />`).join('')}
+          </div>
+          <div class="chips">
+            <span class="chip">Focus: ${option.focus}</span>
+            <span class="chip">${option.nights} nights in Japan</span>
+            <span class="chip">Buffer: ${option.buffer}</span>
+          </div>
+          <ul>
+            ${option.highlights.map((hint) => `<li>${hint}</li>`).join('')}
+          </ul>
+        `;
+        optionCards.appendChild(card);
+      });
+
+      data.actions.slice(0, 4).forEach((action) => {
+        const card = document.createElement('article');
+        card.className = 'action-card';
+        card.innerHTML = `
+          <h3>${action.title}</h3>
+          <p>${action.detail}</p>
+          <a href="${action.link}" target="_blank" rel="noreferrer noopener">Check it out →</a>
+        `;
+        actionHighlights.appendChild(card);
+      });
+
+      data.skillSplit.forEach((item) => {
+        const card = document.createElement('article');
+        card.className = 'day-card';
+        card.innerHTML = `
+          <h3>${item.group}</h3>
+          <p>${item.plan}</p>
+        `;
+        skillCards.appendChild(card);
+      });
+
+      data.hakuba.slice(0, 3).forEach((day) => {
+        const card = document.createElement('article');
+        card.className = 'day-card';
+        card.innerHTML = `
+          <h3>${day.date} · ${day.location}</h3>
+          <p>${day.plan}</p>
+          <p><strong>Hint:</strong> ${day.hint}</p>
+        `;
+        snapshots.appendChild(card);
+      });
+    </script>
+  </body>
+</html>
