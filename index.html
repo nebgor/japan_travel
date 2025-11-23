@@ -336,6 +336,7 @@
       });
 
       setActiveDataset(currentSet);
+      let hasFocusedToday = false;
 
       data.actions.forEach((action) => {
         const card = document.createElement('article');
@@ -495,6 +496,62 @@
 
       renderComparison();
 
+      const monthValue = (dateStr) => {
+        const [dayRaw, monRaw] = dateStr.split(' ');
+        const day = parseInt(dayRaw, 10);
+        const mon = monRaw?.toLowerCase();
+        if (mon === 'dec') return day;
+        if (mon === 'jan') return 31 + day; // cross-year continuation
+        return 1000 + day;
+      };
+
+      const findTodayMatch = () => {
+        const today = new Date();
+        const mon = today.toLocaleString('en-US', { month: 'short' });
+        const key = `${today.getDate()} ${mon}`;
+        const todayVal = monthValue(key);
+
+        const pickFrom = (setKey) => {
+          const list = datasets[setKey] || [];
+          let direct = list.find((d) => d.date === key);
+          if (direct) return { setKey, day: direct };
+          // next upcoming
+          let best = null;
+          let bestVal = Infinity;
+          list.forEach((d) => {
+            const val = monthValue(d.date);
+            if (val >= todayVal && val < bestVal) {
+              bestVal = val;
+              best = d;
+            }
+          });
+          return best ? { setKey, day: best } : null;
+        };
+
+        return pickFrom(currentSet) || pickFrom('hakuba') || pickFrom('furano');
+      };
+
+      const focusToday = () => {
+        if (hasFocusedToday) return;
+        const match = findTodayMatch();
+        if (!match || !match.day) return;
+        if (match.setKey !== currentSet) {
+          setActiveDataset(match.setKey);
+        }
+        hasFocusedToday = true;
+        setTimeout(() => {
+          const card = Array.from(document.querySelectorAll('#day-cards .day-card h3')).find((h) =>
+            h.textContent.trim().startsWith(match.day.date)
+          );
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            geoStatus.textContent = `Today: ${match.day.date} · ${match.day.location} · auto-focused`;
+          }
+        }, 150);
+      };
+
+      focusToday();
+
       const updateGeoStatus = (text) => {
         geoStatus.textContent = text;
       };
@@ -526,6 +583,7 @@
             geoButton?.removeAttribute('disabled');
             geoButton?.classList.remove('busy');
             handleLocationSuccess(position);
+            focusToday();
           },
           (error) => {
             geoButton?.removeAttribute('disabled');
