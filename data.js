@@ -740,6 +740,34 @@ const slopeCams = [
   }
 ];
 
+const emergencyInfo = [
+  {
+    title: 'General emergency',
+    detail: 'Police 110 · Ambulance/Fire 119 (works from any phone in Japan)',
+    link: ''
+  },
+  {
+    title: 'On-slope ski patrol',
+    detail: 'Use patrol number on your lift ticket/map or ask any liftie/patrol hut to call; if unsure, dial 119 and state the resort name clearly.',
+    link: ''
+  },
+  {
+    title: 'Hakuba local help',
+    detail: 'Hakuba Valley bases can patch you to patrol; nearest hospitals reached via 119 dispatch.',
+    link: 'https://www.hakubavalley.com/en/'
+  },
+  {
+    title: 'Hokkaido (Furano/Sapporo)',
+    detail: 'Dial 110/119; patrol contacts posted at Kitanomine/Furano Zone bases—ask staff to call patrol directly.',
+    link: 'https://www.princehotels.co.jp/furano/winter/'
+  },
+  {
+    title: 'Consular support (Tokyo)',
+    detail: 'Keep your embassy/consulate number handy for passport/legal issues; Tokyo missions list.',
+    link: 'https://www.mofa.go.jp/about/emb_cons/mofaserv.html'
+  }
+];
+
 window.TripData = {
   hakuba: hakubaData,
   furano: furanoData,
@@ -754,6 +782,7 @@ window.TripData = {
   slopeMaps,
   slopeCams,
   newsFeeds,
+  emergencyInfo,
   flightOptions,
   travelLinks,
   summary: tripSummary

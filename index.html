@@ -237,6 +237,11 @@
                 <p class="chip">Resort webcams (opens in new tab)</p>
                 <ul class="sidebar-links" id="cam-links"></ul>
               </div>
+              <div class="sidebar-card">
+                <h3>Emergency & help</h3>
+                <p class="chip">Dial 110 (police) · 119 (ambulance/fire)</p>
+                <ul class="sidebar-links" id="emergency-links"></ul>
+              </div>
             </aside>
           </div>
         </div>
@@ -257,6 +262,7 @@
       const mapGrid = document.getElementById('map-grid');
       const newsList = document.getElementById('news-links');
       const camList = document.getElementById('cam-links');
+      const emergencyList = document.getElementById('emergency-links');
       const comparisonCards = document.getElementById('comparison-cards');
       const foodTable = document.getElementById('food-table');
       const energyPreview = document.getElementById('energy-preview');
@@ -439,6 +445,23 @@
       };
 
       renderCams();
+      const renderEmergency = () => {
+        if (!emergencyList || !data.emergencyInfo) return;
+        emergencyList.innerHTML = '';
+        data.emergencyInfo.forEach((item) => {
+          const li = document.createElement('li');
+          const linkPart = item.link
+            ? `<a target="_blank" rel="noreferrer noopener" href="${item.link}">${item.title}</a>`
+            : `<strong>${item.title}</strong>`;
+          li.innerHTML = `
+            ${linkPart}
+            <div class="meta">${item.detail}</div>
+          `;
+          emergencyList.appendChild(li);
+        });
+      };
+
+      renderEmergency();
 
       const journeyLegs = [
         { label: 'PER → SIN', date: '30 Dec', time: '05:35' },
