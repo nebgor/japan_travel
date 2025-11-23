@@ -708,6 +708,34 @@ const newsFeeds = [
   }
 ];
 
+const slopeCams = [
+  {
+    title: 'Happo-one live cam',
+    detail: 'Upper slopes + village view',
+    link: 'https://www.happo-one.jp/en/webcam/'
+  },
+  {
+    title: 'Hakuba 47 / Goryu live cams',
+    detail: 'Base and mid-mountain views',
+    link: 'https://www.hakuba47.co.jp/winter/en/livecamera/'
+  },
+  {
+    title: 'Tsugaike Kogen live cam',
+    detail: 'Tsuga-no-mori / lower area view',
+    link: 'https://www.tsugaike.gr.jp/english/live-camera/'
+  },
+  {
+    title: 'Iwatake live cam',
+    detail: 'Summit panorama cam',
+    link: 'https://www.nsd-hakuba.jp/iwatake/smartphone/iwatake/livecamera/'
+  },
+  {
+    title: 'Furano live cam',
+    detail: 'Kitanomine base cam',
+    link: 'https://www.princehotels.co.jp/furano/winter/live_camera/'
+  }
+];
+
 window.TripData = {
   hakuba: hakubaData,
   furano: furanoData,
@@ -720,6 +748,7 @@ window.TripData = {
   routeArcs,
   actions,
   slopeMaps,
+  slopeCams,
   newsFeeds,
   flightOptions,
   travelLinks,

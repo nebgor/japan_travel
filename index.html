@@ -231,6 +231,11 @@
                 <p class="chip">Official travel + rail updates (opens in new tab)</p>
                 <ul class="sidebar-links" id="news-links"></ul>
               </div>
+              <div class="sidebar-card">
+                <h3>Slope live cams</h3>
+                <p class="chip">Resort webcams (opens in new tab)</p>
+                <ul class="sidebar-links" id="cam-links"></ul>
+              </div>
             </aside>
           </div>
         </div>
@@ -250,6 +255,7 @@
       const flightGrid = document.getElementById('flight-grid');
       const mapGrid = document.getElementById('map-grid');
       const newsList = document.getElementById('news-links');
+      const camList = document.getElementById('cam-links');
       const comparisonCards = document.getElementById('comparison-cards');
       const foodTable = document.getElementById('food-table');
       const energyPreview = document.getElementById('energy-preview');
@@ -413,6 +419,17 @@
       };
 
       renderNews();
+      const renderCams = () => {
+        if (!camList || !data.slopeCams) return;
+        camList.innerHTML = '';
+        data.slopeCams.forEach((item) => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a target="_blank" rel="noreferrer noopener" href="${item.link}">${item.title}</a><div class="meta">${item.detail}</div>`;
+          camList.appendChild(li);
+        });
+      };
+
+      renderCams();
       // Weather pull (Open-Meteo)
       const weatherCards = [
         { id: 'tokyo', lat: 35.68, lon: 139.76, title: 'Tokyo' },
