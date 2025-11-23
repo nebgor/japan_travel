@@ -472,22 +472,24 @@
         { label: 'SIN → PER', date: '20 Jan', time: '11:15' }
       ];
 
-      const parseLegDate = (d) => {
+      const parseLegDate = (d, t) => {
+        const now = new Date();
         const [dayRaw, monRaw] = d.split(' ');
         const day = parseInt(dayRaw, 10);
-        const mon = monRaw.toLowerCase();
-        const year = mon === 'dec' ? 2024 : 2025;
-        const monIdx = { dec: 11, jan: 0 }[mon] ?? 0;
-        return new Date(Date.UTC(year, monIdx, day));
+        const monIdx = { dec: 11, jan: 0 }[monRaw.toLowerCase()] ?? now.getMonth();
+        const [h, m] = t.split(':').map((n) => parseInt(n, 10));
+        let dt = new Date(Date.UTC(now.getFullYear(), monIdx, day, h, m));
+        if (dt < now) {
+          dt = new Date(Date.UTC(now.getFullYear() + 1, monIdx, day, h, m));
+        }
+        return dt;
       };
 
       const updateCountdown = () => {
         const now = new Date();
         const next = journeyLegs
           .map((leg) => {
-            const dt = parseLegDate(leg.date);
-            const [h, m] = leg.time.split(':').map((n) => parseInt(n, 10));
-            dt.setUTCHours(h - now.getTimezoneOffset() / 60, m, 0, 0);
+            const dt = parseLegDate(leg.date, leg.time);
             const diff = dt - now;
             return { ...leg, diff, dt };
           })
