@@ -684,6 +684,30 @@ const tripSummary = {
   focus: 'Sleep buffer after flights, rest days around ski zone, jet-lag friendly pacing'
 };
 
+
+const newsFeeds = [
+  {
+    title: 'Japan travel advisories',
+    detail: 'MOFA/official updates for inbound travelers and transport notices.',
+    link: 'https://www.japan.travel/en/practical-coronavirus-information/'
+  },
+  {
+    title: 'JR East service alerts',
+    detail: 'Current rail service status for Tokyo/Nagano lines.',
+    link: 'https://www.jreast.co.jp/e/customer_support/traffic_advisory.html'
+  },
+  {
+    title: 'Hakuba local updates',
+    detail: 'Snow/road conditions and village notices (Hakuba Valley official).',
+    link: 'https://www.hakubavalley.com/en/'
+  },
+  {
+    title: 'Hokkaido tourism info',
+    detail: 'Weather/roads/events for Sapporo/Furano/Otaru area.',
+    link: 'https://www.hokkaidolikers.com/en'
+  }
+];
+
 window.TripData = {
   hakuba: hakubaData,
   furano: furanoData,
@@ -696,6 +720,7 @@ window.TripData = {
   routeArcs,
   actions,
   slopeMaps,
+  newsFeeds,
   flightOptions,
   travelLinks,
   summary: tripSummary

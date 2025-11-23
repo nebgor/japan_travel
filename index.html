@@ -195,11 +195,11 @@
             </div>
 
             <aside class="sidebar">
-              <div class="sidebar-card">
-                <h3>Japan travel pulse (X/Twitter)</h3>
-                <p class="chip">Open in new tab; curated searches for conditions and transit.</p>
-                <ul class="sidebar-links">
-                  <li><a target="_blank" rel="noreferrer noopener" href="https://twitter.com/search?q=Hakuba%20snow%20OR%20Happo%20weather&src=typed_query&f=live">Hakuba snow / Happo weather</a></li>
+            <div class="sidebar-card">
+              <h3>Japan travel pulse (X/Twitter)</h3>
+              <p class="chip">Open in new tab; curated searches for conditions and transit.</p>
+              <ul class="sidebar-links">
+                <li><a target="_blank" rel="noreferrer noopener" href="https://twitter.com/search?q=Hakuba%20snow%20OR%20Happo%20weather&src=typed_query&f=live">Hakuba snow / Happo weather</a></li>
                   <li><a target="_blank" rel="noreferrer noopener" href="https://twitter.com/search?q=Tokyo%20travel%20delay%20Haneda%20OR%20Narita%20rail&src=typed_query&f=live">Tokyo travel & rail status</a></li>
                   <li><a target="_blank" rel="noreferrer noopener" href="https://twitter.com/search?q=Furano%20snow%20report%20OR%20Sapporo%20snow&src=typed_query&f=live">Furano/Sapporo snow updates</a></li>
                   <li><a target="_blank" rel="noreferrer noopener" href="https://twitter.com/search?q=JR%20Nagano%20bus%20Hakuba&src=typed_query&f=live">JR Nagano → Hakuba buses</a></li>
@@ -226,6 +226,11 @@
                   </div>
                 </div>
               </div>
+              <div class="sidebar-card">
+                <h3>News & alerts</h3>
+                <p class="chip">Official travel + rail updates (opens in new tab)</p>
+                <ul class="sidebar-links" id="news-links"></ul>
+              </div>
             </aside>
           </div>
         </div>
@@ -244,6 +249,7 @@
       const resourceGrid = document.getElementById('resource-grid');
       const flightGrid = document.getElementById('flight-grid');
       const mapGrid = document.getElementById('map-grid');
+      const newsList = document.getElementById('news-links');
       const comparisonCards = document.getElementById('comparison-cards');
       const foodTable = document.getElementById('food-table');
       const energyPreview = document.getElementById('energy-preview');
@@ -396,6 +402,17 @@
       };
 
       renderMapLinks();
+      const renderNews = () => {
+        if (!newsList || !data.newsFeeds) return;
+        newsList.innerHTML = '';
+        data.newsFeeds.forEach((item) => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a target="_blank" rel="noreferrer noopener" href="${item.link}">${item.title}</a><div class="meta">${item.detail}</div>`;
+          newsList.appendChild(li);
+        });
+      };
+
+      renderNews();
       // Weather pull (Open-Meteo)
       const weatherCards = [
         { id: 'tokyo', lat: 35.68, lon: 139.76, title: 'Tokyo' },
