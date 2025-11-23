@@ -457,6 +457,12 @@ nav a:hover {
   color: var(--muted);
 }
 
+.countdown {
+  font-size: 1.1rem;
+  color: #e2e8f0;
+  margin: 0.25rem 0 0.35rem;
+}
+
 .glance-card button {
   margin-top: 0.5rem;
   padding: 0.45rem 0.9rem;

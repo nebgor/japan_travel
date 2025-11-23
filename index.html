@@ -167,11 +167,12 @@
                   <button id="geo-button" type="button">Share location</button>
                 </div>
                 <div class="glance-card">
-                  <small>Essential route order</small>
-                  <p id="route-summary">
-                    Perth → Singapore (buffer) → Tokyo → Hakuba → Tokyo → Singapore → Perth
-                  </p>
-                </div>
+              <small>Essential route order</small>
+              <p id="route-summary">
+                Perth → Singapore (buffer) → Tokyo → Hakuba → Tokyo → Singapore → Perth
+              </p>
+              <div class="countdown" id="next-leg"></div>
+            </div>
                 <div class="glance-card">
                   <small>Energy preview</small>
                   <div id="energy-preview" class="energy-stack"></div>
@@ -430,6 +431,51 @@
       };
 
       renderCams();
+
+      const journeyLegs = [
+        { label: 'PER → SIN', date: '30 Dec', time: '05:35' },
+        { label: 'SIN → TYO', date: '2 Jan', time: '05:25' },
+        { label: 'TYO → HAKUBA', date: '4 Jan', time: '10:00' },
+        { label: 'HAKUBA → TYO', date: '11 Jan', time: '08:00' },
+        { label: 'TYO → SIN', date: '16 Jan', time: '17:05' },
+        { label: 'SIN → PER', date: '20 Jan', time: '11:15' }
+      ];
+
+      const parseLegDate = (d) => {
+        const [dayRaw, monRaw] = d.split(' ');
+        const day = parseInt(dayRaw, 10);
+        const mon = monRaw.toLowerCase();
+        const year = mon === 'dec' ? 2024 : 2025;
+        const monIdx = { dec: 11, jan: 0 }[mon] ?? 0;
+        return new Date(Date.UTC(year, monIdx, day));
+      };
+
+      const updateCountdown = () => {
+        const now = new Date();
+        const next = journeyLegs
+          .map((leg) => {
+            const dt = parseLegDate(leg.date);
+            const [h, m] = leg.time.split(':').map((n) => parseInt(n, 10));
+            dt.setUTCHours(h - now.getTimezoneOffset() / 60, m, 0, 0);
+            const diff = dt - now;
+            return { ...leg, diff, dt };
+          })
+          .filter((leg) => leg.diff > 0)
+          .sort((a, b) => a.diff - b.diff)[0];
+
+        const target = document.getElementById('next-leg');
+        if (!target) return;
+        if (!next) {
+          target.textContent = 'All legs completed';
+          return;
+        }
+        const hrs = Math.floor(next.diff / 3_600_000);
+        const mins = Math.floor((next.diff % 3_600_000) / 60_000);
+        target.textContent = `Next: ${next.label} · ${next.date} ${next.time} (${hrs}h ${mins}m to go)`;
+      };
+
+      updateCountdown();
+      setInterval(updateCountdown, 60_000);
       // Weather pull (Open-Meteo)
       const weatherCards = [
         { id: 'tokyo', lat: 35.68, lon: 139.76, title: 'Tokyo' },
