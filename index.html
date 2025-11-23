@@ -478,9 +478,9 @@
       setInterval(updateCountdown, 60_000);
       // Weather pull (Open-Meteo)
       const weatherCards = [
-        { id: 'tokyo', lat: 35.68, lon: 139.76, title: 'Tokyo' },
-        { id: 'hakuba', lat: 36.69, lon: 137.83, title: 'Hakuba' },
-        { id: 'sapporo', lat: 43.07, lon: 141.35, title: 'Sapporo' }
+        { id: 'tokyo', lat: 35.68, lon: 139.76, title: 'Tokyo', fallback: 'https://www.jma.go.jp/bosai/nowc/#area_type=offices&area_code=130000&center=130&zoom=9' },
+        { id: 'hakuba', lat: 36.69, lon: 137.83, title: 'Hakuba', fallback: 'https://www.jma.go.jp/bosai/nowc/#lat=36.69&lon=137.83&zoom=10' },
+        { id: 'sapporo', lat: 43.07, lon: 141.35, title: 'Sapporo', fallback: 'https://www.jma.go.jp/bosai/nowc/#lat=43.07&lon=141.35&zoom=9' }
       ];
 
       const weatherDesc = (code) => {
@@ -529,7 +529,11 @@
           descEl.textContent = `${summary}${wind ? ' · ' + wind : ''}${observed ? ' · ' + observed : ''}`;
         } catch (e) {
           if (tempEl) tempEl.textContent = '—';
-          if (descEl) descEl.textContent = 'Weather unavailable';
+          if (descEl) {
+            descEl.innerHTML = loc.fallback
+              ? `<a href="${loc.fallback}" target="_blank" rel="noreferrer noopener">Open local forecast</a>`
+              : 'Weather unavailable';
+          }
         }
       };
 
