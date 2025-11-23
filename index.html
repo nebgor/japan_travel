@@ -793,21 +793,3 @@
 
   </body>
 </html>
-      const renderFlights = () => {
-        if (!flightGrid || !data.flightOptions) return;
-        flightGrid.innerHTML = '';
-        data.flightOptions.forEach((f) => {
-          const card = document.createElement('article');
-          card.className = 'flight-card';
-          card.innerHTML = `
-            <h3>${f.leg}</h3>
-            <div class="meta">${f.dates} · ${f.carrier}</div>
-            <div class="chip">${f.times} · ${f.duration}</div>
-            ${f.price ? `<div class="chip">Est. price: ${f.price}</div>` : ''}
-            <p class="meta">${f.note}</p>
-          `;
-          flightGrid.appendChild(card);
-        });
-      };
-
-      renderFlights();
