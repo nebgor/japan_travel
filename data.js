@@ -768,6 +768,34 @@ const emergencyInfo = [
   }
 ];
 
+const gearTips = [
+  {
+    title: 'Pocket Wi-Fi / eSIM',
+    detail: 'Grab a JR-friendly eSIM or pocket Wi-Fi on arrival in SIN/TPY to keep Suica/PASMO working.',
+    link: 'https://www.japan-wireless.com/'
+  },
+  {
+    title: 'Onsen kit',
+    detail: 'Light towel + hair tie + small bag; no swimwear. Perfect post-ski recovery.',
+    link: 'https://www.japan-guide.com/e/e2292_how.html'
+  },
+  {
+    title: 'Ski socks & hand warmers',
+    detail: 'Thin merino socks + disposable warmers for the 7yo and 14yo to avoid cold toes.',
+    link: 'https://www.montbell.jp/english/'
+  },
+  {
+    title: 'Power/charging',
+    detail: 'Type A/B plugs; bring a GaN charger + spare cables for flights and trains.',
+    link: 'https://www.amazon.com.au/s?k=usb+c+gan+charger'
+  },
+  {
+    title: 'Snow boots & traction',
+    detail: 'Light snow boots plus optional microspikes for icy walkways in Hakuba.',
+    link: 'https://www.snowjapan.com/japan-daily-snow-weather-reports'
+  }
+];
+
 window.TripData = {
   hakuba: hakubaData,
   furano: furanoData,
@@ -782,6 +810,7 @@ window.TripData = {
   slopeMaps,
   slopeCams,
   newsFeeds,
+  gearTips,
   emergencyInfo,
   flightOptions,
   travelLinks,

@@ -154,6 +154,12 @@
                 <div class="flight-grid" id="flight-grid"></div>
               </section>
 
+              <section id="gear" class="gear-panel section-anchor">
+                <h2>Recommended gear & helpers</h2>
+                <p class="chip">Stay warm, connected, and onsen-ready</p>
+                <div class="gear-grid" id="gear-grid"></div>
+              </section>
+
               <section id="maps" class="map-panel section-anchor">
                 <h2>Ski slope maps</h2>
                 <p class="chip">Trail maps from resort sites (opens in new tab)</p>
@@ -262,6 +268,7 @@
       const mapGrid = document.getElementById('map-grid');
       const newsList = document.getElementById('news-links');
       const camList = document.getElementById('cam-links');
+      const gearGrid = document.getElementById('gear-grid');
       const emergencyList = document.getElementById('emergency-links');
       const comparisonCards = document.getElementById('comparison-cards');
       const foodTable = document.getElementById('food-table');
@@ -445,6 +452,22 @@
       };
 
       renderCams();
+      const renderGear = () => {
+        if (!gearGrid || !data.gearTips) return;
+        gearGrid.innerHTML = '';
+        data.gearTips.forEach((item) => {
+          const card = document.createElement('article');
+          card.className = 'gear-card';
+          card.innerHTML = `
+            <h3>${item.title}</h3>
+            <p>${item.detail}</p>
+            ${item.link ? `<a target="_blank" rel="noreferrer noopener" href="${item.link}">Open link →</a>` : ''}
+          `;
+          gearGrid.appendChild(card);
+        });
+      };
+
+      renderGear();
       const renderEmergency = () => {
         if (!emergencyList || !data.emergencyInfo) return;
         emergencyList.innerHTML = '';
