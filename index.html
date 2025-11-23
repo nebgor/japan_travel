@@ -98,9 +98,9 @@
       <div class="overlay">
         <div class="page-shell">
           <nav aria-label="Page versions">
-            <a class="active" href="./index.html">Globe View</a>
-            <a href="./cards.html">Card Summary</a>
-            <a href="./timeline.html">Timeline Review</a>
+            <a class="active" href="/nebgor/japan_travel/index.html">Globe View</a>
+            <a href="/nebgor/japan_travel/cards.html">Card Summary</a>
+            <a href="/nebgor/japan_travel/timeline.html">Timeline Review</a>
           </nav>
 
           <div class="hero">
@@ -111,9 +111,9 @@
               This globe-first page keeps the action cards above the day cards so you can stay on top of every slot.
             </p>
           <div class="summary-grid">
-              <div class="summary-chip">
-                <strong>Trip window</strong>
-                <p>30 Dec – 20 Jan</p>
+            <div class="summary-chip">
+              <strong>Trip window</strong>
+              <p>30 Dec – 20 Jan</p>
               </div>
               <div class="summary-chip">
                 <strong>Ski days</strong>
@@ -133,6 +133,11 @@
               <button type="button" data-set="furano">Furano · Sapporo</button>
             </div>
           </div>
+
+          <section class="resource-panel">
+            <h2>Booking + reference links</h2>
+            <div class="resource-grid" id="resource-grid"></div>
+          </section>
 
           <div class="glance-row">
             <div class="glance-card">
@@ -177,6 +182,7 @@
       const data = window.TripData;
       const dayCards = document.getElementById('day-cards');
       const actionsGrid = document.getElementById('actions-grid');
+      const resourceGrid = document.getElementById('resource-grid');
       const comparisonCards = document.getElementById('comparison-cards');
       const foodTable = document.getElementById('food-table');
       const energyPreview = document.getElementById('energy-preview');
@@ -287,6 +293,25 @@
         `;
         actionsGrid.appendChild(card);
       });
+
+      const renderTravelLinks = () => {
+        if (!resourceGrid || !data.travelLinks) {
+          return;
+        }
+        resourceGrid.innerHTML = '';
+        data.travelLinks.forEach((link) => {
+          const card = document.createElement('article');
+          card.className = 'resource-card';
+          card.innerHTML = `
+            <strong>${link.title}</strong>
+            <p>${link.detail}</p>
+            <a href="${link.link}" target="_blank" rel="noreferrer noopener">Visit site →</a>
+          `;
+          resourceGrid.appendChild(card);
+        });
+      };
+
+      renderTravelLinks();
 
       const renderComparison = () => {
         data.planCosts.forEach((option) => {

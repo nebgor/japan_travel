@@ -581,6 +581,33 @@ const actions = [
   }
 ];
 
+const travelLinks = [
+  {
+    title: 'Skyscanner multi-city search',
+    detail:
+      'PER→SIN→TYO→SIN→PER (27 Dec – 20 Jan) with morning buffers; filter for Qantas, Scoot, or Singapore Airlines and compare transfer/layover durations.',
+    link: 'https://www.skyscanner.com/transport/flights'
+  },
+  {
+    title: 'Singapore Airlines PER→SIN + SIN→TYO',
+    detail:
+      'Use the SQ app to lock in the PER 05:35 departure and the overnight SIN→TYO flight; watch for youth fares and extra legroom seats for the 14yo.',
+    link: 'https://www.singaporeair.com/'
+  },
+  {
+    title: 'Hakuba lodging + shuttle bundle',
+    detail:
+      'SnowJapan’s booking portal lists south-side family condos that include shuttle pickup, onsen access, and easy rental dropoffs (Happo/Wadano).',
+    link: 'https://snowjapan.com/guide/hakuba'
+  },
+  {
+    title: 'Furano/Sapporo base',
+    detail:
+      'Check the Furano Resort official site for promotions on Kitanomine condos + Furano Zone lift bundles; include JR tickets via Hokkaido Resort pass.',
+    link: 'https://www.furano.ne.jp/en/'
+  }
+];
+
 const tripSummary = {
   period: '30 Dec → 20 Jan · Perth ↔ Singapore ↔ Tokyo/Hakuba',
   travellers: '2 adults · 18yo · 14yo · 7yo',
@@ -600,5 +627,6 @@ window.TripData = {
   routePoints,
   routeArcs,
   actions,
+  travelLinks,
   summary: tripSummary
 };
