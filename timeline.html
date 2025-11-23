@@ -48,9 +48,9 @@
   <body>
     <div class="page-shell">
       <nav aria-label="Page versions">
-        <a href="/nebgor/japan_travel/index.html">Globe View</a>
-        <a href="/nebgor/japan_travel/cards.html">Card Summary</a>
-        <a class="active" href="/nebgor/japan_travel/timeline.html">Timeline Review</a>
+        <a data-page="index.html" href="/nebgor/japan_travel/index.html">Globe View</a>
+        <a data-page="cards.html" href="/nebgor/japan_travel/cards.html">Card Summary</a>
+        <a class="active" data-page="timeline.html" href="/nebgor/japan_travel/timeline.html">Timeline Review</a>
       </nav>
 
       <div class="hero">
@@ -138,6 +138,21 @@
       if (toggleButtons.length > 0) {
         renderTimeline(toggleButtons[0].dataset.set);
       }
+    </script>
+    <script>
+      (() => {
+        const siteBase = '/nebgor/japan_travel/';
+        const prefix = window.location.pathname.startsWith(siteBase)
+          ? siteBase
+          : window.location.pathname.replace(/\\/[^/]*$/, '/');
+        document.querySelectorAll('[data-page]').forEach((link) => {
+          const target = link.getAttribute('data-page');
+          if (!target) {
+            return;
+          }
+          link.setAttribute('href', `${prefix}${target}`);
+        });
+      })();
     </script>
   </body>
 </html>
