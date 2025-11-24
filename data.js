@@ -843,6 +843,50 @@ const gearTips = [
     detail: 'Light snow boots plus optional microspikes for icy walkways in Hakuba.',
     link: 'https://www.snowjapan.com/japan-daily-snow-weather-reports'
   }
+
+const stays = [
+  {
+    title: 'Hakuba Goryu (Escal Plaza)',
+    area: 'Walk-to-lifts · rentals/lockers at base',
+    detail: 'Condos/lodges 5–10 min to Escal Plaza; easiest for kids and Day 1 lessons.',
+    link: 'https://www.booking.com/landmark/jp/hakuba-goryu1.en.html',
+    image: 'hakuba.jpg'
+  },
+  {
+    title: 'Hakuba Iimori side',
+    area: 'Quieter greens · shuttle to Escal',
+    detail: 'Great for beginners; mellow laps outside the door, quick hop to main Goryu base.',
+    link: 'https://www.snowjapan.com/japan-ski-resorts/hakuba-goryu',
+    image: 'hakuba.jpg'
+  },
+  {
+    title: 'Happo/Wadano',
+    area: 'Ski-in/out options · steeper terrain nearby',
+    detail: 'More dining and ski schools; longer shuttle to Goryu/47 but lively village feel.',
+    link: 'https://www.booking.com/landmark/jp/happo-one.en.html',
+    image: 'hakuba.jpg'
+  },
+  {
+    title: 'Echoland (Hakuba)',
+    area: 'Food/nightlife hub · shuttle to lifts',
+    detail: 'Best for dining variety; trade-off is morning bus to Goryu/47.',
+    link: 'https://www.booking.com/district/jp/hakuba/echoland.en.html',
+    image: 'hakuba.jpg'
+  },
+  {
+    title: 'Tokyo Shinjuku/Shibuya',
+    area: 'Easy rail to everywhere',
+    detail: 'Pick a hotel near JR/Yamanote; fast access to restaurants and shinkansen booking.',
+    link: 'https://www.booking.com/region/jp/tokyo.en.html',
+    image: 'tokyo.jpg'
+  },
+  {
+    title: 'Tokyo family-friendly',
+    area: 'Two rooms or family quad',
+    detail: 'Look for family rooms near Shinjuku/Ginza; easy airport train + food options.',
+    link: 'https://www.booking.com/family/city/jp/tokyo.en.html',
+    image: 'tokyo.jpg'
+  }
 ];
 
 window.TripData = {
@@ -861,6 +905,7 @@ window.TripData = {
   newsFeeds,
   gearTips,
   emergencyInfo,
+  stays,
   flightOptions,
   travelLinks,
   summary: tripSummary

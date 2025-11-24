@@ -578,3 +578,38 @@ nav a:hover {
   font-size: 0.85rem;
 }
 
+.stays-panel {
+  margin-top: 1.5rem;
+}
+
+.stays-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.9rem;
+}
+
+.stay-card {
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(2, 6, 23, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+  display: grid;
+  gap: 0.4rem;
+}
+
+.stay-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.stay-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.stay-card a {
+  color: var(--accent-strong);
+  font-size: 0.85rem;
+}

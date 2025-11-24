@@ -160,6 +160,12 @@
                 <div class="gear-grid" id="gear-grid"></div>
               </section>
 
+              <section id="stays" class="stays-panel section-anchor">
+                <h2>Where to stay (Japan)</h2>
+                <p class="chip">Walk-to-lifts in Hakuba · easy rail in Tokyo</p>
+                <div class="stays-grid" id="stays-grid"></div>
+              </section>
+
               <section id="maps" class="map-panel section-anchor">
                 <h2>Ski slope maps</h2>
                 <p class="chip">Trail maps from resort sites (opens in new tab)</p>
@@ -270,6 +276,7 @@
       const camList = document.getElementById('cam-links');
       const gearGrid = document.getElementById('gear-grid');
       const emergencyList = document.getElementById('emergency-links');
+      const staysGrid = document.getElementById('stays-grid');
       const comparisonCards = document.getElementById('comparison-cards');
       const foodTable = document.getElementById('food-table');
       const energyPreview = document.getElementById('energy-preview');
@@ -487,6 +494,23 @@
       };
 
       renderGear();
+      const renderStays = () => {
+        if (!staysGrid || !data.stays) return;
+        staysGrid.innerHTML = '';
+        data.stays.forEach((item) => {
+          const card = document.createElement('article');
+          card.className = 'stay-card';
+          card.innerHTML = `
+            <h3>${item.title}</h3>
+            <p>${item.area}</p>
+            <p>${item.detail}</p>
+            ${item.link ? `<a target="_blank" rel="noreferrer noopener" href="${item.link}">View stay options →</a>` : ''}
+          `;
+          staysGrid.appendChild(card);
+        });
+      };
+
+      renderStays();
       const renderEmergency = () => {
         if (!emergencyList || !data.emergencyInfo) return;
         emergencyList.innerHTML = '';
