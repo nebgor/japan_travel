@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Timeline · Chrono Family Itinerary</title>
+    <title>Timeline · Japan Family Plan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
     <style>
@@ -15,60 +15,26 @@
         background: rgba(3, 7, 24, 0.85);
         border: 1px solid rgba(255, 255, 255, 0.08);
       }
-
-      .timeline-node .time {
-        font-weight: 600;
-        color: #22d3ee;
-      }
-
-      .timeline-node .location {
-        font-size: 0.95rem;
-        color: var(--muted);
-      }
-
-      .timeline-label {
-        margin: 0.5rem 0 0.25rem;
-        font-size: 0.9rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-
-      .timeline-list {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .timeline-section {
-        margin-bottom: 2rem;
-      }
-
+      .timeline-node .time { font-weight: 600; color: #22d3ee; }
+      .timeline-node .location { font-size: 0.95rem; color: var(--muted); }
+      .timeline-list { display: flex; flex-direction: column; gap: 1rem; }
       .timeline-thumb {
-        width: 100%;
-        max-width: 120px;
-        height: 80px;
-        object-fit: cover;
-        border-radius: 0.75rem;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        width: 100%; max-width: 120px; height: 80px; object-fit: cover;
+        border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.08);
       }
     </style>
   </head>
   <body>
     <div class="page-shell">
-      <nav aria-label="Page versions">
+      <nav aria-label="Pages">
         <a href="/japan_travel/index.html">Globe View</a>
-        <a href="/japan_travel/cards.html">Card Summary</a>
-        <a class="active" href="/japan_travel/timeline.html">Timeline Review</a>
+        <a class="active" href="/japan_travel/timeline.html">Timeline</a>
       </nav>
 
       <div class="hero">
-        <small>Chronological pacing + energy awareness</small>
-        <h1>We travel day-by-day, wake → sleep, with buffer highlights</h1>
-        <p>
-          The timeline below keeps every wake-up, train, and ski push in order. It pulls energy notes from
-          the globe page so you can match recovery days with activities, and always stay chronological.
-        </p>
+        <small>Chronological wake→sleep</small>
+        <h1>Japan family itinerary · Hakuba & Tokyo</h1>
+        <p>Two tabs: base Hakuba plan and Jan 8–30 plan (16 days Japan, then Singapore).</p>
         <div class="dataset-toggle" id="timeline-toggle">
           <button type="button" data-set="hakuba" class="active">Hakuba + Tokyo</button>
           <button type="button" data-set="jan">Jan 8–30 Hakuba/Tokyo/SIN</button>
@@ -76,54 +42,46 @@
       </div>
 
       <section class="timeline-section">
-        <p class="section-caption" id="timeline-caption">Hakuba plan: sequential days, jet-lag buffer, ski focus, final Singapore buffer</p>
+        <p class="section-caption" id="timeline-caption">Hakuba plan: buffers + 5 ski days</p>
         <div class="timeline-list" id="timeline-list"></div>
       </section>
     </div>
 
     <script src="data.js?v=7"></script>
     <script>
-      const data = window.TripData;
+      const data = window.TripData || {};
       const timelineList = document.getElementById('timeline-list');
       const timelineCaption = document.getElementById('timeline-caption');
-      const timelineToggle = document.getElementById('timeline-toggle');
-      const toggleButtons = timelineToggle ? timelineToggle.querySelectorAll('button') : [];
+      const toggleButtons = document.querySelectorAll('#timeline-toggle button');
 
       const datasetInfo = {
         hakuba: 'Hakuba plan: sequential days, jet-lag buffer, ski focus, final Singapore buffer',
-        jan: 'Jan 8–30: PER→SIN→TYO→Hakuba→TYO→SIN→PER'
+        jan: 'Jan 8–30: PER→SIN→TYO→Hakuba→TYO→SIN→PER (16 days in Japan, then SIN)'
       };
 
-  const datasets = {
-    hakuba: data.hakuba,
-    jan: data.januaryPlan || []
-  };
+      const datasets = {
+        hakuba: data.hakuba || [],
+        jan: data.januaryPlan || []
+      };
 
-  const buildTimeline = (entry) => {
-    const node = document.createElement('article');
-    node.className = 'timeline-node';
-    const energy = data.energyMap[entry.date] || {};
-    const energyText = Object.entries(energy)
-      .map(([person, level]) => `${person}: ${level}`)
-      .join(' · ');
-    const gallery =
-      (data.galleryMap && (data.galleryMap[entry.location] || data.galleryMap[entry.location?.split('→')[0]])) ||
-      data.galleryMap?.Tokyo ||
-      [];
-    const thumb = gallery && gallery.length > 0 ? gallery[0] : null;
+      const buildTimeline = (entry) => {
+        const node = document.createElement('article');
+        node.className = 'timeline-node';
+        const energy = data.energyMap[entry.date] || {};
+        const energyText = Object.entries(energy).map(([person, level]) => `${person}: ${level}`).join(' · ');
+        const gallery =
+          (data.galleryMap && (data.galleryMap[entry.location] || data.galleryMap[entry.location?.split('→')[0]])) ||
+          data.galleryMap?.Tokyo || [];
+        const thumb = gallery && gallery.length ? gallery[0] : null;
 
-    node.innerHTML = `
+        node.innerHTML = `
           <div>
-            ${thumb ? `<img class="timeline-thumb" src="${thumb}" alt="${entry.location} photo" />` : ''}
+            ${thumb ? `<img class="timeline-thumb" src="${thumb}" alt="${entry.location}" />` : ''}
             <div class="time">${entry.date}</div>
             <div class="location">${entry.location}</div>
             <div class="chips">
               <span class="chip">Food ${entry.food} AUD</span>
-              ${
-                entry.focus
-                  ? `<span class="chip">Ski focus: ${entry.focus}</span>`
-                  : '<span class="chip">Rest / buffer day</span>'
-              }
+              ${entry.focus ? `<span class="chip">Ski focus: ${entry.focus}</span>` : '<span class="chip">Rest / buffer</span>'}
             </div>
           </div>
           <div>
@@ -131,7 +89,6 @@
             <p><strong>Energy:</strong> ${energyText || 'Balanced'}</p>
           </div>
         `;
-
         return node;
       };
 
@@ -142,18 +99,15 @@
         timelineCaption.textContent = datasetInfo[key] || '';
       };
 
-      toggleButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-          toggleButtons.forEach((btn) => btn.classList.remove('active'));
-          button.classList.add('active');
-          renderTimeline(button.dataset.set);
+      toggleButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          toggleButtons.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderTimeline(btn.dataset.set);
         });
       });
 
-      if (toggleButtons.length > 0) {
-        renderTimeline(toggleButtons[0].dataset.set);
-      }
+      renderTimeline('hakuba');
     </script>
-    <!-- Nav uses static relative links above -->
   </body>
 </html>

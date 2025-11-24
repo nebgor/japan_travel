@@ -2,260 +2,168 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Japan Travel Globe · Hakuba + Tokyo Buffer</title>
+    <title>Japan Travel · Globe + Day Plan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
     <style>
-      html,
-      body {
-        min-height: 100%;
-      }
-
       body {
         margin: 0;
-        overflow-x: hidden;
+        background: radial-gradient(circle at 20% 20%, rgba(14, 116, 209, 0.25), transparent 55%),
+          radial-gradient(circle at 80% 0%, rgba(14, 116, 209, 0.15), transparent 45%), #04070f;
+        color: #f7fbff;
+        font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
       }
-
-      .globe-wrapper {
-        position: relative;
-        min-height: 100vh;
-        overflow: hidden;
+      .hero h1 {
+        margin: 0.2rem 0;
+        font-size: clamp(2.2rem, 4vw, 3.2rem);
+        line-height: 1.1;
       }
-
-      #globe {
+      nav a {
+        color: inherit;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        margin-right: 0.4rem;
+      }
+      nav a.active {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr);
+        gap: 1.5rem;
+        align-items: start;
+      }
+      .sidebar {
+        position: sticky;
+        top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .panel {
+        background: rgba(3, 7, 24, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 1rem;
+        padding: 1rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      }
+      .day-card .gallery img.parallax-img {
+        transition: transform 0.2s ease;
+      }
+      @media (max-width: 960px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          position: relative;
+          top: 0;
+        }
+      }
+      canvas#globe {
         position: fixed;
         inset: 0;
         width: 100%;
         height: 100%;
         z-index: 0;
-        filter: brightness(1.05);
+        pointer-events: none;
+        opacity: 0.28;
       }
-
       .overlay {
         position: relative;
         z-index: 1;
-        pointer-events: auto;
       }
-
-      .page-shell {
-        padding-bottom: 4rem;
-      }
-
-      #day-cards {
-        display: grid;
-        gap: 1.2rem;
-        scroll-snap-type: y mandatory;
-      }
-
-      .day-card {
-        scroll-snap-align: start;
-      }
-
-      .day-card .gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 0.75rem;
-      }
-
-      .day-card .gallery img {
+      .stay-card img {
         width: 100%;
         height: 120px;
         object-fit: cover;
-        border-radius: 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .cards-panel h2,
-      .plan-comparison h2 {
-        margin: 2.5rem 0 0.8rem;
-      }
-
-      .plan-comparison {
-        max-width: 1200px;
-        margin: 0 auto 4rem;
-      }
-
-      .plan-table {
-        margin-top: 1rem;
-        background: rgba(255, 255, 255, 0.02);
-        border-radius: 1rem;
-        overflow: hidden;
-      }
-
-      #route-summary {
-        font-weight: 600;
-        color: #e0f2fe;
-      }
-
-      #route-summary small {
-        color: var(--muted);
+        border-radius: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
       }
     </style>
   </head>
   <body>
-    <div class="globe-wrapper">
-      <canvas id="globe"></canvas>
-      <div class="overlay">
-        <div class="page-shell">
-          <nav aria-label="Page versions">
-            <a class="active" href="/japan_travel/index.html" aria-label="Globe View">Globe View</a>
-            <a href="/japan_travel/cards.html" aria-label="Card Summary">Card Summary</a>
-            <a href="/japan_travel/timeline.html" aria-label="Timeline Review">Timeline Review</a>
-          </nav>
+    <canvas id="globe"></canvas>
+    <div class="overlay">
+      <div class="page-shell">
+        <nav aria-label="Pages">
+          <a class="active" href="/japan_travel/index.html">Globe View</a>
+          <a href="/japan_travel/timeline.html">Timeline</a>
+        </nav>
 
-          <div class="layout">
-            <div class="main-column">
-              <div class="hero">
-                <p class="chip">27 Dec → 20 Jan • Perth → Singapore → Tokyo → Hakuba → Tokyo → Singapore → Perth</p>
-                <h1>Hakuba + Tokyo buffer-ready globe itinerary</h1>
-                <p>
-                  Buffer days in Singapore, energy-aware ski legs in Hakuba, onsen and teamLab city wind-downs.
-                  This globe-first page keeps the action cards above the day cards so you can stay on top of every slot.
-                </p>
-                <div class="pill-nav">
-                  <a href="#resources">Booking links</a>
-                  <a href="#actions">Action items</a>
-                  <a href="#days">Day schedule</a>
-                  <a href="#costs">Costs & food</a>
-                </div>
-                <div class="summary-grid">
-                  <div class="summary-chip">
-                    <strong>Trip window</strong>
-                    <p>30 Dec – 20 Jan</p>
-                  </div>
-                  <div class="summary-chip">
-                    <strong>Ski days</strong>
-                    <p>5 focused powder days plus rest / recovery slots</p>
-                  </div>
-                  <div class="summary-chip">
-                    <strong>Singapore buffer</strong>
-                    <p>7 nights to reset body clocks and gear up for Japan</p>
-                  </div>
-                  <div class="summary-chip">
-                    <strong>Family</strong>
-                    <p>2 adults · 18yo · 14yo · 7yo</p>
-                  </div>
-                </div>
-            <div class="dataset-toggle" id="dataset-toggle">
-              <button type="button" data-set="hakuba" class="active">Hakuba · Tokyo (Dec/Jan)</button>
-              <button type="button" data-set="jan">Jan 8–30 Hakuba/Tokyo/SIN</button>
-            </div>
-              </div>
-
-              <section id="resources" class="resource-panel section-anchor">
-                <h2>Booking + reference links</h2>
-                <p class="chip">Flights • Lodging • Shuttles • Promotions</p>
-                <div class="resource-grid" id="resource-grid"></div>
-              </section>
-
-              <section id="flights" class="flight-panel section-anchor">
-                <h2>Featured flights (locked to itinerary)</h2>
-                <p class="chip">Times align with buffers and wake-to-sleep schedule</p>
-                <div class="flight-grid" id="flight-grid"></div>
-              </section>
-
-              <section id="gear" class="gear-panel section-anchor">
-                <h2>Recommended gear & helpers</h2>
-                <p class="chip">Stay warm, connected, and onsen-ready</p>
-                <div class="gear-grid" id="gear-grid"></div>
-              </section>
-
-              <section id="stays" class="stays-panel section-anchor">
-                <h2>Where to stay (Japan)</h2>
-                <p class="chip">Walk-to-lifts in Hakuba · easy rail in Tokyo</p>
-                <div class="stays-grid" id="stays-grid"></div>
-              </section>
-
-              <section id="maps" class="map-panel section-anchor">
-                <h2>Ski slope maps</h2>
-                <p class="chip">Trail maps from resort sites (opens in new tab)</p>
-                <div class="map-grid" id="map-grid"></div>
-              </section>
-
-              <div class="glance-row">
-                <div class="glance-card">
-                  <small>Live location readout</small>
-                  <p id="geo-status">Tap “Share location” to pin your timezone.</p>
-                  <button id="geo-button" type="button">Share location</button>
-                </div>
-                <div class="glance-card">
-              <small>Essential route order</small>
-              <p id="route-summary">
-                Perth → Singapore (buffer) → Tokyo → Hakuba → Tokyo → Singapore → Perth
-              </p>
-              <div class="countdown" id="next-leg">Loading next leg…</div>
-            </div>
-                <div class="glance-card">
-                  <small>Energy preview</small>
-                  <div id="energy-preview" class="energy-stack"></div>
-                </div>
-              </div>
-
-              <div id="actions" class="actions-grid section-anchor" >
-                <!-- actions inserted via script -->
-              </div>
-
-              <section id="days" class="cards-panel section-anchor">
-                <h2>Day-by-day schedule (wake-up → sleep)</h2>
-                <div id="day-cards"></div>
-              </section>
-
-              <section id="costs" class="plan-comparison section-anchor">
-                <h2>Cost comparisons & food budgets</h2>
-                <div class="card-grid" id="comparison-cards"></div>
-                <table class="plan-table" id="food-table"></table>
-              </section>
-            </div>
-
-            <aside class="sidebar">
-            <div class="sidebar-card">
-              <h3>Japan travel pulse (X/Twitter)</h3>
-              <p class="chip">Open in new tab; curated searches for conditions and transit.</p>
-              <ul class="sidebar-links">
-                <li><a target="_blank" rel="noreferrer noopener" href="https://twitter.com/search?q=Hakuba%20snow%20OR%20Happo%20weather&src=typed_query&f=live">Hakuba snow / Happo weather</a></li>
-                  <li><a target="_blank" rel="noreferrer noopener" href="https://twitter.com/search?q=Tokyo%20travel%20delay%20Haneda%20OR%20Narita%20rail&src=typed_query&f=live">Tokyo travel & rail status</a></li>
-                  <li><a target="_blank" rel="noreferrer noopener" href="https://twitter.com/search?q=Furano%20snow%20report%20OR%20Sapporo%20snow&src=typed_query&f=live">Furano/Sapporo snow updates</a></li>
-                  <li><a target="_blank" rel="noreferrer noopener" href="https://twitter.com/search?q=JR%20Nagano%20bus%20Hakuba&src=typed_query&f=live">JR Nagano → Hakuba buses</a></li>
-                </ul>
-              </div>
-              <div class="sidebar-card">
-                <h3>Weather now</h3>
-                <p class="chip">Current temp + breeze (Open-Meteo)</p>
-                <div id="weather-grid">
-                  <div class="weather-card" data-loc="tokyo">
-                    <div class="title">Tokyo</div>
-                    <div class="temp" id="temp-tokyo">Loading…</div>
-                    <div class="desc" id="desc-tokyo"></div>
-                  </div>
-                  <div class="weather-card" data-loc="hakuba">
-                    <div class="title">Hakuba</div>
-                    <div class="temp" id="temp-hakuba">Loading…</div>
-                    <div class="desc" id="desc-hakuba"></div>
-                  </div>
-                  <div class="weather-card" data-loc="sapporo">
-                    <div class="title">Sapporo</div>
-                    <div class="temp" id="temp-sapporo">Loading…</div>
-                    <div class="desc" id="desc-sapporo"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="sidebar-card">
-                <h3>News & alerts</h3>
-                <p class="chip">Official travel + rail updates (opens in new tab)</p>
-                <ul class="sidebar-links" id="news-links"></ul>
-              </div>
-              <div class="sidebar-card">
-                <h3>Slope live cams</h3>
-                <p class="chip">Resort webcams (opens in new tab)</p>
-                <ul class="sidebar-links" id="cam-links"></ul>
-              </div>
-              <div class="sidebar-card">
-                <h3>Emergency & help</h3>
-                <p class="chip">Dial 110 (police) · 119 (ambulance/fire)</p>
-                <ul class="sidebar-links" id="emergency-links"></ul>
-              </div>
-            </aside>
+        <div class="hero">
+          <p class="chip">Family of 5 · PER → SIN → Tokyo → Hakuba → Tokyo → SIN → PER</p>
+          <h1>Japan 16-day powder + city, then Singapore wind-down</h1>
+          <p>Chronological, wake-to-sleep plan with buffers, live links, and globe overview.</p>
+          <div class="dataset-toggle" id="dataset-toggle">
+            <button type="button" data-set="hakuba" class="active">Hakuba · Tokyo (Dec/Jan)</button>
+            <button type="button" data-set="jan">Jan 8–30 Hakuba/Tokyo/SIN</button>
           </div>
+          <div class="summary-grid">
+            <div class="summary-chip"><strong>Trip window</strong><p>8–30 Jan</p></div>
+            <div class="summary-chip"><strong>Japan days</strong><p>~16 days Tokyo + Hakuba</p></div>
+            <div class="summary-chip"><strong>Singapore</strong><p>Buffers before/after Japan</p></div>
+            <div class="summary-chip"><strong>Family</strong><p>2 adults · 18yo · 14yo · 7yo</p></div>
+          </div>
+        </div>
+
+        <div class="layout">
+          <div class="main-column">
+            <section class="resource-panel section-anchor">
+              <h2>Booking + flights</h2>
+              <p class="chip">Use these to lock the PER→SIN→TYO→Hakuba →SIN→PER legs</p>
+              <div class="actions-grid" id="actions-grid"></div>
+              <div class="flight-grid" id="flight-grid"></div>
+            </section>
+
+            <section id="days" class="cards-panel section-anchor">
+              <h2>Day-by-day (wake → sleep)</h2>
+              <div id="day-cards"></div>
+            </section>
+
+            <section id="stays" class="stays-panel section-anchor">
+              <h2>Where to stay (Japan)</h2>
+              <p class="chip">Walk-to-lifts in Hakuba · easy rail in Tokyo</p>
+              <div class="stays-grid" id="stays-grid"></div>
+            </section>
+          </div>
+
+          <aside class="sidebar">
+            <div class="panel">
+              <h3>Live info</h3>
+              <p class="chip">Weather with forecast links</p>
+              <div id="weather-grid">
+                <div class="weather-card" data-loc="tokyo">
+                  <div class="title">Tokyo</div>
+                  <div class="temp" id="temp-tokyo">Loading…</div>
+                  <div class="desc" id="desc-tokyo"></div>
+                </div>
+                <div class="weather-card" data-loc="hakuba">
+                  <div class="title">Hakuba</div>
+                  <div class="temp" id="temp-hakuba">Loading…</div>
+                  <div class="desc" id="desc-hakuba"></div>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <h3>Emergency</h3>
+              <p class="chip">110 police · 119 ambulance/fire</p>
+              <ul class="sidebar-links" id="emergency-links"></ul>
+            </div>
+            <div class="panel">
+              <h3>Slope maps</h3>
+              <p class="chip">Trail maps (new tab)</p>
+              <ul class="sidebar-links" id="map-links"></ul>
+            </div>
+            <div class="panel">
+              <h3>Cams & news</h3>
+              <p class="chip">Open in new tab</p>
+              <ul class="sidebar-links" id="cam-links"></ul>
+              <ul class="sidebar-links" id="news-links"></ul>
+            </div>
+          </aside>
         </div>
       </div>
     </div>
@@ -267,36 +175,110 @@
       import ThreeGlobe from 'https://cdn.jsdelivr.net/npm/three-globe@2.27.12/dist/three-globe.module.js';
 
       const data = window.TripData || {};
+      const datasets = { hakuba: data.hakuba || [], jan: data.januaryPlan || [] };
+      let currentSet = 'jan';
+
       const dayCards = document.getElementById('day-cards');
       const actionsGrid = document.getElementById('actions-grid');
-      const resourceGrid = document.getElementById('resource-grid');
       const flightGrid = document.getElementById('flight-grid');
-      const mapGrid = document.getElementById('map-grid');
+      const staysGrid = document.getElementById('stays-grid');
       const newsList = document.getElementById('news-links');
       const camList = document.getElementById('cam-links');
-      const gearGrid = document.getElementById('gear-grid');
+      const mapLinks = document.getElementById('map-links');
       const emergencyList = document.getElementById('emergency-links');
-      const staysGrid = document.getElementById('stays-grid');
-      const comparisonCards = document.getElementById('comparison-cards');
-      const foodTable = document.getElementById('food-table');
-      const energyPreview = document.getElementById('energy-preview');
-      const geoStatus = document.getElementById('geo-status');
-      const geoButton = document.getElementById('geo-button');
-      const datasetToggle = document.getElementById('dataset-toggle');
-      const datasetButtons = datasetToggle ? datasetToggle.querySelectorAll('button') : [];
+      const weatherCards = [
+        { id: 'tokyo', lat: 35.68, lon: 139.76, title: 'Tokyo', fallback: 'https://www.jma.go.jp/bosai/nowc/#area_type=offices&area_code=130000&center=130&zoom=9' },
+        { id: 'hakuba', lat: 36.69, lon: 137.83, title: 'Hakuba', fallback: 'https://www.jma.go.jp/bosai/nowc/#lat=36.69&lon=137.83&zoom=10' }
+      ];
+
+      const renderActions = () => {
+        actionsGrid.innerHTML = '';
+        (data.actions || []).forEach((action) => {
+          const card = document.createElement('article');
+          card.className = 'action-card';
+          card.innerHTML = `
+            <h3>${action.title}</h3>
+            <p>${action.detail}</p>
+            <a href="${action.link}" target="_blank" rel="noreferrer noopener">Open →</a>
+          `;
+          actionsGrid.appendChild(card);
+        });
+      };
+
+      const renderFlights = () => {
+        flightGrid.innerHTML = '';
+        (data.flightOptions || []).forEach((f) => {
+          const card = document.createElement('article');
+          card.className = 'flight-card';
+          card.innerHTML = `
+            <h3>${f.leg}</h3>
+            <div class="meta">${f.dates} · ${f.carrier}</div>
+            <div class="chip">${f.times} · ${f.duration}</div>
+            ${f.price ? `<div class="chip">Est. price: ${f.price}</div>` : ''}
+            <p class="meta">${f.note}</p>
+          `;
+          flightGrid.appendChild(card);
+        });
+      };
+
+      const renderStays = () => {
+        staysGrid.innerHTML = '';
+        (data.stays || []).forEach((item) => {
+          const card = document.createElement('article');
+          card.className = 'stay-card';
+          card.innerHTML = `
+            ${item.image ? `<img src="${item.image}" alt="${item.title}" loading="lazy" />` : ''}
+            <h3>${item.title}</h3>
+            <p>${item.area}</p>
+            <p>${item.detail}</p>
+            ${item.link ? `<a target="_blank" rel="noreferrer noopener" href="${item.link}">View options →</a>` : ''}
+          `;
+          staysGrid.appendChild(card);
+        });
+      };
+
+      const renderMaps = () => {
+        mapLinks.innerHTML = '';
+        (data.slopeMaps || []).forEach((item) => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a target="_blank" rel="noreferrer noopener" href="${item.link}">${item.title}</a><div class="meta">${item.area || ''}</div>`;
+          mapLinks.appendChild(li);
+        });
+      };
+
+      const renderNews = () => {
+        newsList.innerHTML = '';
+        (data.newsFeeds || []).forEach((item) => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a target="_blank" rel="noreferrer noopener" href="${item.link}">${item.title}</a><div class="meta">${item.detail}</div>`;
+          newsList.appendChild(li);
+        });
+      };
+
+      const renderCams = () => {
+        camList.innerHTML = '';
+        (data.slopeCams || []).forEach((item) => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a target="_blank" rel="noreferrer noopener" href="${item.link}">${item.title}</a><div class="meta">${item.detail}</div>`;
+          camList.appendChild(li);
+        });
+      };
+
+      const renderEmergency = () => {
+        emergencyList.innerHTML = '';
+        (data.emergencyInfo || []).forEach((item) => {
+          const li = document.createElement('li');
+          li.innerHTML = `${item.link ? `<a target="_blank" rel="noreferrer noopener" href="${item.link}">${item.title}</a>` : `<strong>${item.title}</strong>`}<div class="meta">${item.detail}</div>`;
+          emergencyList.appendChild(li);
+        });
+      };
 
       const buildCard = (entry) => {
         const card = document.createElement('article');
         card.className = 'day-card';
-        const planSteps = entry.plan.split(';').map((step) => step.trim()).filter(Boolean);
-        const gallery =
-          data.galleryMap[entry.location] || data.galleryMap[entry.location.split('→')[0]] || data.galleryMap.Tokyo;
-        const energy = data.energyMap[entry.date] || {
-          adults: 'Medium',
-          '18yo': 'Medium',
-          '14yo': 'Medium',
-          '7yo': 'Low'
-        };
+        const planSteps = entry.plan.split(';').map((s) => s.trim()).filter(Boolean);
+        const gallery = data.galleryMap?.[entry.location] || data.galleryMap?.[entry.location?.split('→')[0]] || data.galleryMap?.Tokyo || [];
+        const energy = data.energyMap[entry.date] || {};
 
         const galleryMarkup = gallery
           .map(
@@ -318,285 +300,54 @@
           <div class="gallery">${galleryMarkup}</div>
           <div class="chips">
             <span class="chip">Food mid: $${entry.food}</span>
-            ${
-              entry.focus
-                ? `<span class="chip">Ski focus: ${entry.focus}</span>`
-                : '<span class="chip">Jet-lag smart pacing</span>'
-            }
+            ${entry.focus ? `<span class="chip">Ski focus: ${entry.focus}</span>` : '<span class="chip">Buffer-smart pacing</span>'}
           </div>
           <p>${planSteps.join(' · ')}</p>
           <div class="chips energy-stack">${energyMarkup}</div>
-          <p><strong>Hint:</strong> ${entry.hint || 'Smooth transitions via reliable transfers.'}</p>
+          <p><strong>Hint:</strong> ${entry.hint || ''}</p>
         `;
 
-        // Lightweight parallax on card images (desktop only)
         const imgs = card.querySelectorAll('.parallax-img');
         if (window.matchMedia('(pointer:fine)').matches && imgs.length) {
           card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const relY = (e.clientY - rect.top) / rect.height - 0.5;
-            const offset = relY * 10; // px shift
-            imgs.forEach((img) => {
-              img.style.transform = `translateY(${offset}px)`;
-            });
+            const offset = relY * 10;
+            imgs.forEach((img) => (img.style.transform = `translateY(${offset}px)`));
           });
-          card.addEventListener('mouseleave', () => {
-            imgs.forEach((img) => {
-              img.style.transform = 'translateY(0)';
-            });
-          });
+          card.addEventListener('mouseleave', () => imgs.forEach((img) => (img.style.transform = 'translateY(0)')));
         }
-
         return card;
       };
 
-      const datasets = {
-        hakuba: data.hakuba || [],
-        jan: data.januaryPlan || []
-      };
-      const datasetOrder = Object.keys(datasets);
-
-      let currentSet = 'hakuba';
-
-      const updateEnergyPreview = (entry) => {
-        const energy =
-          data.energyMap[entry?.date] || {
-            adults: 'Medium',
-            '18yo': 'Medium',
-            '14yo': 'Medium',
-            '7yo': 'Low'
-          };
-        energyPreview.innerHTML = Object.entries(energy)
-          .map(
-            ([person, level]) => `<span class="energy-pill ${level.toLowerCase()}">${person}: <span>${level}</span></span>`
-          )
-          .join('');
-      };
-
-      const renderDays = (setKey) => {
+      const renderDays = (key) => {
         dayCards.innerHTML = '';
-        const selection = datasets[setKey] || [];
-        selection.forEach((day) => dayCards.appendChild(buildCard(day)));
-        updateEnergyPreview(selection[0]);
+        (datasets[key] || []).forEach((day) => dayCards.appendChild(buildCard(day)));
       };
 
-      const setActiveDataset = (key) => {
-        currentSet = key;
-        datasetButtons.forEach((btn) => {
-          btn.classList.toggle('active', btn.dataset.set === key);
-        });
-        renderDays(key);
-      };
-
-      datasetButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-          setActiveDataset(button.dataset.set);
+      document.querySelectorAll('#dataset-toggle button').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#dataset-toggle button').forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentSet = btn.dataset.set;
+          renderDays(currentSet);
         });
       });
 
-      setActiveDataset(currentSet);
-      let hasFocusedToday = false;
-
-      data.actions.forEach((action) => {
-        const card = document.createElement('article');
-        card.className = 'action-card';
-        card.innerHTML = `
-          <h3>${action.title}</h3>
-          <p>${action.detail}</p>
-          <a href="${action.link}" target="_blank" rel="noreferrer noopener">Open resource →</a>
-        `;
-        actionsGrid.appendChild(card);
-      });
-
-      const renderTravelLinks = () => {
-        if (!resourceGrid || !data.travelLinks) {
-          return;
-        }
-        resourceGrid.innerHTML = '';
-        data.travelLinks.forEach((link) => {
-          const card = document.createElement('article');
-          card.className = 'resource-card';
-          card.innerHTML = `
-            <strong>${link.title}</strong>
-            <p>${link.detail}</p>
-            <a href="${link.link}" target="_blank" rel="noreferrer noopener">Visit site →</a>
-          `;
-          resourceGrid.appendChild(card);
-        });
-      };
-
-      renderTravelLinks();
-      const renderMapLinks = () => {
-        if (!mapGrid || !data.slopeMaps) return;
-        mapGrid.innerHTML = '';
-        data.slopeMaps.forEach((item) => {
-          const card = document.createElement('article');
-          card.className = 'map-card';
-          const imgSrc = item.image || 'hakuba.jpg';
-          card.innerHTML = `
-            <img src="${imgSrc}" alt="${item.title}" loading="lazy" decoding="async" />
-            <div class="body">
-              <h3>${item.title}</h3>
-              <p>${item.area}</p>
-            </div>
-            <div class="footer">
-              <a href="${item.link}" target="_blank" rel="noreferrer noopener">Open map →</a>
-            </div>
-          `;
-          mapGrid.appendChild(card);
-        });
-      };
-
-      renderMapLinks();
-      const renderNews = () => {
-        if (!newsList || !data.newsFeeds) return;
-        newsList.innerHTML = '';
-        data.newsFeeds.forEach((item) => {
-          const li = document.createElement('li');
-          li.innerHTML = `
-            <a target="_blank" rel="noreferrer noopener" href="${item.link}">
-              <div>${item.title}</div>
-              <div class="meta">${item.detail}</div>
-            </a>`;
-          newsList.appendChild(li);
-        });
-      };
-
-      renderNews();
-      const renderCams = () => {
-        if (!camList || !data.slopeCams) return;
-        camList.innerHTML = '';
-        data.slopeCams.forEach((item) => {
-          const li = document.createElement('li');
-          li.innerHTML = `
-            <a target="_blank" rel="noreferrer noopener" href="${item.link}">
-              <div>${item.title}</div>
-              <div class="meta">${item.detail}</div>
-            </a>`;
-          camList.appendChild(li);
-        });
-      };
-
-      renderCams();
-      const renderGear = () => {
-        if (!gearGrid || !data.gearTips) return;
-        gearGrid.innerHTML = '';
-        data.gearTips.forEach((item) => {
-          const card = document.createElement('article');
-          card.className = 'gear-card';
-          card.innerHTML = `
-            <h3>${item.title}</h3>
-            <p>${item.detail}</p>
-            ${item.link ? `<a target="_blank" rel="noreferrer noopener" href="${item.link}">Open link →</a>` : ''}
-          `;
-          gearGrid.appendChild(card);
-        });
-      };
-
-      renderGear();
-      const renderStays = () => {
-        if (!staysGrid || !data.stays) return;
-        staysGrid.innerHTML = '';
-        data.stays.forEach((item) => {
-          const card = document.createElement('article');
-          card.className = 'stay-card';
-          card.innerHTML = `
-            <h3>${item.title}</h3>
-            <p>${item.area}</p>
-            <p>${item.detail}</p>
-            ${item.link ? `<a target="_blank" rel="noreferrer noopener" href="${item.link}">View stay options →</a>` : ''}
-          `;
-          staysGrid.appendChild(card);
-        });
-      };
-
+      renderActions();
+      renderFlights();
       renderStays();
-      const renderEmergency = () => {
-        if (!emergencyList || !data.emergencyInfo) return;
-        emergencyList.innerHTML = '';
-        data.emergencyInfo.forEach((item) => {
-          const li = document.createElement('li');
-          const linkPart = item.link
-            ? `<a target="_blank" rel="noreferrer noopener" href="${item.link}">${item.title}</a>`
-            : `<strong>${item.title}</strong>`;
-          li.innerHTML = `
-            ${linkPart}
-            <div class="meta">${item.detail}</div>
-          `;
-          emergencyList.appendChild(li);
-        });
-      };
-
+      renderMaps();
+      renderNews();
+      renderCams();
       renderEmergency();
-
-      const journeyLegs = [
-        { label: 'PER → SIN', date: '2024-12-30', time: '05:35' },
-        { label: 'SIN → TYO', date: '2025-01-02', time: '05:25' },
-        { label: 'TYO → HAKUBA', date: '2025-01-04', time: '10:00' },
-        { label: 'HAKUBA → TYO', date: '2025-01-11', time: '08:00' },
-        { label: 'TYO → SIN', date: '2025-01-16', time: '17:05' },
-        { label: 'SIN → PER', date: '2025-01-20', time: '11:15' }
-      ];
-
-      const parseLegDate = (isoDate, t) => {
-        const [h, m] = t.split(':').map((n) => parseInt(n, 10));
-        const base = new Date(`${isoDate}T${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:00Z`);
-        return base;
-      };
-
-      const updateCountdown = () => {
-        const now = new Date();
-        const next = journeyLegs
-          .map((leg) => {
-            const dt = parseLegDate(leg.date, leg.time);
-            const diff = dt - now;
-            return { ...leg, diff, dt };
-          })
-          .filter((leg) => leg.diff > 0)
-          .sort((a, b) => a.diff - b.diff)[0];
-
-        const target = document.getElementById('next-leg');
-        if (!target) return;
-        if (!next) {
-          target.textContent = 'All legs completed';
-          return;
-        }
-        const hrs = Math.floor(next.diff / 3_600_000);
-        const mins = Math.floor((next.diff % 3_600_000) / 60_000);
-        target.textContent = `Next: ${next.label} · ${next.date} ${next.time} (${hrs}h ${mins}m to go)`;
-      };
-
-      updateCountdown();
-      setInterval(updateCountdown, 60_000);
-      // Weather pull (Open-Meteo)
-      const weatherCards = [
-        { id: 'tokyo', lat: 35.68, lon: 139.76, title: 'Tokyo', fallback: 'https://www.jma.go.jp/bosai/nowc/#area_type=offices&area_code=130000&center=130&zoom=9' },
-        { id: 'hakuba', lat: 36.69, lon: 137.83, title: 'Hakuba', fallback: 'https://www.jma.go.jp/bosai/nowc/#lat=36.69&lon=137.83&zoom=10' },
-        { id: 'sapporo', lat: 43.07, lon: 141.35, title: 'Sapporo', fallback: 'https://www.jma.go.jp/bosai/nowc/#lat=43.07&lon=141.35&zoom=9' }
-      ];
+      renderDays(currentSet);
 
       const weatherDesc = (code) => {
         const map = {
-          0: 'Clear',
-          1: 'Mainly clear',
-          2: 'Partly cloudy',
-          3: 'Overcast',
-          45: 'Foggy',
-          48: 'Rime fog',
-          51: 'Light drizzle',
-          53: 'Drizzle',
-          55: 'Heavy drizzle',
-          61: 'Light rain',
-          63: 'Rain',
-          65: 'Heavy rain',
-          71: 'Snowfall',
-          73: 'Snow',
-          75: 'Heavy snow',
-          80: 'Rain showers',
-          81: 'Rain showers',
-          82: 'Heavy showers',
-          85: 'Snow showers',
-          86: 'Heavy snow showers'
+          0: 'Clear', 1: 'Mainly clear', 2: 'Partly cloudy', 3: 'Overcast', 45: 'Foggy', 48: 'Rime fog', 51: 'Light drizzle',
+          53: 'Drizzle', 55: 'Heavy drizzle', 61: 'Light rain', 63: 'Rain', 65: 'Heavy rain', 71: 'Snowfall', 73: 'Snow',
+          75: 'Heavy snow', 80: 'Rain showers', 81: 'Rain showers', 82: 'Heavy showers', 85: 'Snow showers', 86: 'Heavy snow showers'
         };
         return map[code] || 'Live update';
       };
@@ -610,7 +361,6 @@
           const timeout = setTimeout(() => controller.abort(), 7000);
           const res = await fetch(url, { signal: controller.signal });
           clearTimeout(timeout);
-          if (!res.ok) throw new Error('Weather unavailable');
           const json = await res.json();
           const cw = json.current_weather || {};
           const temp = cw.temperature != null ? `${cw.temperature}°C` : '—';
@@ -619,278 +369,82 @@
           const observed = cw.time ? `as of ${cw.time}` : '';
           tempEl.textContent = temp;
           descEl.innerHTML = `${summary}${wind ? ' · ' + wind : ''}${observed ? ' · ' + observed : ''}${
-            loc.fallback
-              ? ` · <a target="_blank" rel="noreferrer noopener" href="${loc.fallback}">Forecast ↗</a>`
-              : ''
+            loc.fallback ? ` · <a target="_blank" rel="noreferrer noopener" href="${loc.fallback}">Forecast ↗</a>` : ''
           }`;
         } catch (e) {
           if (tempEl) tempEl.textContent = '—';
-          if (descEl) {
-            descEl.innerHTML = loc.fallback
-              ? `<a href="${loc.fallback}" target="_blank" rel="noreferrer noopener">Open local forecast</a>`
-              : 'Weather unavailable';
-          }
+          if (descEl) descEl.innerHTML = loc.fallback
+            ? `<a href="${loc.fallback}" target="_blank" rel="noreferrer noopener">Open local forecast</a>`
+            : 'Weather unavailable';
         }
       };
 
-      // Stagger weather fetches to avoid blocking on slow responses
-      weatherCards.forEach((loc, idx) => {
-        setTimeout(() => fetchWeather(loc), idx * 500);
-      });
+      weatherCards.forEach((loc, idx) => setTimeout(() => fetchWeather(loc), idx * 400));
 
-      const renderComparison = () => {
-        data.planCosts.forEach((option) => {
-          const card = document.createElement('article');
-          card.className = 'day-card';
-          const chips = [
-            `Flights: ${option.flights}`,
-            `Lodging: ${option.lodging}`,
-            `Lifts: ${option.lifts}`,
-            `Rentals: ${option.rentals}`,
-            `Transport: ${option.transport}`,
-            `Food: ${option.food}`,
-            `Activities: ${option.activities}`
-          ]
-            .map((label) => `<span class="chip">${label}</span>`)
-            .join('');
+      // Globe
+      try {
+        const canvas = document.getElementById('globe');
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x030711, 0);
 
-          card.innerHTML = `
-            <h3>${option.plan}</h3>
-            <div class="chips">${chips}</div>
-            <p>${option.notes}</p>
-          `;
-          comparisonCards.appendChild(card);
-        });
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 200);
 
-        const headerRow = `
-          <tr>
-            <th>Location</th>
-            <th>Lean</th>
-            <th>Mid</th>
-            <th>Splurge</th>
-            <th>Notes</th>
-          </tr>
-        `;
-        const rows = data.foodBudget
-          .map(
-            (row) => `
-              <tr>
-                <td>${row.location}</td>
-                <td>${row.lean}</td>
-                <td>${row.mid}</td>
-                <td>${row.splurge}</td>
-                <td>${row.notes}</td>
-              </tr>
-            `
-          )
-          .join('');
-        foodTable.innerHTML = `<thead>${headerRow}</thead><tbody>${rows}</tbody>`;
-      };
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        directionalLight.position.set(100, 150, 100);
+        scene.add(directionalLight);
 
-      renderComparison();
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enablePan = false;
+        controls.minDistance = 130;
+        controls.maxDistance = 300;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.2;
 
-      const monthValue = (dateStr) => {
-        const [dayRaw, monRaw] = dateStr.split(' ');
-        const day = parseInt(dayRaw, 10);
-        const mon = monRaw?.toLowerCase();
-        if (mon === 'dec') return day;
-        if (mon === 'jan') return 31 + day; // cross-year continuation
-        return 1000 + day;
-      };
+        const globe = new ThreeGlobe({ animateIn: true })
+          .globeImageUrl('https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg')
+          .bumpImageUrl('https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png')
+          .arcsData(data.routeArcs || [])
+          .arcColor(() => '#38bdf8')
+          .arcAltitudeAutoScale(true)
+          .arcDashLength(0.4)
+          .arcDashGap(0.7)
+          .arcDashAnimateTime(2000)
+          .pointsData(data.routePoints || [])
+          .pointLat('lat')
+          .pointLng('lng')
+          .pointColor(() => '#e0f2fe')
+          .pointRadius(0.6)
+          .labelsData(data.routePoints || [])
+          .labelLat('lat')
+          .labelLng('lng')
+          .labelText('label')
+          .labelAltitude(0.05)
+          .labelSize(0.8)
+          .labelColor(() => '#fff');
 
-      const findTodayMatch = () => {
-        const today = new Date();
-        const mon = today.toLocaleString('en-US', { month: 'short' });
-        const key = `${today.getDate()} ${mon}`;
-        const todayVal = monthValue(key);
+        scene.add(globe);
 
-        const pickFrom = (setKey) => {
-          const list = datasets[setKey] || [];
-          let direct = list.find((d) => d.date === key);
-          if (direct) return { setKey, day: direct };
-          // next upcoming
-          let best = null;
-          let bestVal = Infinity;
-          list.forEach((d) => {
-            const val = monthValue(d.date);
-            if (val >= todayVal && val < bestVal) {
-              bestVal = val;
-              best = d;
-            }
-          });
-          return best ? { setKey, day: best } : null;
+        const animate = () => {
+          controls.update();
+          renderer.render(scene, camera);
+          requestAnimationFrame(animate);
         };
+        animate();
 
-        return pickFrom(currentSet) || pickFrom('hakuba') || pickFrom('jan');
-      };
-
-      const focusToday = () => {
-        if (hasFocusedToday) return;
-        const match = findTodayMatch();
-        if (!match || !match.day) return;
-        if (match.setKey !== currentSet) {
-          setActiveDataset(match.setKey);
-        }
-        hasFocusedToday = true;
-        setTimeout(() => {
-          const card = Array.from(document.querySelectorAll('#day-cards .day-card h3')).find((h) =>
-            h.textContent.trim().startsWith(match.day.date)
-          );
-          if (card) {
-            card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            geoStatus.textContent = `Today: ${match.day.date} · ${match.day.location} · auto-focused`;
-          }
-        }, 150);
-      };
-
-      focusToday();
-
-      const updateGeoStatus = (text) => {
-        geoStatus.textContent = text;
-      };
-
-      const handleLocationSuccess = (pos) => {
-        updateGeoStatus(
-          `Device near ${pos.coords.latitude.toFixed(2)}, ${pos.coords.longitude.toFixed(2)}. Est. timezone offset ${(
-            new Date().getTimezoneOffset() / -60
-          ).toFixed(0)}h.`
-        );
-      };
-
-      const handleLocationError = (message) => {
-        updateGeoStatus(message);
-      };
-
-      const requestDeviceLocation = () => {
-        if (!('geolocation' in navigator)) {
-          handleLocationError('Geolocation unsupported; planning from Perth.');
-          geoButton?.setAttribute('disabled', 'true');
-          return;
-        }
-        updateGeoStatus('Requesting device location…');
-        geoButton?.setAttribute('disabled', 'true');
-        geoButton?.classList.add('busy');
-
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            geoButton?.removeAttribute('disabled');
-            geoButton?.classList.remove('busy');
-            handleLocationSuccess(position);
-            focusToday();
-          },
-          (error) => {
-            geoButton?.removeAttribute('disabled');
-            geoButton?.classList.remove('busy');
-            handleLocationError(`Location blocked (${error.code}): ${error.message}`);
-          },
-          {
-            timeout: 20000,
-            maximumAge: 60000
-          }
-        );
-      };
-
-      geoButton?.addEventListener('click', requestDeviceLocation);
-
-      if ('geolocation' in navigator) {
-        if ('permissions' in navigator) {
-          navigator.permissions.query({ name: 'geolocation' }).then((status) => {
-            if (status.state === 'granted') {
-              requestDeviceLocation();
-            } else if (status.state === 'denied') {
-              handleLocationError('Location blocked; using Perth anchor.');
-            } else {
-              updateGeoStatus('Tap “Share location” to pin your timezone.');
-            }
-
-            status.onchange = () => {
-              if (status.state === 'granted') {
-                requestDeviceLocation();
-              } else if (status.state === 'denied') {
-                handleLocationError('Location blocked; using Perth anchor.');
-              }
-            };
-          });
-        } else {
-          updateGeoStatus('Tap “Share location” to pin your timezone.');
-        }
-      } else {
-        handleLocationError('Geolocation unsupported; planning from Perth.');
-        geoButton?.setAttribute('disabled', 'true');
-      }
-
-      const initGlobeScene = () => {
-        try {
-          const canvas = document.getElementById('globe');
-          const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-          renderer.setPixelRatio(window.devicePixelRatio);
+        window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
           renderer.setSize(window.innerWidth, window.innerHeight);
-          renderer.setClearColor(0x030711, 0);
-
-          const scene = new THREE.Scene();
-          const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
-          camera.position.set(0, 0, 200);
-
-          const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
-          scene.add(ambientLight);
-          const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-          directionalLight.position.set(100, 150, 100);
-          scene.add(directionalLight);
-
-          const controls = new OrbitControls(camera, renderer.domElement);
-          controls.enablePan = false;
-          controls.minDistance = 130;
-          controls.maxDistance = 300;
-          controls.autoRotate = true;
-          controls.autoRotateSpeed = 0.2;
-
-          const globe = new ThreeGlobe({ animateIn: true })
-            .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-night.jpg')
-            .bumpImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png')
-            .arcsData(data.routeArcs || [])
-            .arcColor(() => '#38bdf8')
-            .arcAltitudeAutoScale(true)
-            .arcDashLength(0.4)
-            .arcDashGap(0.7)
-            .arcDashAnimateTime(2000)
-            .pointsData(data.routePoints || [])
-            .pointLat('lat')
-            .pointLng('lng')
-            .pointColor(() => '#e0f2fe')
-            .pointRadius(0.6)
-            .labelsData(data.routePoints || [])
-            .labelLat('lat')
-            .labelLng('lng')
-            .labelText('label')
-            .labelAltitude(0.05)
-            .labelSize(0.8)
-            .labelColor(() => '#fff');
-
-          scene.add(globe);
-
-          const animate = () => {
-            controls.update();
-            renderer.render(scene, camera);
-            requestAnimationFrame(animate);
-          };
-
-          animate();
-
-          window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-          });
-        } catch (err) {
-          const status = document.getElementById('route-summary');
-          if (status) status.textContent = 'Globe unavailable on this device.';
-          console.error('Globe init failed', err);
-        }
-      };
-
-      initGlobeScene();
+        });
+      } catch (err) {
+        console.error('Globe failed', err);
+      }
     </script>
-    <!-- Simple nav uses static relative links above -->
-
   </body>
 </html>
