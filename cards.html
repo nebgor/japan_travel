@@ -47,6 +47,10 @@
           A quick-reference layout that keeps your ski needs, energy levels, and essential next steps in one
           scroll. Each option layer includes photos, buffer counts, and remaining to-dos.
         </p>
+        <div class="dataset-toggle" id="cards-toggle">
+          <button type="button" data-set="hakuba" class="active">Hakuba · Tokyo (Dec/Jan)</button>
+          <button type="button" data-set="jan">Jan 8–30 Hakuba/Tokyo/SIN</button>
+        </div>
       </div>
 
       <section>
@@ -77,6 +81,12 @@
       const actionHighlights = document.getElementById('action-highlights');
       const skillCards = document.getElementById('skill-cards');
       const snapshots = document.getElementById('daily-snapshots');
+      const toggleButtons = document.querySelectorAll('#cards-toggle button');
+      const datasets = {
+        hakuba: data.hakuba,
+        jan: data.januaryPlan || []
+      };
+      let currentSet = 'hakuba';
 
       const optionSummary = [
         {
@@ -146,16 +156,30 @@
         skillCards.appendChild(card);
       });
 
-      data.hakuba.slice(0, 3).forEach((day) => {
-        const card = document.createElement('article');
-        card.className = 'day-card';
-        card.innerHTML = `
-          <h3>${day.date} · ${day.location}</h3>
-          <p>${day.plan}</p>
-          <p><strong>Hint:</strong> ${day.hint}</p>
-        `;
-        snapshots.appendChild(card);
+      const renderSnapshots = () => {
+        snapshots.innerHTML = '';
+        (datasets[currentSet] || []).slice(0, 3).forEach((day) => {
+          const card = document.createElement('article');
+          card.className = 'day-card';
+          card.innerHTML = `
+            <h3>${day.date} · ${day.location}</h3>
+            <p>${day.plan}</p>
+            <p><strong>Hint:</strong> ${day.hint || ''}</p>
+          `;
+          snapshots.appendChild(card);
+        });
+      };
+
+      toggleButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          toggleButtons.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentSet = btn.dataset.set;
+          renderSnapshots();
+        });
       });
+
+      renderSnapshots();
     </script>
     <script>
       (() => {
