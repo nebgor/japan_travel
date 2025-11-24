@@ -8,15 +8,16 @@
     <style>
       body {
         margin: 0;
-        background: radial-gradient(circle at 20% 20%, rgba(14, 116, 209, 0.25), transparent 55%),
-          radial-gradient(circle at 80% 0%, rgba(14, 116, 209, 0.15), transparent 45%), #04070f;
+        background: radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.15), transparent 45%),
+          radial-gradient(circle at 78% 5%, rgba(236, 72, 153, 0.12), transparent 40%),
+          linear-gradient(180deg, #020617, #020617 60%, #040b1d);
         color: #f7fbff;
-        font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        font-family: 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', -apple-system, system-ui, sans-serif;
       }
       .hero h1 {
-        margin: 0.2rem 0;
-        font-size: clamp(2.2rem, 4vw, 3.2rem);
-        line-height: 1.1;
+        margin: 0.35rem 0;
+        font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+        line-height: 1.05;
       }
       nav a {
         color: inherit;
@@ -49,6 +50,7 @@
         border-radius: 1rem;
         padding: 1rem;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(16px);
       }
       .day-card .gallery img.parallax-img {
         transition: transform 0.2s ease;
@@ -89,31 +91,79 @@
     <div class="overlay">
       <div class="page-shell">
         <nav aria-label="Pages">
-          <a class="active" href="/japan_travel/index.html">Globe View</a>
-          <a href="/japan_travel/timeline.html">Timeline</a>
+          <a class="active" href="index.html">Globe View</a>
+          <a href="timeline.html">Timeline</a>
         </nav>
 
-        <div class="hero">
-          <p class="chip">Family of 5 · PER → SIN → Tokyo → Hakuba → Tokyo → SIN → PER</p>
-          <h1>Japan 16-day powder + city, then Singapore wind-down</h1>
-          <p>Chronological, wake-to-sleep plan with buffers, live links, and globe overview.</p>
-          <div class="dataset-toggle" id="dataset-toggle">
-            <button type="button" data-set="jan" class="active">Jan 8–30 Hakuba/Tokyo/SIN</button>
-            <button type="button" data-set="hakuba">Hakuba · Tokyo (Dec/Jan)</button>
+        <div class="hero hero-grid">
+          <div class="hero-copy">
+            <p class="chip">Family of 5 · PER → SIN (transit) → Tokyo/Hakuba → Singapore → PER</p>
+            <h1>16 days Japan (Tokyo + Hakuba) then Singapore wind-down</h1>
+            <p>Wake-to-sleep plan with booking links for hotels, food, onsen, ski days, and a no-accommodation Singapore stay.</p>
+            <div class="dataset-toggle" id="dataset-toggle">
+              <button type="button" data-set="jan" class="active">Jan 8–30 · Perth→Japan→Singapore</button>
+              <button type="button" data-set="hakuba">Legacy Hakuba sample</button>
+            </div>
+            <div class="summary-grid">
+              <div class="summary-chip"><strong>Trip window</strong><p>8–30 Jan</p></div>
+              <div class="summary-chip"><strong>Japan days</strong><p>16 days Tokyo + Hakuba (5 ski days)</p></div>
+              <div class="summary-chip"><strong>Singapore</strong><p>After Japan · staying with family</p></div>
+              <div class="summary-chip"><strong>Family</strong><p>2 adults · 18yo · 14yo · 7yo</p></div>
+            </div>
           </div>
-          <div class="summary-grid">
-            <div class="summary-chip"><strong>Trip window</strong><p>8–30 Jan</p></div>
-            <div class="summary-chip"><strong>Japan days</strong><p>~16 days Tokyo + Hakuba</p></div>
-            <div class="summary-chip"><strong>Singapore</strong><p>Buffers before/after Japan</p></div>
-            <div class="summary-chip"><strong>Family</strong><p>2 adults · 18yo · 14yo · 7yo</p></div>
+          <div class="hero-visuals">
+            <div class="orb a" data-parallax="0.12"></div>
+            <div class="orb b" data-parallax="0.08"></div>
+            <figure class="hero-photo large" data-parallax="0.28">
+              <img src="tokyo.jpg" alt="Tokyo skyline night" loading="lazy" />
+              <figcaption>Tokyo arrival + ramen sprint</figcaption>
+            </figure>
+            <figure class="hero-photo medium" data-parallax="0.2">
+              <img src="hakuba.jpg" alt="Hakuba ski slopes" loading="lazy" />
+              <figcaption>Hakuba ski + onsen rhythm</figcaption>
+            </figure>
+            <figure class="hero-photo small" data-parallax="0.14">
+              <img src="singapore.jpg" alt="Singapore skyline" loading="lazy" />
+              <figcaption>Singapore wind-down</figcaption>
+            </figure>
           </div>
         </div>
+
+        <section class="destinations" aria-label="Destinations preview">
+          <article class="dest-card" data-parallax="0.08">
+            <span class="tag">Tokyo</span>
+            <img src="tokyo.jpg" alt="Tokyo streets" loading="lazy" />
+            <div class="dest-body">
+              <strong>City energy without overloading the kids.</strong>
+              <p>Ramen, Tsukiji bites, Shibuya Sky, and easy JR access from Shinjuku/Ginza bases.</p>
+              <a href="#actions-grid" class="chip">See booking links</a>
+            </div>
+          </article>
+          <article class="dest-card" data-parallax="0.08">
+            <span class="tag">Hakuba</span>
+            <img src="hakuba.jpg" alt="Hakuba mountain view" loading="lazy" />
+            <div class="dest-body">
+              <strong>5 ski days + rest buffers.</strong>
+              <p>Greens for the beginners, reds for the intermediates, onsen every evening, Snow Monkeys on the rest day.</p>
+              <a href="#stays" class="chip">Stay near lifts</a>
+            </div>
+          </article>
+          <article class="dest-card" data-parallax="0.08">
+            <span class="tag">Singapore</span>
+            <img src="singapore.jpg" alt="Singapore skyline at night" loading="lazy" />
+            <div class="dest-body">
+              <strong>Family base, no hotel needed.</strong>
+              <p>Gardens by the Bay, Sentosa option, food crawl, and pool/AC downtime after Japan.</p>
+              <a href="#days" class="chip">See day plan</a>
+            </div>
+          </article>
+        </section>
 
         <div class="layout">
           <div class="main-column">
             <section class="resource-panel section-anchor">
               <h2>Booking + flights</h2>
-              <p class="chip">Use these to lock the PER→SIN→TYO→Hakuba →SIN→PER legs</p>
+              <p class="chip">Use these to lock the PER→SIN (transit)→Tokyo/Hakuba→Tokyo→SIN→PER legs</p>
               <div class="actions-grid" id="actions-grid"></div>
               <div class="flight-grid" id="flight-grid"></div>
             </section>
@@ -190,6 +240,49 @@
         { id: 'tokyo', lat: 35.68, lon: 139.76, title: 'Tokyo', fallback: 'https://www.jma.go.jp/bosai/nowc/#area_type=offices&area_code=130000&center=130&zoom=9' },
         { id: 'hakuba', lat: 36.69, lon: 137.83, title: 'Hakuba', fallback: 'https://www.jma.go.jp/bosai/nowc/#lat=36.69&lon=137.83&zoom=10' }
       ];
+      let cardObserver = null;
+
+      const parallaxItems = Array.from(document.querySelectorAll('[data-parallax]'));
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let raf;
+      const updateParallax = () => {
+        const midX = window.innerWidth / 2;
+        const midY = window.innerHeight / 2;
+        parallaxItems.forEach((el) => {
+          const speed = parseFloat(el.dataset.parallax || '0.2');
+          const rect = el.getBoundingClientRect();
+          const offsetY = (rect.top - window.innerHeight / 2) * speed * -0.05;
+          const dx = ((mouseX - midX) / midX) * speed * 12;
+          const dy = ((mouseY - midY) / midY) * speed * 10 + offsetY;
+          el.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+        });
+      };
+      const queueParallax = () => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          updateParallax();
+          raf = null;
+        });
+      };
+      window.addEventListener('pointermove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        queueParallax();
+      });
+      window.addEventListener('scroll', queueParallax, { passive: true });
+      queueParallax();
+
+      const attachCardFocus = () => {
+        if (cardObserver) cardObserver.disconnect();
+        cardObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => entry.target.classList.toggle('active', entry.isIntersecting && entry.intersectionRatio > 0.5));
+          },
+          { threshold: [0.35, 0.5, 0.75] }
+        );
+        document.querySelectorAll('.day-card').forEach((card) => cardObserver.observe(card));
+      };
 
       const renderActions = () => {
         actionsGrid.innerHTML = '';
@@ -277,15 +370,18 @@
         const card = document.createElement('article');
         card.className = 'day-card';
         const planSteps = entry.plan.split(';').map((s) => s.trim()).filter(Boolean);
-        const gallery = data.galleryMap?.[entry.location] || data.galleryMap?.[entry.location?.split('→')[0]] || data.galleryMap?.Tokyo || [];
+        const baseLoc = entry.location?.split('→')[0]?.trim();
+        const gallery = data.galleryMap?.[entry.location] || (baseLoc && data.galleryMap?.[baseLoc]) || data.galleryMap?.Tokyo || [];
         const energy = data.energyMap[entry.date] || {};
+        const heroImg = gallery[0] || '';
 
-        const galleryMarkup = gallery
-          .map(
-            (src) =>
-              `<img class="parallax-img" src="${src}" alt="${entry.location} highlight" loading="lazy" decoding="async" />`
-          )
-          .join('');
+        const scheduleItems = planSteps.map((step) => {
+          const match = step.match(/^(\d{1,2}:\d{2}(?:[–-]\d{1,2}:\d{2})?)\s+(.*)$/);
+          if (match) {
+            return { time: match[1], desc: match[2] };
+          }
+          return { time: '', desc: step };
+        });
 
         const energyMarkup = Object.entries(energy)
           .map(
@@ -296,27 +392,39 @@
           .join('');
 
         card.innerHTML = `
-          <h3>${entry.date} <span>${entry.location}</span></h3>
-          <div class="gallery">${galleryMarkup}</div>
-          <div class="chips">
-            <span class="chip">Food mid: $${entry.food}</span>
-            ${entry.focus ? `<span class="chip">Ski focus: ${entry.focus}</span>` : '<span class="chip">Buffer-smart pacing</span>'}
+          <div class="day-media" style="${heroImg ? `background-image:url(${heroImg})` : ''}">
+            <div class="day-media-overlay">
+              <div class="chips">
+                <span class="chip">Food mid: $${entry.food}</span>
+                ${entry.focus ? `<span class="chip">Ski focus: ${entry.focus}</span>` : '<span class="chip">Buffer-smart pacing</span>'}
+              </div>
+            </div>
           </div>
-          <p>${planSteps.join(' · ')}</p>
-          <div class="chips energy-stack">${energyMarkup}</div>
-          <p><strong>Hint:</strong> ${entry.hint || ''}</p>
+          <div class="day-body">
+            <div class="day-header">
+              <div>
+                <p class="card-date">${entry.date}</p>
+                <h3>${entry.location}</h3>
+              </div>
+              <div class="chips energy-stack">
+                ${energyMarkup || '<span class="chip">Balanced energy</span>'}
+              </div>
+            </div>
+            <ul class="schedule-list">
+              ${scheduleItems
+                .map(
+                  (item) => `
+                    <li class="schedule-item">
+                      <span class="schedule-time">${item.time || 'Anytime'}</span>
+                      <span class="schedule-desc">${item.desc}</span>
+                    </li>
+                  `
+                )
+                .join('')}
+            </ul>
+            <p class="schedule-desc"><strong>Hint:</strong> ${entry.hint || ''}</p>
+          </div>
         `;
-
-        const imgs = card.querySelectorAll('.parallax-img');
-        if (window.matchMedia('(pointer:fine)').matches && imgs.length) {
-          card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const relY = (e.clientY - rect.top) / rect.height - 0.5;
-            const offset = relY * 10;
-            imgs.forEach((img) => (img.style.transform = `translateY(${offset}px)`));
-          });
-          card.addEventListener('mouseleave', () => imgs.forEach((img) => (img.style.transform = 'translateY(0)')));
-        }
         return card;
       };
 
@@ -328,6 +436,7 @@
           return;
         }
         list.forEach((day) => dayCards.appendChild(buildCard(day)));
+        attachCardFocus();
       };
 
       document.querySelectorAll('#dataset-toggle button').forEach((btn) => {

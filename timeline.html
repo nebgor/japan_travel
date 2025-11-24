@@ -18,6 +18,9 @@
         background-position: center;
         position: relative;
         overflow: hidden;
+        backdrop-filter: blur(14px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
       .timeline-node.has-bg::before {
         content: '';
@@ -29,6 +32,10 @@
       .timeline-node.has-bg > * {
         position: relative;
         z-index: 1;
+      }
+      .timeline-node:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
       }
       .timeline-node .time { font-weight: 600; color: #22d3ee; }
       .timeline-node .location { font-size: 0.95rem; color: var(--muted); }
@@ -42,22 +49,34 @@
   <body>
     <div class="page-shell">
       <nav aria-label="Pages">
-        <a href="/japan_travel/index.html">Globe View</a>
-        <a class="active" href="/japan_travel/timeline.html">Timeline</a>
+        <a href="index.html">Globe View</a>
+        <a class="active" href="timeline.html">Timeline</a>
       </nav>
 
-      <div class="hero">
-        <small>Chronological wake→sleep</small>
-        <h1>Japan family itinerary · Hakuba & Tokyo</h1>
-        <p>Two tabs: base Hakuba plan and Jan 8–30 plan (16 days Japan, then Singapore).</p>
-        <div class="dataset-toggle" id="timeline-toggle">
-          <button type="button" data-set="jan" class="active">Jan 8–30 Hakuba/Tokyo/SIN</button>
-          <button type="button" data-set="hakuba">Hakuba + Tokyo</button>
+      <div class="hero hero-grid">
+        <div class="hero-copy">
+          <small>Chronological wake→sleep</small>
+          <h1>Jan family itinerary · Tokyo + Hakuba then Singapore</h1>
+          <p>Two tabs: the actual Jan 8–30 plan and a legacy Hakuba sample.</p>
+          <div class="dataset-toggle" id="timeline-toggle">
+            <button type="button" data-set="jan" class="active">Jan 8–30 · Perth→Japan→Singapore</button>
+            <button type="button" data-set="hakuba">Legacy Hakuba sample</button>
+          </div>
+        </div>
+        <div class="hero-visuals">
+          <figure class="hero-photo large" data-parallax="0.22">
+            <img src="tokyo.jpg" alt="Tokyo skyline" loading="lazy" />
+            <figcaption>Tokyo mornings</figcaption>
+          </figure>
+          <figure class="hero-photo medium" data-parallax="0.16">
+            <img src="hakuba.jpg" alt="Hakuba powder" loading="lazy" />
+            <figcaption>Hakuba ski days</figcaption>
+          </figure>
         </div>
       </div>
 
       <section class="timeline-section">
-        <p class="section-caption" id="timeline-caption">Hakuba plan: buffers + 5 ski days</p>
+        <p class="section-caption" id="timeline-caption">Jan plan: 16 days Japan, then Singapore wind-down</p>
         <div class="timeline-list" id="timeline-list"></div>
       </section>
     </div>
@@ -69,9 +88,40 @@
       const timelineCaption = document.getElementById('timeline-caption');
       const toggleButtons = document.querySelectorAll('#timeline-toggle button');
 
+      const parallaxItems = Array.from(document.querySelectorAll('[data-parallax]'));
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let raf;
+      const updateParallax = () => {
+        const midX = window.innerWidth / 2;
+        const midY = window.innerHeight / 2;
+        parallaxItems.forEach((el) => {
+          const speed = parseFloat(el.dataset.parallax || '0.2');
+          const rect = el.getBoundingClientRect();
+          const offsetY = (rect.top - window.innerHeight / 2) * speed * -0.05;
+          const dx = ((mouseX - midX) / midX) * speed * 12;
+          const dy = ((mouseY - midY) / midY) * speed * 10 + offsetY;
+          el.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+        });
+      };
+      const queueParallax = () => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          updateParallax();
+          raf = null;
+        });
+      };
+      window.addEventListener('pointermove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        queueParallax();
+      });
+      window.addEventListener('scroll', queueParallax, { passive: true });
+      queueParallax();
+
       const datasetInfo = {
-        hakuba: 'Hakuba plan: sequential days, jet-lag buffer, ski focus, final Singapore buffer',
-        jan: 'Jan 8–30: PER→SIN→TYO→Hakuba→TYO→SIN→PER (16 days in Japan, then SIN)'
+        hakuba: 'Legacy Hakuba sample: buffers + 5 ski days',
+        jan: 'Jan 8–30: PER→SIN→Tokyo/Hakuba (16 days) → Singapore (family stay)'
       };
 
       const datasets = {
@@ -84,8 +134,16 @@
         node.className = 'timeline-node';
         const energy = data.energyMap[entry.date] || {};
         const energyText = Object.entries(energy).map(([person, level]) => `${person}: ${level}`).join(' · ');
+        const planSteps = entry.plan.split(';').map((s) => s.trim()).filter(Boolean);
+        const scheduleItems = planSteps.map((step) => {
+          const match = step.match(/^(\d{1,2}:\d{2}(?:[–-]\d{1,2}:\d{2})?)\s+(.*)$/);
+          if (match) return { time: match[1], desc: match[2] };
+          return { time: '', desc: step };
+        });
+        const baseLoc = entry.location?.split('→')[0]?.trim();
         const gallery =
-          (data.galleryMap && (data.galleryMap[entry.location] || data.galleryMap[entry.location?.split('→')[0]])) ||
+          (data.galleryMap &&
+            (data.galleryMap[entry.location] || (baseLoc && data.galleryMap[baseLoc]))) ||
           data.galleryMap?.Tokyo || [];
         const thumb = gallery && gallery.length ? gallery[0] : null;
         if (thumb) {
@@ -104,7 +162,18 @@
             </div>
           </div>
           <div>
-            <p>${entry.plan}</p>
+            <ul class="schedule-list">
+              ${scheduleItems
+                .map(
+                  (item) => `
+                    <li class="schedule-item">
+                      <span class="schedule-time">${item.time || 'Anytime'}</span>
+                      <span class="schedule-desc">${item.desc}</span>
+                    </li>
+                  `
+                )
+                .join('')}
+            </ul>
             <p><strong>Energy:</strong> ${energyText || 'Balanced'}</p>
           </div>
         `;

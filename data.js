@@ -211,209 +211,214 @@ const hakubaData = [
   }
 ];
 
-const furanoData = [
-  {
-    date: '27 Dec',
-    location: 'Singapore',
-    plan: 'Arrive PER→SIN (~5h); hawker dinner; overnight buffer',
-    food: 170,
-    focus: null
-  },
-  {
-    date: '28 Dec',
-    location: 'Singapore',
-    plan: 'Buffer day; light sights; rest',
-    food: 170,
-    focus: null
-  },
-  {
-    date: '29 Dec',
-    location: 'Singapore',
-    plan: 'Buffer day',
-    food: 170,
-    focus: null
-  },
-  {
-    date: '30 Dec',
-    location: 'Singapore',
-    plan: 'Buffer day',
-    food: 170,
-    focus: null
-  },
-  {
-    date: '31 Dec',
-    location: 'Singapore',
-    plan: 'Buffer day',
-    food: 170,
-    focus: null
-  },
-  {
-    date: '1 Jan',
-    location: 'Singapore',
-    plan: 'Buffer day',
-    food: 170,
-    focus: null
-  },
-  {
-    date: '2 Jan',
-    location: 'Singapore',
-    plan: 'Buffer day',
-    food: 170,
-    focus: null
-  },
-  {
-    date: '3 Jan',
-    location: 'Singapore',
-    plan: 'Buffer day',
-    food: 170,
-    focus: null
-  },
-  {
-    date: '4 Jan',
-    location: 'Tokyo',
-    plan: 'Fly SIN→TYO (~7h); overnight buffer',
-    food: 200,
-    focus: null
-  },
-  {
-    date: '5 Jan',
-    location: 'Sapporo',
-    plan: 'Fly TYO→CTS (~1.5h); JR/bus to Sapporo (~1h); soup curry',
-    food: 200,
-    focus: null
-  },
-  {
-    date: '6 Jan',
-    location: 'Furano',
-    plan: 'Bus/JR via Asahikawa (~2.5–3h); check-in; rentals',
-    food: 200,
-    focus: null
-  },
-  {
-    date: '7 Jan',
-    location: 'Furano',
-    plan:
-      'Ski day 1 (Beg: Kitanomine Family/Romance; Interm: Sailer/Spies/Downhill); Day 1 lessons',
-    food: 200,
-    focus: 'Beg: Kitanomine Family/Romance; Interm: Sailer/Spies, Downhill'
-  },
+const januaryPlan = [
   {
     date: '8 Jan',
-    location: 'Furano',
-    plan: 'Ski day 2; onsen evening',
+    location: 'Perth → Tokyo (via Singapore)',
+    plan:
+      '04:30 Wake; 05:35–10:45 PER→SIN; 12:30–20:55 SIN→HND/NRT; 21:30 Hotel check-in; 22:00 Light dinner; 23:00 Sleep',
     food: 200,
-    focus: 'Beg: Kitanomine Family/Romance; Interm: Sailer/Spies, Downhill'
+    focus: null,
+    hint: 'Keep meds/snacks in carry-on; load Suica/PASMO on arrival.'
   },
   {
     date: '9 Jan',
-    location: 'Furano',
-    plan: 'Ski day 3; interm explore Furano Zone; kids greens',
+    location: 'Tokyo (Shinjuku base)',
+    plan:
+      '08:30 Wake; 09:00 Breakfast; 11:00 Shinjuku Gyoen walk; 13:00 Ramen; 15:00 Rest at hotel; 18:30 Omoide/depachika dinner; 21:30 Sleep',
     food: 200,
-    focus: 'Beg: Kitanomine Family/Romance; Interm: Sailer/Spies, Downhill'
+    focus: null,
+    hint: 'Set up Suica on phones; grab JR tickets Tokyo→Nagano for Hakuba.'
   },
   {
     date: '10 Jan',
-    location: 'Furano',
-    plan: 'Ski day 4; optional tune-up lesson',
+    location: 'Tokyo (prep + light sightseeing)',
+    plan:
+      '08:30 Breakfast; 10:00 Asakusa/Senso-ji; 12:30 Tsukiji street snacks; 15:00 TeamLab booking/pack for snow; 18:30 Early dinner; 21:30 Sleep',
     food: 200,
-    focus: 'Beg: Kitanomine Family/Romance; Interm: Sailer/Spies, Downhill'
+    focus: null,
+    hint: 'Buy Nagano→Hakuba bus seats; keep luggage ready for early train.'
   },
   {
     date: '11 Jan',
-    location: 'Furano',
-    plan: 'Ski day 5; early night',
+    location: 'Tokyo → Hakuba',
+    plan:
+      '07:30 Breakfast; 09:30 Tokyo Station (ekiben); 10:30–11:55 Shinkansen to Nagano; 12:15–13:30 Bus to Hakuba; 14:00 Check-in; 15:00 Rentals; 18:30 Onsen; 20:00 Dinner; 21:30 Sleep',
     food: 200,
-    focus: 'Beg: Kitanomine Family/Romance; Interm: Sailer/Spies, Downhill'
+    focus: null,
+    hint: 'Arrive early for lockers; Rhythm/Spicy rentals; confirm lesson times.'
   },
   {
     date: '12 Jan',
-    location: 'Sapporo',
-    plan: 'Biei Blue Pond + Asahiyama Zoo tour; back to Sapporo',
+    location: 'Hakuba (Ski day 1)',
+    plan:
+      '07:15 Breakfast; 08:15 Shuttle to lifts; 09:00–12:00 Lessons + greens; 12:00–13:00 Lunch; 13:00–15:00 Easy laps; 16:30 Onsen; 19:00 Dinner; 21:30 Sleep',
     food: 200,
-    focus: null
+    focus: 'Beg: Sakka/Iimori; Interm: Panorama/47/Goryu reds',
+    hint: 'Book lessons; stay on mellow runs to warm up.'
   },
   {
     date: '13 Jan',
-    location: 'Sapporo/Otaru',
-    plan: 'Ramen Alley brunch; Otaru canal + sushi',
+    location: 'Hakuba (Ski day 2)',
+    plan:
+      '07:15 Breakfast; 08:15 Lifts; 09:00–12:00 Ski; 12:00–13:00 Lunch; 13:00–15:00 Technique laps; 16:30 Onsen; 19:00 Dinner; 21:30 Sleep',
     food: 200,
-    focus: null
+    focus: 'Beg: Greens; Interm: Reds/rollers',
+    hint: 'Swap/adjust boots early if needed; watch wind holds.'
   },
   {
     date: '14 Jan',
-    location: 'Tokyo',
-    plan: 'Fly CTS→TYO (~1.5h); buffer night',
+    location: 'Hakuba (Rest + village)',
+    plan:
+      '08:30 Wake; 09:00 Breakfast; 10:30 Village stroll/sledding; 12:30 Lunch; 14:30 Laundry/rest; 17:00 Onsen; 19:00 Izakaya dinner; 21:30 Sleep',
     food: 200,
-    focus: null
+    focus: null,
+    hint: 'True rest day; onsen etiquette (wash first, no swimwear).'
   },
   {
     date: '15 Jan',
-    location: 'Tokyo',
-    plan: 'Asakusa/Senso-ji; Tsukiji street bites',
+    location: 'Hakuba (Ski day 3 · Tsugaike)',
+    plan:
+      '07:15 Breakfast; 08:15 Transfer to Tsugaike; 09:00–12:00 Huge greens/family zone; 12:00–13:00 Lunch; 13:00–15:00 Afternoon laps; 16:30 Onsen; 19:00 Dinner; 21:30 Sleep',
     food: 200,
-    focus: null
+    focus: 'Beg: Tsugaike greens; Interm: Han-no-ki/Champion',
+    hint: 'Carry cash for lockers/food; set meet-up points.'
   },
   {
     date: '16 Jan',
-    location: 'Tokyo→Singapore',
-    plan: 'Fly TYO→SIN (~7h); light evening',
-    food: 170,
-    focus: null
+    location: 'Hakuba (Ski day 4 · Iwatake)',
+    plan:
+      '07:30 Breakfast; 08:30 To Iwatake; 09:00–12:00 View runs/Sunny Valley; 12:00–13:00 Lunch at summit cafés; 13:00–15:00 Favourite laps; 16:30 Onsen; 19:00 Dinner; 21:30 Sleep',
+    food: 200,
+    focus: 'Beg: Sunny Valley; Interm: View A/B + South',
+    hint: 'Check lift closures; enjoy summit views/photos.'
   },
   {
     date: '17 Jan',
-    location: 'Singapore',
-    plan: 'Buffer; chilli crab option',
-    food: 170,
-    focus: null
+    location: 'Hakuba (Rest/Snow Monkeys)',
+    plan:
+      '08:30 Wake; 09:00 Breakfast; 10:30 Jigokudani Snow Monkeys or local walk; 13:00 Lunch; 15:00 Onsen/nap; 19:00 Dinner; 21:00 Sleep',
+    food: 200,
+    focus: null,
+    hint: 'Snow boots/microspikes; lockers at trailhead; bring towel.'
   },
   {
     date: '18 Jan',
-    location: 'Singapore',
-    plan: 'Buffer; rest/light sightseeing',
-    food: 170,
-    focus: null
+    location: 'Hakuba (Ski day 5 wrap)',
+    plan:
+      '07:30 Breakfast; 08:30 Lifts; 09:00–12:00 Favourite terrain; 12:00–13:00 Lunch; 13:00–15:00 Short laps/photo runs; 16:30 Return rentals; 19:00 Farewell dinner; 21:30 Sleep',
+    food: 200,
+    focus: 'Beg: Greens/Blues; Interm: Goryu/47 reds',
+    hint: 'Return rentals tonight to ease travel day.'
   },
   {
     date: '19 Jan',
-    location: 'Singapore',
-    plan: 'Buffer; packing',
-    food: 170,
-    focus: null
+    location: 'Hakuba → Tokyo',
+    plan:
+      '07:30 Breakfast; 08:30 Depart Hakuba; 10:30 Bus/train to Nagano; 11:45–13:15 Shinkansen to Tokyo; 14:30 Hotel check-in; 16:00 Rest; 19:00 Dinner; 21:30 Sleep',
+    food: 200,
+    focus: null,
+    hint: 'Ship bulky bags if needed; grab ekiben for train.'
   },
   {
     date: '20 Jan',
-    location: 'Perth',
-    plan: 'Fly SIN→PER (~5h)',
+    location: 'Tokyo (Asakusa + Skytree)',
+    plan:
+      '09:00 Breakfast; 10:30 Asakusa/Senso-ji; 12:30 Tsukiji snacks; 15:00 Sumida/Skytree views; 19:00 Dinner; 21:30 Sleep',
     food: 200,
-    focus: null
+    focus: null,
+    hint: 'Cash handy for street food; avoid peak tour groups.'
+  },
+  {
+    date: '21 Jan',
+    location: 'Tokyo (Shibuya/Harajuku)',
+    plan:
+      '09:00 Breakfast; 11:00 Shibuya Crossing + Sky; 13:00 Harajuku crepes; 15:00 Meiji Jingu/Omotesando; 18:30 Dinner; 21:30 Sleep',
+    food: 200,
+    focus: null,
+    hint: 'Prebook Shibuya Sky; split briefly for shopping if needed.'
+  },
+  {
+    date: '22 Jan',
+    location: 'Tokyo (Odaiba/teamLab)',
+    plan:
+      '09:00 Breakfast; 11:00 Odaiba promenade; 13:00 teamLab Planets slot; 15:00 Mall/arcade break; 18:30 Dinner; 21:30 Pack',
+    food: 200,
+    focus: null,
+    hint: 'Secure teamLab tickets; pack snow gear into checked bags.'
+  },
+  {
+    date: '23 Jan',
+    location: 'Tokyo (flex day)',
+    plan:
+      '09:00 Brunch; 11:30 Day trip to Yokohama/Kamakura or Ueno museums; 16:30 Return + rest; 19:30 Final Tokyo dinner; 22:00 Sleep',
+    food: 200,
+    focus: null,
+    hint: 'Choose one big outing; keep buffer for next-day flight.'
+  },
+  {
+    date: '24 Jan',
+    location: 'Tokyo → Singapore',
+    plan:
+      '07:30 Wake; 08:00 Breakfast; 10:30 Checkout + airport train; 13:00 Airport lunch; 17:05–23:45 TYO→SIN; 00:30 Settle with family/friends; 01:00 Sleep',
+    food: 170,
+    focus: null,
+    hint: 'Eat before boarding; confirm airport rail timing; passports/immigration cards ready.'
+  },
+  {
+    date: '25 Jan',
+    location: 'Singapore (decompress)',
+    plan:
+      '09:30 Wake; 10:00 Brunch; 12:30 Pool/rest; 16:00 Nap; 19:00 Hawker dinner; 22:00 Sleep',
+    food: 170,
+    focus: null,
+    hint: 'No hotel needed—sync with host; hydrate in heat.'
+  },
+  {
+    date: '26 Jan',
+    location: 'Singapore (Gardens/Marina)',
+    plan:
+      '09:00 Breakfast; 11:00 Gardens by the Bay (prebook); 14:00 AC break; 17:00 Marina Bay stroll; 20:00 Dinner; 22:00 Sleep',
+    food: 170,
+    focus: null,
+    hint: 'Book Gardens timed entry; wear light clothes.'
+  },
+  {
+    date: '27 Jan',
+    location: 'Singapore (Sentosa option)',
+    plan:
+      '09:00 Breakfast; 10:30 Sentosa (SEA Aquarium/Adventure Cove) or mall; 15:00 Rest; 19:00 Dinner with friends; 22:30 Sleep',
+    food: 170,
+    focus: null,
+    hint: 'Prebook Sentosa tickets; sunscreen + swimsuits for kids.'
+  },
+  {
+    date: '28 Jan',
+    location: 'Singapore (food crawl)',
+    plan:
+      '09:00 Breakfast; 11:00 Chinatown/Little India food crawl; 15:00 Rest/AC; 19:30 Night market desserts; 22:30 Sleep',
+    food: 170,
+    focus: null,
+    hint: 'Use Grab/metro; pace spice for kids.'
+  },
+  {
+    date: '29 Jan',
+    location: 'Singapore (pack + chill)',
+    plan:
+      '09:30 Brunch; 12:00 Souvenir stops; 14:00 Pack; 17:00 Pool; 20:00 Early dinner; 22:00 Sleep',
+    food: 170,
+    focus: null,
+    hint: 'Check passports/visas; weigh bags for flight.'
+  },
+  {
+    date: '30 Jan',
+    location: 'Singapore → Perth',
+    plan:
+      '07:30 Wake; 08:00 Breakfast; 09:30 Airport transfer; 11:15–16:30 SIN→PER; 18:30 Home dinner; 21:30 Sleep',
+    food: 200,
+    focus: null,
+    hint: 'Arrive 2–3h early; keep meds/chargers handy.'
   }
-];
-
-const januaryPlan = [
-  { date: '8 Jan', location: 'Singapore', plan: '05:35–10:45 PER→SIN; 11:30 Hotel check-in; 13:00 Hawker lunch; 16:00 Pool/rest; 19:00 Easy dinner; 21:30 Sleep', food: 170, focus: null, hint: 'Buffer after the red-eye; grab SIM/eSIM or pocket Wi-Fi in SIN.' },
-  { date: '9 Jan', location: 'Singapore', plan: '09:00 Wake; 09:30 Brunch; 12:30 Light outing; 16:00 Rest; 19:00 Dinner; 21:30 Sleep', food: 170, focus: null, hint: 'Keep it mellow; hydrate and adjust before Japan.' },
-  { date: '10 Jan', location: 'Tokyo', plan: '07:00 Wake; 09:25–17:05 SIN→TYO; 18:30 Hotel check-in; 19:30 Ramen; 21:30 Sleep', food: 200, focus: null, hint: 'Load Suica/PASMO on phone; early dinner near hotel.' },
-  { date: '11 Jan', location: 'Tokyo', plan: '09:00 Wake; 09:30 Breakfast; 11:00 Shinjuku walk; 13:00 Lunch; 15:00 Rest; 18:30 Simple dinner; 21:00 Sleep', food: 200, focus: null, hint: 'Book shinkansen seats Tokyo→Nagano; light day only.' },
-  { date: '12 Jan', location: 'Tokyo→Hakuba', plan: '08:30 Breakfast; 10:00 Tokyo Station; 11:00–12:30 Shinkansen Tokyo→Nagano; 13:00–14:00 Bus to Hakuba; 15:00 Rentals/check-in; 18:30 Onsen; 19:30 Dinner; 21:30 Sleep', food: 200, focus: null, hint: 'Reserve Nagano→Hakuba bus; cash for lockers; ekiben at Tokyo Station.' },
-  { date: '13 Jan', location: 'Hakuba', plan: '07:30 Breakfast; 08:30 Shuttle; 09:00–12:00 Ski + Day 1 lessons; 12:00–13:00 Lunch; 13:00–15:00 Easy laps; 16:30 Onsen; 19:00 Dinner; 21:30 Sleep', food: 200, focus: 'Beg: Sakka/Iimori greens; Interm: Panorama/47/Goryu reds', hint: 'Book lessons; adjust rentals if needed.' },
-  { date: '14 Jan', location: 'Hakuba', plan: '07:30 Breakfast; 08:30 Lifts; 09:00–12:00 Ski familiar runs; 12:00–13:00 Lunch; 13:00–15:00 Optional laps or café; 16:30 Onsen; 19:00 Dinner; 21:30 Sleep', food: 200, focus: 'Beg: Sakka/Iimori; Interm: Panorama/Riesen, 47/Goryu reds', hint: 'Check wind/holds; keep it fun for kids.' },
-  { date: '15 Jan', location: 'Hakuba', plan: '07:30 Breakfast; 08:30 Shuttle; 09:00–12:00 Ski; 12:00–13:00 Lunch; 13:00–15:00 Favourite laps; 16:30 Onsen; 19:00 Dinner; 21:30 Sleep', food: 200, focus: 'Beg: Greens/Blues; Interm: Reds at 47/Goryu', hint: 'Dial in technique; consider a tune-up lesson.' },
-  { date: '16 Jan', location: 'Hakuba', plan: '08:00 Breakfast; 09:00 Lifts; 09:30–12:00 Ski; 12:00–13:00 Lunch; 13:00–15:00 Optional laps/park; 16:30 Onsen; 19:00 Dinner; 21:30 Sleep', food: 200, focus: 'Beg: Iimori/Tsugaike greens; Interm: Goryu/47 reds', hint: 'Optionally explore Tsugaike for huge greens.' },
-  { date: '17 Jan', location: 'Hakuba (rest/Monkeys)', plan: '08:30 Wake; 09:00 Breakfast; 10:30 Snow Monkeys or village stroll; 13:00 Lunch; 15:00 Onsen/nap; 19:00 Dinner; 21:00 Sleep', food: 200, focus: null, hint: 'Rest day; onsen etiquette (wash first, no swimwear); laundry if needed.' },
-  { date: '18 Jan', location: 'Hakuba', plan: '07:30 Breakfast; 08:30 Shuttle; 09:00–12:00 Ski day 5; 12:00–13:00 Lunch; 13:00–15:00 Short laps; 16:30 Onsen; 19:00 Farewell dinner; 21:30 Sleep', food: 200, focus: 'Beg: Sakka/Tsugaike; Interm: View runs, reds', hint: 'Finish on favourite runs; return rentals if done.' },
-  { date: '19 Jan', location: 'Hakuba→Tokyo', plan: '07:00 Breakfast; 08:00 Depart Hakuba; 10:30 Snow Monkeys or direct to Tokyo; 15:00 Tokyo check-in; 18:30 Dinner; 21:30 Sleep', food: 200, focus: null, hint: 'Confirm luggage plan; lockers if stopping at Monkeys.' },
-  { date: '20 Jan', location: 'Tokyo', plan: '09:30 Wake; 10:00 Breakfast; 11:00 Asakusa/Senso-ji; 13:00 Tsukiji bites; 16:00 Skytree view; 19:30 Dinner; 21:30 Sleep', food: 200, focus: null, hint: 'Cash handy for small shops; avoid peak tour times.' },
-  { date: '21 Jan', location: 'Tokyo', plan: '09:30 Breakfast; 11:00 Shibuya Crossing + Sky; 13:30 Harajuku crepes; 15:00 Omotesando; 18:30 Dinner; 21:30 Sleep', food: 200, focus: null, hint: 'Prebook Shibuya Sky slot; split briefly for shopping.' },
-  { date: '22 Jan', location: 'Tokyo→Singapore', plan: '10:00 Wake; 10:30 Brunch; 13:00–19:00 TYO→SIN; 20:00 Hotel check-in; 21:30 Sleep', food: 170, focus: null, hint: 'Airport rail timing; eat before flight; hydrate on arrival.' },
-  { date: '23 Jan', location: 'Singapore', plan: '09:00 Breakfast; 11:00 Light sightseeing/mall; 14:00 Rest in AC; 17:00 Pool; 20:00 Dinner; 21:30 Sleep', food: 170, focus: null, hint: 'Keep mid-day indoor; use Grab for moves.' },
-  { date: '24 Jan', location: 'Singapore', plan: '09:00 Breakfast; 11:30 Gardens/indoor activity; 14:00 Rest; 17:00 Pool; 20:00 Dinner', food: 170, focus: null, hint: 'Book popular attractions ahead; stay cool mid-day.' },
-  { date: '25 Jan', location: 'Singapore', plan: '09:00 Breakfast; 11:00 Day trip or mall; 14:00 Rest; 19:00 Dinner', food: 170, focus: null, hint: 'Optional Sentosa/SEA Aquarium; hydrate.' },
-  { date: '26 Jan', location: 'Singapore', plan: '09:30 Brunch; 12:30 Light outing; 16:00 Rest; 19:00 Dinner', food: 170, focus: null, hint: 'Keep it easy; consider indoor kid activities.' },
-  { date: '27 Jan', location: 'Singapore', plan: '09:00 Breakfast; 11:00 Botanic gardens walk; 14:00 Rest; 19:00 Dinner', food: 170, focus: null, hint: 'Morning outdoor, afternoon AC.' },
-  { date: '28 Jan', location: 'Singapore', plan: '09:00 Breakfast; 11:30 Museum/AC activity; 15:00 Rest; 19:00 Dinner', food: 170, focus: null, hint: 'Reserve dining for a treat night.' },
-  { date: '29 Jan', location: 'Singapore', plan: '09:00 Breakfast; 11:00 Souvenir shopping; 14:00 Pack; 18:30 Early dinner; 21:30 Sleep', food: 170, focus: null, hint: 'Pack and rest before travel day.' },
-  { date: '30 Jan', location: 'Perth', plan: '07:30 Wake; 08:00 Breakfast; 11:15–16:30 SIN→PER; 18:00 Light dinner at home; 21:30 Sleep', food: 200, focus: null, hint: 'Arrive airport 2–3h early; snacks and meds in carry-on.' }
 ];
 
 const planCosts = [
@@ -427,17 +432,6 @@ const planCosts = [
     food: '$2.4k–$3.6k',
     activities: '$600–$1.3k',
     notes: 'No car needed; Snow Monkeys optional'
-  },
-  {
-    plan: 'Furano/Sapporo',
-    flights: '$8k–$10k',
-    lodging: '$3.2k–$6.0k',
-    lifts: '$1.8k–$2.4k',
-    rentals: '$1.0k–$1.6k',
-    transport: '$1.3k–$1.7k',
-    food: '$2.4k–$3.6k',
-    activities: '$600–$1.1k',
-    notes: 'Keep CTS buffers; Biei/Zoo tour'
   }
 ];
 
@@ -477,21 +471,6 @@ const skillSplit = [
     group: 'Lessons',
     plan:
       'Book Day 1 group/semi-private; optional Day 3 tune-up. Kids-friendly instructors available at Hakuba.'
-  },
-  {
-    group: 'Furano (Beginners/Intermediates)',
-    plan:
-      'Beg: Kitanomine greens (Family/Romance) + Day 1 lesson. Interm: Sailer/Spies, Furano Downhill, Premium Zone when open.'
-  },
-  {
-    group: 'Shared days',
-    plan:
-      'Use wide Kitanomine groomers; finish together on lower runs. Add a Day 3 tune-up lesson if needed.'
-  },
-  {
-    group: 'Lessons',
-    plan:
-      'Book Day 1 group/semi-private for beginners; intermediates optional technique session. Kid-friendly schools available at Furano.'
   }
 ];
 
@@ -502,9 +481,6 @@ const galleryMap = {
   Hakuba: ['hakuba.jpg', 'snowmonkey.jpg'],
   'Hakuba→Tokyo': ['hakuba.jpg', 'otaru.jpg'],
   'Tokyo→Singapore': ['tokyo.jpg', 'singapore.jpg'],
-  Sapporo: ['sapporo.jpg', 'otaru.jpg'],
-  Furano: ['furano.jpg', 'sapporo.jpg'],
-  'Sapporo/Otaru': ['sapporo.jpg', 'otaru.jpg'],
   Perth: ['ramen.jpg', 'singapore.jpg']
 };
 
@@ -513,9 +489,9 @@ const energyMap = {
   '9 Jan': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
   '10 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Low', '7yo': 'Low' },
   '11 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Low' },
-  '12 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Low' },
+  '12 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
   '13 Jan': { adults: 'High', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
-  '14 Jan': { adults: 'High', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
+  '14 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Low', '7yo': 'Low' },
   '15 Jan': { adults: 'High', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
   '16 Jan': { adults: 'High', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
   '17 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Low', '7yo': 'Low' },
@@ -523,50 +499,22 @@ const energyMap = {
   '19 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
   '20 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
   '21 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
-  '22 Jan': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
+  '22 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
   '23 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
-  '24 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
+  '24 Jan': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
   '25 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
   '26 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
   '27 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
   '28 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
   '29 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
-  '30 Jan': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
-  '27 Dec': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
-  '28 Dec': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
-  '29 Dec': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
-  '30 Dec': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
-  '31 Dec': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
-  '1 Jan': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
-  '2 Jan': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
-  '3 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Low' },
-  '4 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Low' },
-  '5 Jan': { adults: 'High', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
-  '6 Jan': { adults: 'High', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
-  '7 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Low' },
-  '8 Jan': { adults: 'High', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
-  '9 Jan': { adults: 'High', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
-  '10 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Low', '7yo': 'Low' },
-  '11 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
-  '12 Jan': { adults: 'Medium', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
-  '13 Jan': { adults: 'Medium', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
-  '14 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Low', '7yo': 'Low' },
-  '15 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
-  '16 Jan': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
-  '17 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
-  '18 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
-  '19 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
-  '20 Jan': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' }
+  '30 Jan': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' }
 };
 
 const routePoints = [
   { lat: -31.95, lng: 115.86, label: 'Perth' },
   { lat: 1.35, lng: 103.82, label: 'Singapore' },
   { lat: 35.68, lng: 139.76, label: 'Tokyo' },
-  { lat: 36.69, lng: 137.83, label: 'Hakuba' },
-  { lat: 43.07, lng: 141.35, label: 'Sapporo' },
-  { lat: 43.34, lng: 142.37, label: 'Furano' },
-  { lat: 43.20, lng: 140.99, label: 'Otaru' }
+  { lat: 36.69, lng: 137.83, label: 'Hakuba' }
 ];
 
 const routeArcs = [
@@ -575,58 +523,54 @@ const routeArcs = [
   { startLat: 35.68, startLng: 139.76, endLat: 36.69, endLng: 137.83, label: 'Tokyo → Hakuba' },
   { startLat: 36.69, startLng: 137.83, endLat: 35.68, endLng: 139.76, label: 'Hakuba → Tokyo' },
   { startLat: 35.68, startLng: 139.76, endLat: 1.35, endLng: 103.82, label: 'Tokyo → Singapore' },
-  { startLat: 1.35, startLng: 103.82, endLat: -31.95, endLng: 115.86, label: 'Singapore → Perth' },
-  { startLat: 35.68, startLng: 139.76, endLat: 43.07, endLng: 141.35, label: 'Tokyo → Sapporo' },
-  { startLat: 43.07, startLng: 141.35, endLat: 43.34, endLng: 142.37, label: 'Sapporo → Furano' },
-  { startLat: 43.34, startLng: 142.37, endLat: 43.20, endLng: 140.99, label: 'Furano → Otaru' }
+  { startLat: 1.35, startLng: 103.82, endLat: -31.95, endLng: 115.86, label: 'Singapore → Perth' }
 ];
 
 const actions = [
   {
-    title: 'Family Flights',
-    detail:
-      'Use Skyscanner multi-city (PER→SIN→TYO→SIN→PER) and lock in the 30 Dec outbound / 20 Jan inbound window with morning buffer.',
+    title: 'Flights PER→SIN→HND/NRT→SIN→PER',
+    detail: 'Multi-city search for 8 Jan outbound and 30 Jan return; pick seats together and align the SIN transit.',
     link: 'https://www.skyscanner.com/transport/flights'
   },
   {
-    title: 'Hakuba Base',
-    detail: 'Book around Happo-one or Wadano for ski-on access and easy shuttle pickups.',
+    title: 'Tokyo hotel (Shinjuku/Ginza)',
+    detail: 'Family rooms/quad near JR or metro for easy ramen runs and Shinkansen access.',
+    link: 'https://www.booking.com/region/jp/tokyo.en.html'
+  },
+  {
+    title: 'Hakuba stay near lifts',
+    detail: 'Wadano/Happo or Goryu/47 for walk-to-lifts and shuttle pickups with breakfast.',
     link: 'https://www.booking.com/region/jp/hakuba.html'
   },
   {
-    title: 'Hakuba Rentals',
-    detail: 'Reserve boots and boards at Rhythm or Spicy; ask for kid-friendly adjustments.',
-    link: 'https://www.rhythm.co.jp/'
+    title: 'Hakuba rentals',
+    detail: 'Reserve skis/boards at Rhythm or Spicy; book fittings the afternoon you arrive.',
+    link: 'https://www.rhythmjapan.com/hakuba/'
   },
   {
-    title: 'Hakuba Lessons',
-    detail: 'Evergreen or ESS offer English-speaking instructors for the 2 beginners and tune-up day.',
-    link: 'https://www.evergreenhakuba.com/'
+    title: 'Hakuba lessons (EN instructors)',
+    detail: 'Evergreen or ESS for Day 1 + optional tune-up; ask for kid-friendly instructors.',
+    link: 'https://www.evergreen-hakuba.com/'
   },
   {
-    title: 'Snow Monkey + Bus',
-    detail: 'Jigokudani trailheads need lockers; grab bus reservations at Nagano Station.',
-    link: 'https://www.japan-guide.com/e/e6033.html'
-  },
-  {
-    title: 'Tokyo & teamLab',
-    detail: 'Reserve teamLab Planets + Shibuya Sky early to avoid crowds and maintain jet-lag buffer.',
-    link: 'https://www.teamlab.art/'
-  },
-  {
-    title: 'Onsen Evenings',
-    detail: 'Book a family-friendly onsen in Hakuba (e.g. Wadano Onsen) and Tokyo (Oedo Onsen).',
+    title: 'Onsen evenings (Hakuba + Tokyo)',
+    detail: 'Book family-friendly onsen: Wadano/Obinata in Hakuba and Oedo Onsen/thermae in Tokyo.',
     link: 'https://www.japan-guide.com/e/e2293.html'
   },
   {
-    title: 'Food & Ramen Picks',
-    detail: 'Try ramen alley, sushi counters, and soup curry; keep a food budget of $180–$230 AUD/day in Japan.',
-    link: 'https://www.timeout.com/tokyo/restaurants'
+    title: 'Food + ramen holds',
+    detail: 'Grab ramen/sushi shortlists (TimeOut/Tabelog) and reserve one special Tokyo dinner + Hakuba izakaya.',
+    link: 'https://tabelog.com/en/tokyo/'
   },
   {
-    title: 'Transport & Passes',
-    detail: 'JR Pass + local passes cover Tokyo→Nagano→Hakuba; add Narita Express + Limousine Bus buffer.',
-    link: 'https://www.japanrailpass.net/'
+    title: 'Snow Monkey day',
+    detail: 'Reserve Jigokudani lockers/shuttle or join a guided half-day from Nagano/Hakuba.',
+    link: 'https://www.japan-guide.com/e/e6028.html'
+  },
+  {
+    title: 'Luggage forwarding + JR tickets',
+    detail: 'Ship ski bags via Yamato and prebook Tokyo→Nagano bus/train seats at Tokyo Station.',
+    link: 'https://www.kuronekoyamato.co.jp/ytc/en/send/services/airport/'
   }
 ];
 
@@ -654,51 +598,45 @@ const slopeMaps = [
     area: 'Hakuba',
     link: 'https://www.nsd-hakuba.jp/iwatake/wp-content/uploads/sites/11/2022/12/iwatake_trailmap_en.pdf',
     image: 'hakuba.jpg'
-  },
-  {
-    title: 'Furano resort trail map',
-    area: 'Furano',
-    link: 'https://www.princehotels.co.jp/furano/wp-content/uploads/sites/78/2023/11/furano_trailmap_en.pdf',
-    image: 'furano.jpg'
   }
 ];
 
 const flightOptions = [
   {
     leg: 'PER → SIN',
-    dates: '30 Dec',
-    carrier: 'Singapore Airlines SQ214',
+    dates: '8 Jan',
+    carrier: 'Singapore Airlines SQ214 (example)',
     times: 'Dep 05:35 · Arr 10:45',
     duration: '5h 10m',
     price: 'from ~AUD 820 (econ)',
-    note: 'Morning arrival; buffer hotel check-in and pool time'
+    note: 'Morning arrival for same-day SIN→TYO connection'
   },
   {
     leg: 'SIN → TYO (NRT/HND)',
-    dates: '2 Jan',
-    carrier: 'Singapore Airlines SQ638 (overnight)',
-    times: 'Dep 00:30 · Arr 08:20',
-    duration: '6h 50m',
+    dates: '8 Jan',
+    carrier: 'SQ634/638 (example)',
+    times: 'Dep 12:30–14:00 · Arr 20:30–22:00',
+    duration: '7h–7h30m',
     price: 'from ~AUD 980 (econ)',
-    note: 'Overnight to Tokyo; aligns with buffer day on arrival'
+    note: 'Same-day connection to Tokyo; aim for HND if possible'
   },
   {
     leg: 'TYO → SIN',
-    dates: '16 Jan',
+    dates: '24 Jan',
     carrier: 'SQ633 (HND→SIN)',
     times: 'Dep 17:05 · Arr 23:45',
     duration: '7h 40m',
     price: 'from ~AUD 930 (econ)',
-    note: 'Evening flight after Tokyo wrap-up; lands same night'
+    note: 'Evening flight after Tokyo wrap-up; lands late night in SIN'
   },
   {
     leg: 'SIN → PER',
-    dates: '20 Jan',
+    dates: '30 Jan',
     carrier: 'SQ225',
     times: 'Dep 11:15 · Arr 16:30',
     duration: '5h 15m',
     price: 'from ~AUD 820 (econ)',
-    note: 'Daytime return; morning checkout is relaxed'
+    note: 'Daytime return after Singapore stay; relaxed checkout'
   }
 ];
 
@@ -706,35 +644,29 @@ const travelLinks = [
   {
     title: 'Skyscanner multi-city search',
     detail:
-      'PER→SIN→TYO→SIN→PER (27 Dec – 20 Jan) with morning buffers; filter for Qantas, Scoot, or Singapore Airlines and compare transfer/layover durations.',
+      'PER→SIN→HND/NRT→SIN→PER (8–30 Jan) with same-day SIN transit outbound; filter for Qantas/SQ/Scoot and keep layovers tight.',
     link: 'https://www.skyscanner.com/transport/flights'
   },
   {
-    title: 'Singapore Airlines PER→SIN + SIN→TYO',
+    title: 'Singapore Airlines picks',
     detail:
-      'Use the SQ app to lock in the PER 05:35 departure and the overnight SIN→TYO flight; watch for youth fares and extra legroom seats for the 14yo.',
+      'Use the SQ app to lock PER 05:35 → SIN + SIN→HND/NRT on 8 Jan, HND→SIN on 24 Jan, and SIN→PER on 30 Jan; check youth fares/extra legroom.',
     link: 'https://www.singaporeair.com/'
   },
   {
     title: 'Hakuba lodging + shuttle bundle',
     detail:
-      'SnowJapan’s booking portal lists south-side family condos that include shuttle pickup, onsen access, and easy rental dropoffs (Happo/Wadano).',
+      'SnowJapan/booking portals list Happo/Wadano/Goryu condos with shuttle pickup, breakfast, and onsen options.',
     link: 'https://snowjapan.com/guide/hakuba'
-  },
-  {
-    title: 'Furano/Sapporo base',
-    detail:
-      'Check the Furano Resort official site for promotions on Kitanomine condos + Furano Zone lift bundles; include JR tickets via Hokkaido Resort pass.',
-    link: 'https://www.furano.ne.jp/en/'
   }
 ];
 
 const tripSummary = {
-  period: '30 Dec → 20 Jan · Perth ↔ Singapore ↔ Tokyo/Hakuba',
+  period: '8–30 Jan · Perth ↔ Tokyo/Hakuba ↔ Singapore (family stay)',
   travellers: '2 adults · 18yo · 14yo · 7yo',
   skiDays: 5,
-  bufferDays: 7,
-  focus: 'Sleep buffer after flights, rest days around ski zone, jet-lag friendly pacing'
+  bufferDays: 6,
+  focus: '16 days in Japan with jet-lag buffers and Hakuba rest days, then Singapore wind-down'
 };
 
 
@@ -781,11 +713,6 @@ const slopeCams = [
     title: 'Iwatake live cam',
     detail: 'Summit panorama cam',
     link: 'https://www.nsd-hakuba.jp/iwatake/smartphone/iwatake/livecamera/'
-  },
-  {
-    title: 'Furano live cam',
-    detail: 'Kitanomine base cam',
-    link: 'https://www.princehotels.co.jp/furano/winter/live_camera/'
   }
 ];
 
@@ -804,11 +731,6 @@ const emergencyInfo = [
     title: 'Hakuba local help',
     detail: 'Hakuba Valley bases can patch you to patrol; nearest hospitals reached via 119 dispatch.',
     link: 'https://www.hakubavalley.com/en/'
-  },
-  {
-    title: 'Hokkaido (Furano/Sapporo)',
-    detail: 'Dial 110/119; patrol contacts posted at Kitanomine/Furano Zone bases—ask staff to call patrol directly.',
-    link: 'https://www.princehotels.co.jp/furano/winter/'
   },
   {
     title: 'Consular support (Tokyo)',
@@ -843,6 +765,7 @@ const gearTips = [
     detail: 'Light snow boots plus optional microspikes for icy walkways in Hakuba.',
     link: 'https://www.snowjapan.com/japan-daily-snow-weather-reports'
   }
+];
 
 const stays = [
   {
@@ -891,7 +814,7 @@ const stays = [
 
 window.TripData = {
   hakuba: hakubaData,
-  furano: furanoData,
+  januaryPlan,
   planCosts,
   foodBudget,
   skillSplit,
