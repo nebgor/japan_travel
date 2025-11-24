@@ -136,10 +136,11 @@
                     <p>2 adults · 18yo · 14yo · 7yo</p>
                   </div>
                 </div>
-                <div class="dataset-toggle" id="dataset-toggle">
-                  <button type="button" data-set="hakuba" class="active">Hakuba · Tokyo</button>
-                  <button type="button" data-set="furano">Furano · Sapporo</button>
-                </div>
+            <div class="dataset-toggle" id="dataset-toggle">
+              <button type="button" data-set="hakuba" class="active">Hakuba · Tokyo (Dec/Jan)</button>
+              <button type="button" data-set="furano">Furano · Sapporo (alt)</button>
+              <button type="button" data-set="jan">Jan 8–30 Hakuba/Tokyo/SIN</button>
+            </div>
               </div>
 
               <section id="resources" class="resource-panel section-anchor">
@@ -327,7 +328,8 @@
 
       const datasets = {
         hakuba: data.hakuba || [],
-        furano: data.furano || []
+        furano: data.furano || [],
+        jan: data.januaryPlan || []
       };
 
       let currentSet = 'hakuba';

@@ -390,6 +390,32 @@ const furanoData = [
   }
 ];
 
+const januaryPlan = [
+  { date: '8 Jan', location: 'Singapore', plan: '05:35–10:45 PER→SIN; 11:30 Hotel check-in; 13:00 Hawker lunch; 16:00 Pool/rest; 19:00 Easy dinner; 21:30 Sleep', food: 170, focus: null, hint: 'Buffer after the red-eye; grab SIM/eSIM or pocket Wi-Fi in SIN.' },
+  { date: '9 Jan', location: 'Singapore', plan: '09:00 Wake; 09:30 Brunch; 12:30 Light outing; 16:00 Rest; 19:00 Dinner; 21:30 Sleep', food: 170, focus: null, hint: 'Keep it mellow; hydrate and adjust before Japan.' },
+  { date: '10 Jan', location: 'Tokyo', plan: '07:00 Wake; 09:25–17:05 SIN→TYO; 18:30 Hotel check-in; 19:30 Ramen; 21:30 Sleep', food: 200, focus: null, hint: 'Load Suica/PASMO on phone; early dinner near hotel.' },
+  { date: '11 Jan', location: 'Tokyo', plan: '09:00 Wake; 09:30 Breakfast; 11:00 Shinjuku walk; 13:00 Lunch; 15:00 Rest; 18:30 Simple dinner; 21:00 Sleep', food: 200, focus: null, hint: 'Book shinkansen seats Tokyo→Nagano; light day only.' },
+  { date: '12 Jan', location: 'Tokyo→Hakuba', plan: '08:30 Breakfast; 10:00 Tokyo Station; 11:00–12:30 Shinkansen Tokyo→Nagano; 13:00–14:00 Bus to Hakuba; 15:00 Rentals/check-in; 18:30 Onsen; 19:30 Dinner; 21:30 Sleep', food: 200, focus: null, hint: 'Reserve Nagano→Hakuba bus; cash for lockers; ekiben at Tokyo Station.' },
+  { date: '13 Jan', location: 'Hakuba', plan: '07:30 Breakfast; 08:30 Shuttle; 09:00–12:00 Ski + Day 1 lessons; 12:00–13:00 Lunch; 13:00–15:00 Easy laps; 16:30 Onsen; 19:00 Dinner; 21:30 Sleep', food: 200, focus: 'Beg: Sakka/Iimori greens; Interm: Panorama/47/Goryu reds', hint: 'Book lessons; adjust rentals if needed.' },
+  { date: '14 Jan', location: 'Hakuba', plan: '07:30 Breakfast; 08:30 Lifts; 09:00–12:00 Ski familiar runs; 12:00–13:00 Lunch; 13:00–15:00 Optional laps or café; 16:30 Onsen; 19:00 Dinner; 21:30 Sleep', food: 200, focus: 'Beg: Sakka/Iimori; Interm: Panorama/Riesen, 47/Goryu reds', hint: 'Check wind/holds; keep it fun for kids.' },
+  { date: '15 Jan', location: 'Hakuba', plan: '07:30 Breakfast; 08:30 Shuttle; 09:00–12:00 Ski; 12:00–13:00 Lunch; 13:00–15:00 Favourite laps; 16:30 Onsen; 19:00 Dinner; 21:30 Sleep', food: 200, focus: 'Beg: Greens/Blues; Interm: Reds at 47/Goryu', hint: 'Dial in technique; consider a tune-up lesson.' },
+  { date: '16 Jan', location: 'Hakuba', plan: '08:00 Breakfast; 09:00 Lifts; 09:30–12:00 Ski; 12:00–13:00 Lunch; 13:00–15:00 Optional laps/park; 16:30 Onsen; 19:00 Dinner; 21:30 Sleep', food: 200, focus: 'Beg: Iimori/Tsugaike greens; Interm: Goryu/47 reds', hint: 'Optionally explore Tsugaike for huge greens.' },
+  { date: '17 Jan', location: 'Hakuba (rest/Monkeys)', plan: '08:30 Wake; 09:00 Breakfast; 10:30 Snow Monkeys or village stroll; 13:00 Lunch; 15:00 Onsen/nap; 19:00 Dinner; 21:00 Sleep', food: 200, focus: null, hint: 'Rest day; onsen etiquette (wash first, no swimwear); laundry if needed.' },
+  { date: '18 Jan', location: 'Hakuba', plan: '07:30 Breakfast; 08:30 Shuttle; 09:00–12:00 Ski day 5; 12:00–13:00 Lunch; 13:00–15:00 Short laps; 16:30 Onsen; 19:00 Farewell dinner; 21:30 Sleep', food: 200, focus: 'Beg: Sakka/Tsugaike; Interm: View runs, reds', hint: 'Finish on favourite runs; return rentals if done.' },
+  { date: '19 Jan', location: 'Hakuba→Tokyo', plan: '07:00 Breakfast; 08:00 Depart Hakuba; 10:30 Snow Monkeys or direct to Tokyo; 15:00 Tokyo check-in; 18:30 Dinner; 21:30 Sleep', food: 200, focus: null, hint: 'Confirm luggage plan; lockers if stopping at Monkeys.' },
+  { date: '20 Jan', location: 'Tokyo', plan: '09:30 Wake; 10:00 Breakfast; 11:00 Asakusa/Senso-ji; 13:00 Tsukiji bites; 16:00 Skytree view; 19:30 Dinner; 21:30 Sleep', food: 200, focus: null, hint: 'Cash handy for small shops; avoid peak tour times.' },
+  { date: '21 Jan', location: 'Tokyo', plan: '09:30 Breakfast; 11:00 Shibuya Crossing + Sky; 13:30 Harajuku crepes; 15:00 Omotesando; 18:30 Dinner; 21:30 Sleep', food: 200, focus: null, hint: 'Prebook Shibuya Sky slot; split briefly for shopping.' },
+  { date: '22 Jan', location: 'Tokyo→Singapore', plan: '10:00 Wake; 10:30 Brunch; 13:00–19:00 TYO→SIN; 20:00 Hotel check-in; 21:30 Sleep', food: 170, focus: null, hint: 'Airport rail timing; eat before flight; hydrate on arrival.' },
+  { date: '23 Jan', location: 'Singapore', plan: '09:00 Breakfast; 11:00 Light sightseeing/mall; 14:00 Rest in AC; 17:00 Pool; 20:00 Dinner; 21:30 Sleep', food: 170, focus: null, hint: 'Keep mid-day indoor; use Grab for moves.' },
+  { date: '24 Jan', location: 'Singapore', plan: '09:00 Breakfast; 11:30 Gardens/indoor activity; 14:00 Rest; 17:00 Pool; 20:00 Dinner', food: 170, focus: null, hint: 'Book popular attractions ahead; stay cool mid-day.' },
+  { date: '25 Jan', location: 'Singapore', plan: '09:00 Breakfast; 11:00 Day trip or mall; 14:00 Rest; 19:00 Dinner', food: 170, focus: null, hint: 'Optional Sentosa/SEA Aquarium; hydrate.' },
+  { date: '26 Jan', location: 'Singapore', plan: '09:30 Brunch; 12:30 Light outing; 16:00 Rest; 19:00 Dinner', food: 170, focus: null, hint: 'Keep it easy; consider indoor kid activities.' },
+  { date: '27 Jan', location: 'Singapore', plan: '09:00 Breakfast; 11:00 Botanic gardens walk; 14:00 Rest; 19:00 Dinner', food: 170, focus: null, hint: 'Morning outdoor, afternoon AC.' },
+  { date: '28 Jan', location: 'Singapore', plan: '09:00 Breakfast; 11:30 Museum/AC activity; 15:00 Rest; 19:00 Dinner', food: 170, focus: null, hint: 'Reserve dining for a treat night.' },
+  { date: '29 Jan', location: 'Singapore', plan: '09:00 Breakfast; 11:00 Souvenir shopping; 14:00 Pack; 18:30 Early dinner; 21:30 Sleep', food: 170, focus: null, hint: 'Pack and rest before travel day.' },
+  { date: '30 Jan', location: 'Perth', plan: '07:30 Wake; 08:00 Breakfast; 11:15–16:30 SIN→PER; 18:00 Light dinner at home; 21:30 Sleep', food: 200, focus: null, hint: 'Arrive airport 2–3h early; snacks and meds in carry-on.' }
+];
+
 const planCosts = [
   {
     plan: 'Hakuba',
@@ -483,6 +509,29 @@ const galleryMap = {
 };
 
 const energyMap = {
+  '8 Jan': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
+  '9 Jan': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
+  '10 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Low', '7yo': 'Low' },
+  '11 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Low' },
+  '12 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Low' },
+  '13 Jan': { adults: 'High', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
+  '14 Jan': { adults: 'High', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
+  '15 Jan': { adults: 'High', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
+  '16 Jan': { adults: 'High', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
+  '17 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Low', '7yo': 'Low' },
+  '18 Jan': { adults: 'High', '18yo': 'High', '14yo': 'Medium', '7yo': 'Medium' },
+  '19 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
+  '20 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
+  '21 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
+  '22 Jan': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
+  '23 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
+  '24 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
+  '25 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
+  '26 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
+  '27 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
+  '28 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
+  '29 Jan': { adults: 'Medium', '18yo': 'Medium', '14yo': 'Medium', '7yo': 'Medium' },
+  '30 Jan': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
   '27 Dec': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
   '28 Dec': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
   '29 Dec': { adults: 'Low', '18yo': 'Low', '14yo': 'Low', '7yo': 'Low' },
