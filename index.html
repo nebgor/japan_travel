@@ -851,13 +851,12 @@
     </script>
     <script>
       (() => {
-        const prefix = window.location.pathname.replace(/[^/]*$/, '');
+        const basePath = window.location.pathname.replace(/[^/]*$/, '');
+        const base = `${window.location.origin}${basePath}`;
         document.querySelectorAll('[data-page]').forEach((link) => {
           const target = link.getAttribute('data-page');
-          if (!target) {
-            return;
-          }
-          link.setAttribute('href', `${prefix}${target}`);
+          if (!target) return;
+          link.setAttribute('href', `${base}${target}`);
         });
       })();
     </script>
