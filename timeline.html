@@ -43,6 +43,15 @@
       .timeline-section {
         margin-bottom: 2rem;
       }
+
+      .timeline-thumb {
+        width: 100%;
+        max-width: 120px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
     </style>
   </head>
   <body>
@@ -85,21 +94,27 @@
         jan: 'Jan 8–30: PER→SIN→TYO→Hakuba→TYO→SIN→PER'
       };
 
-      const datasets = {
-        hakuba: data.hakuba,
-        jan: data.januaryPlan || []
-      };
+  const datasets = {
+    hakuba: data.hakuba,
+    jan: data.januaryPlan || []
+  };
 
-      const buildTimeline = (entry) => {
-        const node = document.createElement('article');
-        node.className = 'timeline-node';
-        const energy = data.energyMap[entry.date] || {};
-        const energyText = Object.entries(energy)
-          .map(([person, level]) => `${person}: ${level}`)
-          .join(' · ');
+  const buildTimeline = (entry) => {
+    const node = document.createElement('article');
+    node.className = 'timeline-node';
+    const energy = data.energyMap[entry.date] || {};
+    const energyText = Object.entries(energy)
+      .map(([person, level]) => `${person}: ${level}`)
+      .join(' · ');
+    const gallery =
+      (data.galleryMap && (data.galleryMap[entry.location] || data.galleryMap[entry.location?.split('→')[0]])) ||
+      data.galleryMap?.Tokyo ||
+      [];
+    const thumb = gallery && gallery.length > 0 ? gallery[0] : null;
 
-        node.innerHTML = `
+    node.innerHTML = `
           <div>
+            ${thumb ? `<img class="timeline-thumb" src="${thumb}" alt="${entry.location} photo" />` : ''}
             <div class="time">${entry.date}</div>
             <div class="location">${entry.location}</div>
             <div class="chips">
