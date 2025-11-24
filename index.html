@@ -254,7 +254,7 @@
       </div>
     </div>
 
-    <script src="data.js?v=5"></script>
+    <script src="data.js?v=6"></script>
     <script type="module">
       import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js';
       import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/controls/OrbitControls.js';
@@ -294,7 +294,7 @@
         const galleryMarkup = gallery
           .map(
             (src) =>
-              `<img src="${src}" alt="${entry.location} highlight" loading="lazy" decoding="async" />`
+              `<img class="parallax-img" src="${src}" alt="${entry.location} highlight" loading="lazy" decoding="async" />`
           )
           .join('');
 
@@ -321,6 +321,24 @@
           <div class="chips energy-stack">${energyMarkup}</div>
           <p><strong>Hint:</strong> ${entry.hint || 'Smooth transitions via reliable transfers.'}</p>
         `;
+
+        // Lightweight parallax on card images (desktop only)
+        const imgs = card.querySelectorAll('.parallax-img');
+        if (window.matchMedia('(pointer:fine)').matches && imgs.length) {
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const relY = (e.clientY - rect.top) / rect.height - 0.5;
+            const offset = relY * 10; // px shift
+            imgs.forEach((img) => {
+              img.style.transform = `translateY(${offset}px)`;
+            });
+          });
+          card.addEventListener('mouseleave', () => {
+            imgs.forEach((img) => {
+              img.style.transform = 'translateY(0)';
+            });
+          });
+        }
 
         return card;
       };
