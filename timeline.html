@@ -62,7 +62,6 @@
         </p>
         <div class="dataset-toggle" id="timeline-toggle">
           <button type="button" data-set="hakuba" class="active">Hakuba + Tokyo</button>
-          <button type="button" data-set="furano">Furano + Sapporo</button>
           <button type="button" data-set="jan">Jan 8–30 Hakuba/Tokyo/SIN</button>
         </div>
       </div>
@@ -83,13 +82,11 @@
 
       const datasetInfo = {
         hakuba: 'Hakuba plan: sequential days, jet-lag buffer, ski focus, final Singapore buffer',
-        furano: 'Furano/Sapporo plan: CTS buffer, Hokkaido powder, Tokyo wind-down',
         jan: 'Jan 8–30: PER→SIN→TYO→Hakuba→TYO→SIN→PER'
       };
 
       const datasets = {
         hakuba: data.hakuba,
-        furano: data.furano,
         jan: data.januaryPlan || []
       };
 

@@ -138,7 +138,6 @@
                 </div>
             <div class="dataset-toggle" id="dataset-toggle">
               <button type="button" data-set="hakuba" class="active">Hakuba · Tokyo (Dec/Jan)</button>
-              <button type="button" data-set="furano">Furano · Sapporo (alt)</button>
               <button type="button" data-set="jan">Jan 8–30 Hakuba/Tokyo/SIN</button>
             </div>
               </div>
@@ -328,9 +327,9 @@
 
       const datasets = {
         hakuba: data.hakuba || [],
-        furano: data.furano || [],
         jan: data.januaryPlan || []
       };
+      const datasetOrder = Object.keys(datasets);
 
       let currentSet = 'hakuba';
 
@@ -680,7 +679,7 @@
           return best ? { setKey, day: best } : null;
         };
 
-        return pickFrom(currentSet) || pickFrom('hakuba') || pickFrom('furano');
+        return pickFrom(currentSet) || pickFrom('hakuba') || pickFrom('jan');
       };
 
       const focusToday = () => {
