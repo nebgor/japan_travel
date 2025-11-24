@@ -538,6 +538,11 @@ const actions = [
     link: 'https://www.booking.com/region/jp/tokyo.en.html'
   },
   {
+    title: 'Hakuba family stay',
+    detail: 'Book Wadano/Happo or Goryu/47 walk-to-lifts with breakfast; confirm shuttle pickups.',
+    link: 'https://www.booking.com/region/jp/hakuba.html'
+  },
+  {
     title: 'Hakuba stay near lifts',
     detail: 'Wadano/Happo or Goryu/47 for walk-to-lifts and shuttle pickups with breakfast.',
     link: 'https://www.booking.com/region/jp/hakuba.html'
@@ -551,6 +556,11 @@ const actions = [
     title: 'Hakuba lessons (EN instructors)',
     detail: 'Evergreen or ESS for Day 1 + optional tune-up; ask for kid-friendly instructors.',
     link: 'https://www.evergreen-hakuba.com/'
+  },
+  {
+    title: 'teamLab / Shibuya Sky',
+    detail: 'Prebook teamLab Planets slots and Shibuya Sky sunset tickets to avoid queues.',
+    link: 'https://teamlab.art/e/planets/'
   },
   {
     title: 'Onsen evenings (Hakuba + Tokyo)',
@@ -571,6 +581,11 @@ const actions = [
     title: 'Luggage forwarding + JR tickets',
     detail: 'Ship ski bags via Yamato and prebook Tokyo→Nagano bus/train seats at Tokyo Station.',
     link: 'https://www.kuronekoyamato.co.jp/ytc/en/send/services/airport/'
+  },
+  {
+    title: 'Snow Monkey tour hold',
+    detail: 'Reserve a guided Snow Monkey half-day or Nagano locker plan before the rest day.',
+    link: 'https://www.japan-guide.com/e/e6028.html'
   }
 ];
 
@@ -769,45 +784,45 @@ const gearTips = [
 
 const stays = [
   {
-    title: 'Hakuba Goryu (Escal Plaza)',
-    area: 'Walk-to-lifts · rentals/lockers at base',
-    detail: 'Condos/lodges 5–10 min to Escal Plaza; easiest for kids and Day 1 lessons.',
+    title: 'Wadano / Happo One (near Sakka)',
+    area: 'Walk-to-lifts · lessons pickup',
+    detail: 'Family rooms/condos near Sakka slopes; easy for beginners and fast shuttles to 47/Goryu.',
+    link: 'https://www.booking.com/region/jp/hakuba.html?label=wadano',
+    image: 'hakuba.jpg'
+  },
+  {
+    title: 'Goryu / Escal Plaza',
+    area: 'Base of 47/Goryu · rentals downstairs',
+    detail: 'Condos/lodges within 5–10 min of Escal Plaza; rentals/lockers right at the base for kids.',
     link: 'https://www.booking.com/landmark/jp/hakuba-goryu1.en.html',
     image: 'hakuba.jpg'
   },
   {
-    title: 'Hakuba Iimori side',
-    area: 'Quieter greens · shuttle to Escal',
-    detail: 'Great for beginners; mellow laps outside the door, quick hop to main Goryu base.',
+    title: 'Iimori / Kamishiro',
+    area: 'Quiet greens · shuttle to base',
+    detail: 'Great for first-timers; mellow laps outside the door with quick hop to main base.',
     link: 'https://www.snowjapan.com/japan-ski-resorts/hakuba-goryu',
     image: 'hakuba.jpg'
   },
   {
-    title: 'Happo/Wadano',
-    area: 'Ski-in/out options · steeper terrain nearby',
-    detail: 'More dining and ski schools; longer shuttle to Goryu/47 but lively village feel.',
-    link: 'https://www.booking.com/landmark/jp/happo-one.en.html',
-    image: 'hakuba.jpg'
-  },
-  {
-    title: 'Echoland (Hakuba)',
-    area: 'Food/nightlife hub · shuttle to lifts',
-    detail: 'Best for dining variety; trade-off is morning bus to Goryu/47.',
+    title: 'Echoland village',
+    area: 'Food hub · shuttles to lifts',
+    detail: 'Best dining variety; trade-off is morning bus to the lifts (works fine with shuttles).',
     link: 'https://www.booking.com/district/jp/hakuba/echoland.en.html',
     image: 'hakuba.jpg'
   },
   {
-    title: 'Tokyo Shinjuku/Shibuya',
-    area: 'Easy rail to everywhere',
-    detail: 'Pick a hotel near JR/Yamanote; fast access to restaurants and shinkansen booking.',
-    link: 'https://www.booking.com/region/jp/tokyo.en.html',
+    title: 'Tokyo Shinjuku/Ginza',
+    area: 'Easy JR/metro · food everywhere',
+    detail: 'Pick family rooms or two twins; close to JR for Shinkansen to Nagano and late-night ramen.',
+    link: 'https://www.booking.com/family/city/jp/tokyo.en.html',
     image: 'tokyo.jpg'
   },
   {
-    title: 'Tokyo family-friendly',
-    area: 'Two rooms or family quad',
-    detail: 'Look for family rooms near Shinjuku/Ginza; easy airport train + food options.',
-    link: 'https://www.booking.com/family/city/jp/tokyo.en.html',
+    title: 'Tokyo Disney area (optional)',
+    area: 'Buffer stays with kids',
+    detail: 'If you add a Disney day, stay nearby for easy mornings; otherwise stick to Shinjuku.',
+    link: 'https://www.booking.com/city/jp/tokyo.html?label=disney',
     image: 'tokyo.jpg'
   }
 ];
