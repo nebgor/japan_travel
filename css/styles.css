@@ -294,6 +294,24 @@ nav a:hover {
   .schedule-item {
     grid-template-columns: 90px 1fr;
   }
+
+  nav {
+    justify-content: flex-start;
+  }
+
+  .actions-grid,
+  .stays-grid,
+  .flight-grid,
+  .gear-grid,
+  .map-grid,
+  .summary-grid,
+  .destinations {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    margin-bottom: 1rem;
+  }
 }
 
 
