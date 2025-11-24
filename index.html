@@ -98,9 +98,9 @@
       <div class="overlay">
         <div class="page-shell">
           <nav aria-label="Page versions">
-            <a class="active" data-page="index.html" href="index.html" aria-label="Globe View">Globe View</a>
-            <a data-page="cards.html" href="cards.html" aria-label="Card Summary">Card Summary</a>
-            <a data-page="timeline.html" href="timeline.html" aria-label="Timeline Review">Timeline Review</a>
+            <a class="active" href="./index.html" aria-label="Globe View">Globe View</a>
+            <a href="./cards.html" aria-label="Card Summary">Card Summary</a>
+            <a href="./timeline.html" aria-label="Timeline Review">Timeline Review</a>
           </nav>
 
           <div class="layout">
@@ -254,7 +254,7 @@
       </div>
     </div>
 
-    <script src="data.js?v=4"></script>
+    <script src="data.js?v=5"></script>
     <script type="module">
       import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js';
       import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/controls/OrbitControls.js';
@@ -848,17 +848,7 @@
 
       initGlobeScene();
     </script>
-    <script>
-      (() => {
-        const basePath = window.location.pathname.replace(/[^/]*$/, '');
-        const base = `${window.location.origin}${basePath}`;
-        document.querySelectorAll('[data-page]').forEach((link) => {
-          const target = link.getAttribute('data-page');
-          if (!target) return;
-          link.setAttribute('href', `${base}${target}`);
-        });
-      })();
-    </script>
+    <!-- Simple nav uses static relative links above -->
 
   </body>
 </html>

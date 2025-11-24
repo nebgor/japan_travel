@@ -48,9 +48,9 @@
   <body>
     <div class="page-shell">
       <nav aria-label="Page versions">
-        <a data-page="index.html" href="index.html">Globe View</a>
-        <a data-page="cards.html" href="cards.html">Card Summary</a>
-        <a class="active" data-page="timeline.html" href="timeline.html">Timeline Review</a>
+        <a href="./index.html">Globe View</a>
+        <a href="./cards.html">Card Summary</a>
+        <a class="active" href="./timeline.html">Timeline Review</a>
       </nav>
 
       <div class="hero">
@@ -72,7 +72,7 @@
       </section>
     </div>
 
-    <script src="data.js"></script>
+    <script src="data.js?v=5"></script>
     <script>
       const data = window.TripData;
       const timelineList = document.getElementById('timeline-list');
@@ -139,18 +139,6 @@
         renderTimeline(toggleButtons[0].dataset.set);
       }
     </script>
-    <script>
-      (() => {
-        const basePath = window.location.pathname.replace(/[^/]*$/, '');
-        const base = `${window.location.origin}${basePath}`;
-        document.querySelectorAll('[data-page]').forEach((link) => {
-          const target = link.getAttribute('data-page');
-          if (!target) {
-            return;
-          }
-          link.setAttribute('href', `${base}${target}`);
-        });
-      })();
-    </script>
+    <!-- Nav uses static relative links above -->
   </body>
 </html>
