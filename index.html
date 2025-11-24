@@ -98,8 +98,8 @@
           <h1>Japan 16-day powder + city, then Singapore wind-down</h1>
           <p>Chronological, wake-to-sleep plan with buffers, live links, and globe overview.</p>
           <div class="dataset-toggle" id="dataset-toggle">
-            <button type="button" data-set="hakuba" class="active">Hakuba · Tokyo (Dec/Jan)</button>
-            <button type="button" data-set="jan">Jan 8–30 Hakuba/Tokyo/SIN</button>
+            <button type="button" data-set="jan" class="active">Jan 8–30 Hakuba/Tokyo/SIN</button>
+            <button type="button" data-set="hakuba">Hakuba · Tokyo (Dec/Jan)</button>
           </div>
           <div class="summary-grid">
             <div class="summary-chip"><strong>Trip window</strong><p>8–30 Jan</p></div>
@@ -322,7 +322,12 @@
 
       const renderDays = (key) => {
         dayCards.innerHTML = '';
-        (datasets[key] || []).forEach((day) => dayCards.appendChild(buildCard(day)));
+        const list = datasets[key] || [];
+        if (!list.length) {
+          dayCards.innerHTML = '<p class="chip">No days available for this plan.</p>';
+          return;
+        }
+        list.forEach((day) => dayCards.appendChild(buildCard(day)));
       };
 
       document.querySelectorAll('#dataset-toggle button').forEach((btn) => {
